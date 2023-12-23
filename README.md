@@ -4,7 +4,7 @@
 
 **Main Screen**
 
-![[Pasted image 20231222201733.png]]
+![[/assets/images/main-screen.png]]
 
 
 **Contributors**
