@@ -1,0 +1,150 @@
+.main-content {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    flex-direction: column;
+}
+.main-content-top {
+    display: flex;
+    gap: 1rem;
+    .main-content-left {
+        flex: 4;
+    }
+    .main-content-right {
+        flex: 1;
+    }
+}
+
+// information  top
+.content-left-earnings {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.card-earnings-sol {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    width: 70%;
+
+    .card-earnings-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        span {
+            background-color: #05c50f;
+            height: 30px;
+            width: 30px;
+            border-radius: 30%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            i {
+                color: white;
+            }
+        }
+    }
+}
+.card-earnings-ma {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    width: 70%;
+
+    .card-earnings-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        span {
+            background-color: #f05941;
+            height: 30px;
+            width: 30px;
+            border-radius: 30%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            i {
+                color: white;
+            }
+        }
+    }
+}
+// tablas
+.content-left-tables {
+    padding: 1.5rem 0;
+    display: flex;
+    gap: 3rem;
+}
+.table {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 1rem;
+    .table-card {
+        display: flex;
+        margin-top: 1.2rem;
+        border-bottom: solid 1px #e0e0e06c;
+        .table-card-info {
+            flex: 2;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            // justify-content: center;
+            .card-info {
+                img {
+                    height: 50px;
+                    width: 50px;
+                    border-radius: 50%;
+                }
+            }
+        }
+        .table-card-days {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            width: 100%;
+        }
+    }
+}
+
+// stats
+
+.stats-total-earnings {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+}
+
+// content bottom
+
+.main-content-bottom {
+    display: flex;
+    flex-direction: column;
+    .ingresos-mes-dia {
+        background-color: white;
+        border-radius: 1rem;
+        canvas {
+            padding: 1.5rem;
+        }
+    }
+    .ingresos-mes {
+        margin-top: 3rem;
+        background-color: white;
+        border-radius: 1rem;
+        canvas {
+            padding: 1.5rem;
+        }
+    }
+}
