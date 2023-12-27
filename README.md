@@ -4,7 +4,7 @@
 
 **Main Screen**
 
-![[/assets/images/main-screen.png]]
+![Main Screen](/assets/images/background/main-screen.PNG)
 
 
-**Contributors** #important
+**Contributors**
