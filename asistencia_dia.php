@@ -17,7 +17,7 @@ date_default_timezone_set('America/Lima');
         <div>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" id="regis-asis-hoy">Registro De Asistencias Hoy</a>
+                    <a  class="nav-link active" id="regis-asis-hoy" >Registro De Asistencias Hoy</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="regis-asis-mes" href="#">Registro de Asistencias del Mes</a>
