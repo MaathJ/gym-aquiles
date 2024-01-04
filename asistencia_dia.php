@@ -7,6 +7,7 @@ date_default_timezone_set('America/Lima');
 <link rel="stylesheet" src="style.css" href="assets/css/servicio/servicio.css">
 <link rel="stylesheet" src="style.css" href="assets/css/datatables/datatables.css">
 <link rel="stylesheet" src="style.css" href="assets/css/bootstrap/bootstrap.css">
+<link rel="stylesheet" src="style.css" href="tabs-asistencia.css">
 <div class="app-body-main-content">
     <div>
         <p>Pages<span> / Asistencias por Clase</span></p>
@@ -14,30 +15,40 @@ date_default_timezone_set('America/Lima');
     </div>
     <div class="main-content">
         <div>
-            <button class="servicio" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Registro De Asistencias Hoy
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" id="regis-asis-hoy">Registro De Asistencias Hoy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="regis-asis-mes" href="#">Registro de Asistencias del Mes</a>
+                </li>
+            </ul>
+            <!-- <button class="servicio" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
+                Registro De Asistencias Hoy
             </button>
-            <button class="servicio" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
-            Registro De Asistencias Del Mes
-            </button>
+            <button class="servicio" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2"
+                aria-expanded="false" aria-controls="collapseExample">
+                Registro De Asistencias Del Mes
+            </button> -->
         </div>
-        <div class="collapse" id="collapseExample">
+        <div  id="collapseExample">
             <div style="color: #f05941; font-weight: bolder; font-size: 2rem; text-align:center;">Asistencias Hoy</div>
             <div class="col-md-12">
-    
-                                        <table class="table table-striped" id="table_asistencia">
-    
-                                            <thead style="color: #fff; background-color:#f05941;">
-                                                <tr align="center">
-                                                    <th> CODIGO </th>
-                                                    <th> NOMBRE </th>
-                                                    <th> FECHA </th>
-                                                    <th> PRECIO </th>
-                                                    <th> RUTINA </th>
-                                                    <th> OPCIONES</th>
-                                                </tr>
-                                            </thead>
-                                            <?php
+
+                <table class="table table-striped" id="table_asistencia">
+
+                    <thead style="color: #fff; background-color:#f05941;">
+                        <tr align="center">
+                            <th> CODIGO </th>
+                            <th> NOMBRE </th>
+                            <th> FECHA </th>
+                            <th> PRECIO </th>
+                            <th> RUTINA </th>
+                            <th> OPCIONES</th>
+                        </tr>
+                    </thead>
+                    <?php
                                             include('config/dbconnect.php');
                                             
                                            
@@ -53,56 +64,69 @@ date_default_timezone_set('America/Lima');
     
     
                                             ?>
-                                                <td align="center"><?php echo $r['id_asip'] ?></td>
-                                                <td align="center"><?php echo $r['nomb_asip'] ?></td>
-                                                <td align="center"><?php echo $r['fech_asip'] ?></td>
-                                                <td align="center"><?php echo $r['precio_tiru'] ?></td>
-                                                <td align="center"><?php echo $r['nombre_tiru'] ?></td>
-                                                <td>
-                                                    <center>
-    
-                                                        <a class="btn btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
+                    <td align="center">
+                        <?php echo $r['id_asip'] ?>
+                    </td>
+                    <td align="center">
+                        <?php echo $r['nomb_asip'] ?>
+                    </td>
+                    <td align="center">
+                        <?php echo $r['fech_asip'] ?>
+                    </td>
+                    <td align="center">
+                        <?php echo $r['precio_tiru'] ?>
+                    </td>
+                    <td align="center">
+                        <?php echo $r['nombre_tiru'] ?>
+                    </td>
+                    <td>
+                        <center>
+
+                            <a class="btn btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                                data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
                                                 'id': '<?php echo $r['id_asip'] ?? ''; ?>',
                                                 'nombre': '<?php echo $r['nomb_asip'] ?? ''; ?>',
                                                 'fecha': '<?php echo $r['fech_asip'] ?? ''; ?>',
                                                 'rutina': '<?php echo $r['nombre_tiru'] ?? ''; ?>'
                                             });">
-                                                            <i class="fas fa-edit"> </i></a>
-    
-    
-                                                        <a href="asistencia_dia/D_asistencia_dia.php?d=<?php echo $r['id_asip'] ?>" class="btn btn-danger btn-circle " target="_parent">
-                                                            <i class="fas fa-trash"> </i></a>
-                                                    </center>
-    
-                                                </td>
-    
-                                                </tr>
-                                            <?php
+                                <i class="fas fa-edit"> </i></a>
+
+
+                            <a href="asistencia_dia/D_asistencia_dia.php?d=<?php echo $r['id_asip'] ?>"
+                                class="btn btn-danger btn-circle " target="_parent">
+                                <i class="fas fa-trash"> </i></a>
+                        </center>
+
+                    </td>
+
+                    </tr>
+                    <?php
                                             }
                                             ?>
-    
-    
-    
-                                        </table>
+
+
+
+                </table>
             </div>
         </div>
-        <div class="collapse" id="collapseExample2">
-        <div style="color: #f05941; font-weight: bolder; font-size: 2rem; text-align:center;">Asistencias Mensuales</div>
+        <div  id="collapseExample2">
+            <div style="color: #f05941; font-weight: bolder; font-size: 2rem; text-align:center;">Asistencias Mensuales
+            </div>
             <div class="col-md-12">
-    
-                                        <table class="table table-striped" id="table_asistencia2">
-    
-                                            <thead style="color: #fff; background-color:#f05941;">
-                                                <tr align="center">
-                                                    <th> CODIGO </th>
-                                                    <th> NOMBRE </th>
-                                                    <th> FECHA </th>
-                                                    <th> PRECIO </th>
-                                                    <th> RUTINA </th>
-                                                    <th> OPCIONES</th>
-                                                </tr>
-                                            </thead>
-                                            <?php
+
+                <table class="table table-striped" id="table_asistencia2">
+
+                    <thead style="color: #fff; background-color:#f05941;">
+                        <tr align="center">
+                            <th> CODIGO </th>
+                            <th> NOMBRE </th>
+                            <th> FECHA </th>
+                            <th> PRECIO </th>
+                            <th> RUTINA </th>
+                            <th> OPCIONES</th>
+                        </tr>
+                    </thead>
+                    <?php
                                             include('config/dbconnect.php');
     
                                             date_default_timezone_set('America/Lima');
@@ -118,47 +142,61 @@ date_default_timezone_set('America/Lima');
     
     
                                             ?>
-                                                <td align="center"><?php echo $r['id_asip'] ?></td>
-                                                <td align="center"><?php echo $r['nomb_asip'] ?></td>
-                                                <td align="center"><?php echo $r['fech_asip'] ?></td>
-                                                <td align="center"><?php echo $r['precio_tiru'] ?></td>
-                                                <td align="center"><?php echo $r['nombre_tiru'] ?></td>
-                                                <td>
-                                                    <center>
-    
-                                                        <a class="btn btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
+                    <td align="center">
+                        <?php echo $r['id_asip'] ?>
+                    </td>
+                    <td align="center">
+                        <?php echo $r['nomb_asip'] ?>
+                    </td>
+                    <td align="center">
+                        <?php echo $r['fech_asip'] ?>
+                    </td>
+                    <td align="center">
+                        <?php echo $r['precio_tiru'] ?>
+                    </td>
+                    <td align="center">
+                        <?php echo $r['nombre_tiru'] ?>
+                    </td>
+                    <td>
+                        <center>
+
+                            <a class="btn btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                                data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
                                                 'id': '<?php echo $r['id_asip'] ?? ''; ?>',
                                                 'nombre': '<?php echo $r['nomb_asip'] ?? ''; ?>',
                                                 'fecha': '<?php echo $r['fech_asip'] ?? ''; ?>',
                                                 'rutina': '<?php echo $r['nombre_tiru'] ?? ''; ?>'
                                             });">
-                                                            <i class="fas fa-edit"> </i></a>
-    
-    
-                                                        <a href="asistencia_dia/D_asistencia_dia.php?d=<?php echo $r['id_asip'] ?>" class="btn btn-danger btn-circle " target="_parent">
-                                                            <i class="fas fa-trash"> </i></a>
-                                                    </center>
-    
-                                                </td>
-    
-                                                </tr>
-                                            <?php
+                                <i class="fas fa-edit"> </i></a>
+
+
+                            <a href="asistencia_dia/D_asistencia_dia.php?d=<?php echo $r['id_asip'] ?>"
+                                class="btn btn-danger btn-circle " target="_parent">
+                                <i class="fas fa-trash"> </i></a>
+                        </center>
+
+                    </td>
+
+                    </tr>
+                    <?php
                                             }
                                             ?>
-    
-    
-    
-                                        </table>
+
+
+
+                </table>
             </div>
         </div>
-</div>
+    </div>
 
-<div class="modal fade  " id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: -20px;">
+    <div class="modal fade  " id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        style="margin-top: -20px;">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header " style="background-color: #0B5ED7; color: #ffffff;">
                     <h4 class="modal-title" id="exampleModalLabel">EDITAR REGISTRO ASISTENCIA POR DIA</h4>
-                    <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
@@ -167,12 +205,16 @@ date_default_timezone_set('America/Lima');
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label" style="color: black;">CODIGO:</label>
-                                    <input type="text" name="txtcodigo" class="form-control" id="recipient_name" value="" disabled>
-                                    <input type="text" name="txtcod" class="form-control" id="recipient_name2" value="" hidden>
+                                    <label for="recipient-name" class="col-form-label"
+                                        style="color: black;">CODIGO:</label>
+                                    <input type="text" name="txtcodigo" class="form-control" id="recipient_name"
+                                        value="" disabled>
+                                    <input type="text" name="txtcod" class="form-control" id="recipient_name2" value=""
+                                        hidden>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="Nombre-name" class="col-form-label" style="color: black;">NOMBRE:</label>
+                                    <label for="Nombre-name" class="col-form-label"
+                                        style="color: black;">NOMBRE:</label>
                                     <input type="text" name="txtnombre" class="form-control" id="nombre_name" required>
                                 </div>
 
@@ -181,14 +223,17 @@ date_default_timezone_set('America/Lima');
                             <div class="col-md-6">
 
                                 <div class="mb-3">
-                                    <label for="Telefono-name" class="col-form-label" style="color: black;">FECHA:</label>
-                                    <input type="datetime-local" name="txtfecha" class="form-control" maxlength="9" id="Fecha_name" disabled>
+                                    <label for="Telefono-name" class="col-form-label"
+                                        style="color: black;">FECHA:</label>
+                                    <input type="datetime-local" name="txtfecha" class="form-control" maxlength="9"
+                                        id="Fecha_name" disabled>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="Edad-name" class="col-form-label" style="color: black;">RUTINA:</label>
 
-                                    <select name="txt_rutina" id="rutina_name" class="form-select" aria-label="Default select example">
+                                    <select name="txt_rutina" id="rutina_name" class="form-select"
+                                        aria-label="Default select example">
                                         <?php
                                         include('conexion.php');
                                         $sql_2 = "select * from tipo_rutina";
@@ -196,13 +241,16 @@ date_default_timezone_set('America/Lima');
                                         while ($r = mysqli_fetch_assoc($f)) {
                                         ?>
 
-                                            <option value="<?php echo $r['nombre_tiru'] ?>"><?php echo $r['nombre_tiru'] ?></option>
+                                        <option value="<?php echo $r['nombre_tiru'] ?>">
+                                            <?php echo $r['nombre_tiru'] ?>
+                                        </option>
                                         <?php
                                         }
                                         ?>
                                     </select>
 
-                                    <input type="text" name="txtrutina" class="form-control" min="0" id="Rutina_name" hidden>
+                                    <input type="text" name="txtrutina" class="form-control" min="0" id="Rutina_name"
+                                        hidden>
 
                                 </div>
 
@@ -222,34 +270,34 @@ date_default_timezone_set('America/Lima');
         </div>
     </div>
 
-                        
-<?php
+
+    <?php
 include_once("inc/estructura/parte_inferior.php")
 ?>
+    <script src="assets/js/tabs-asistencia/tabs-asis.js"></script>
+    <script type="text/javascript">
+        function cargar_info(dato) {
 
-<script type="text/javascript">
-            function cargar_info(dato) {
+            document.getElementById('recipient_name').value = dato.id;
+            document.getElementById('recipient_name2').value = dato.id;
+            document.getElementById('nombre_name').value = dato.nombre;
+            document.getElementById('Fecha_name').value = dato.fecha;
 
-document.getElementById('recipient_name').value = dato.id;
-document.getElementById('recipient_name2').value = dato.id;
-document.getElementById('nombre_name').value = dato.nombre;
-document.getElementById('Fecha_name').value = dato.fecha;
+            var generoSelect = document.getElementById('rutina_name');
 
-var generoSelect = document.getElementById('rutina_name');
-
-for (var i = 0; i < generoSelect.options.length; i++) {
-    if (generoSelect.options[i].value == dato.rutina) {
-        generoSelect.options[i].selected = true;
-        break;
-    }
-}
+            for (var i = 0; i < generoSelect.options.length; i++) {
+                if (generoSelect.options[i].value == dato.rutina) {
+                    generoSelect.options[i].selected = true;
+                    break;
+                }
+            }
 
 
-}
+        }
 
-      
-let table = new DataTable('#table_asistencia', {
-    language: {
+
+        let table = new DataTable('#table_asistencia', {
+            language: {
                 "lengthMenu": "Mostrar _MENU_ registros",
                 "zeroRecords": "No se encontraron resultados",
                 "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
@@ -258,41 +306,41 @@ let table = new DataTable('#table_asistencia', {
                 "sSearch": "Buscar:",
                 "oPaginate": {
                     "sFirst": "Primero",
-                    "sLast":"Último",
-                    "sNext":"Siguiente",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
                     "sPrevious": "Anterior"
-			     },
-			     "sProcessing":"Procesando...",
-            }   ,
-        //para usar los botones   
-        responsive: "true",
-        dom: 'Bfrtilp',       
-        buttons:[ 
-			{
-				extend:    'excelHtml5',
-				text:      '<i class="fa-regular fa-file-excel"></i> ',
-				titleAttr: 'Exportar a Excel',
-				// className: 'btn btn-success'
-			},
-			{
-				extend:    'pdfHtml5',
-				text:      '<i class="fa-regular fa-file-pdf"></i>',
-				titleAttr: 'Exportar a PDF',
-				// className: 'btn btn-danger',
-                orientation: 'landscape' 
-			},
-			{
-				extend:    'print',
-				text:      '<i class="fa-solid fa-print"></i>',
-				titleAttr: 'Imprimir',
-				// className: 'btn btn-info'
-			},
-		]	      
+                },
+                "sProcessing": "Procesando...",
+            },
+            //para usar los botones   
+            responsive: "true",
+            dom: 'Bfrtilp',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="fa-regular fa-file-excel"></i> ',
+                    titleAttr: 'Exportar a Excel',
+                    // className: 'btn btn-success'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: '<i class="fa-regular fa-file-pdf"></i>',
+                    titleAttr: 'Exportar a PDF',
+                    // className: 'btn btn-danger',
+                    orientation: 'landscape'
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fa-solid fa-print"></i>',
+                    titleAttr: 'Imprimir',
+                    // className: 'btn btn-info'
+                },
+            ]
 
-});
+        });
 
-let table2 = new DataTable('#table_asistencia2', {
-    language: {
+        let table2 = new DataTable('#table_asistencia2', {
+            language: {
                 "lengthMenu": "Mostrar _MENU_ registros",
                 "zeroRecords": "No se encontraron resultados",
                 "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
@@ -301,39 +349,36 @@ let table2 = new DataTable('#table_asistencia2', {
                 "sSearch": "Buscar:",
                 "oPaginate": {
                     "sFirst": "Primero",
-                    "sLast":"Último",
-                    "sNext":"Siguiente",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
                     "sPrevious": "Anterior"
-			     },
-			     "sProcessing":"Procesando...",
-            }   ,
-        //para usar los botones   
-        responsive: "true",
-        dom: 'Bfrtilp',       
-        buttons:[ 
-			{
-				extend:    'excelHtml5',
-				text:      '<i class="fa-regular fa-file-excel"></i> ',
-				titleAttr: 'Exportar a Excel',
-				// className: 'btn btn-success'
-			},
-			{
-				extend:    'pdfHtml5',
-				text:      '<i class="fa-regular fa-file-pdf"></i>',
-				titleAttr: 'Exportar a PDF',
-				// className: 'btn btn-danger',
-                orientation: 'landscape' 
-			},
-			{
-				extend:    'print',
-				text:      '<i class="fa-solid fa-print"></i>',
-				titleAttr: 'Imprimir',
-				// className: 'btn btn-info'
-			},
-		]	      
+                },
+                "sProcessing": "Procesando...",
+            },
+            //para usar los botones   
+            responsive: "true",
+            dom: 'Bfrtilp',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="fa-regular fa-file-excel"></i> ',
+                    titleAttr: 'Exportar a Excel',
+                    // className: 'btn btn-success'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: '<i class="fa-regular fa-file-pdf"></i>',
+                    titleAttr: 'Exportar a PDF',
+                    // className: 'btn btn-danger',
+                    orientation: 'landscape'
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fa-solid fa-print"></i>',
+                    titleAttr: 'Imprimir',
+                    // className: 'btn btn-info'
+                },
+            ]
 
-});
-</script>
-
-
-
+        });
+    </script>

@@ -1,5 +1,5 @@
 <?php
-include_once('auth.php')
+include_once('auth.php');
 include('config/dbconnect.php');
 
 if ($cn->connect_error) {
