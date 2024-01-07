@@ -134,15 +134,7 @@
     flex-direction: column;
     .ingresos-mes-dia {
         background-color: white;
-        border-radius: 1rem;
-        canvas {
-            padding: 1.5rem;
-        }
-    }
-    .ingresos-mes {
-        margin-top: 3rem;
-        background-color: white;
-        border-radius: 1rem;
+        border-radius: 0 0 1rem 1rem;
         canvas {
             padding: 1.5rem;
         }

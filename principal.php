@@ -2,6 +2,7 @@
 include_once("auth.php");
 include_once("inc/estructura/parte_superior.php");
 include('config/dbconnect.php');
+
 $fechaHoy = new DateTime();
 $mesactual = $fechaHoy->format('m');
 $añoactual = $fechaHoy->format('Y');
@@ -157,18 +158,19 @@ $precios[] = $fila['total_precios'];
 }
 ?>
 <link rel="stylesheet" src="style.css" href="assets/css/dashboard/dashboard.css">
+<link rel="stylesheet" src="style.css" href="assets/css/bootstrap/bootstrap.css">
 <div class="app-body-main-content">
-    <div>
-        <p>Pages<span> / Dashboard</span></p>
-        <h3>Dashboard</h3>
-    </div>
-    <div class="main-content">
-        <div class="main-content-top">
-            <div class="main-content-left">
-                <div class="content-left-earnings">
-                  <!-- INGRESO MENSUAL -->
+  <div>
+    <p>Pages<span> / Dashboard</span></p>
+    <h3>Dashboard</h3>
+  </div>
+  <div class="main-content">
+    <div class="main-content-top">
+      <div class="main-content-left">
+        <div class="content-left-earnings">
+          <!-- INGRESO MENSUAL -->
 
-                  <?php 
+          <?php 
                     $cod = $_SESSION["usuario"];
                     $sql = "SELECT * FROM usuario as us INNER JOIN rol as ro ON us.id_ro = ro.id_ro WHERE us.id_us = $cod AND ro.nombre_ro='ADMINISTRADOR'";
                     // Ejecutar la consulta y obtener el resultado...
@@ -177,11 +179,11 @@ $precios[] = $fila['total_precios'];
                     // Verificar si el usuario tiene el rol de ADMINISTRADOR
                     if ($resultado && mysqli_num_rows($resultado) > 0) {
                     ?>
-                    <div class="card-earnings-sol">
-                        <div class="card-earnings-title">
-                            <span><i class="fa-solid fa-money-bill"></i></span>
-                            <p>Ingreso mes de:
-                          <?php
+          <div class="card-earnings-sol">
+            <div class="card-earnings-title">
+              <span><i class="fa-solid fa-money-bill"></i></span>
+              <p>Ingreso mes de:
+                <?php
                           $mes = date("n");
                           switch ($mes) {
                             case 1:
@@ -222,105 +224,117 @@ $precios[] = $fila['total_precios'];
                               break;
                           }
                           ?>
-                          </p>
-                        </div>
-                        <h2 class="card-earnings-text">
-                        <?php echo "S/. " . $r_g['total']; ?>
-                      </h2>
-                    </div>
-                    <?php 
+              </p>
+            </div>
+            <h2 class="card-earnings-text">
+              <?php echo "S/. " . $r_g['total']; ?>
+            </h2>
+          </div>
+          <?php 
                     }
                       ?>
 
 
-                    <div class="card-earnings-sol">
-                        <div class="card-earnings-title">
-                            <span><i class="fa-solid fa-money-bill"></i></span>
-                            <p>Caja Soles Matriculados Hoy</p>
-                        </div>
-                        <h2 class="card-earnings-text"><?php echo " S/" . $rMatricula['total'] ?></h2>
-                    </div>
-                    <div class="card-earnings-sol">
-                        <div class="card-earnings-title">
-                            <span><i class="fa-solid fa-money-bill"></i></span>
-                            <p>Caja Soles Por Clase Hoy</p>
-                        </div>
-                        <h2 class="card-earnings-text"><?php echo " S/" . $rAPago['total'] ?></h2>
-                    </div>
-                    <div class="card-earnings-sol">
-                        <div class="card-earnings-title">
-                            <span><i class="fa-solid fa-money-bill"></i></span>
-                            <p>Caja Soles Total Hoy</p>
-                        </div>
-                        <h2 class="card-earnings-text"><?php echo  " S/" . $rMatricula['total'] + $rAPago['total'] ?></h2>
-                    </div>
-                </div>
-                <div class="content-left-earnings">
-                  <!-- INGRESO MENSUAL -->
-                    <div class="card-earnings-ma">
-                        <div class="card-earnings-title">
-                            <span><i class="fa-solid fa-newspaper"></i></span>
-                            <p>
-                              Matriculados
-                            </p>
-                        </div>
-                        <h2 class="card-earnings-text">
-                        <?php echo $rMatric['countmatricula'] ?>
-                      </h2>
-                    </div>
-              
-                    <div class="card-earnings-ma">
-                        <div class="card-earnings-title">
-                            <span><i class="fa-solid  fa-door-open"></i></span>
-                            <p>Asistencia Hoy Matriculados</p>
-                        </div>
-                        <h2 class="card-earnings-text"><?php echo $r_mat['asistencia']; ?></h2>
-                    </div>
-                    <div class="card-earnings-ma">
-                        <div class="card-earnings-title">
-                            <span><i class="fa-solid  fa-door-open"></i></span>
-                            <p>Asistencia Hoy Por Clase</p>
-                        </div>
-                        <h2 class="card-earnings-text"><?php echo $r_cla['asistencia']; ?></h2>
-                    </div>
-                    <div class="card-earnings-ma">
-                        <div class="card-earnings-title">
-                            <span><i class="fa-solid  fa-door-open"></i></span>
-                            <p>Asistencia Total Hoy</p>
-                        </div>
-                        <h2 class="card-earnings-text"><?php echo ($r_mat['asistencia'] + $r_cla['asistencia']); ?></h2>
-                    </div>
-                </div>
+          <div class="card-earnings-sol">
+            <div class="card-earnings-title">
+              <span><i class="fa-solid fa-money-bill"></i></span>
+              <p>Caja Soles Matriculados Hoy</p>
+            </div>
+            <h2 class="card-earnings-text">
+              <?php echo " S/" . $rMatricula['total'] ?>
+            </h2>
+          </div>
+          <div class="card-earnings-sol">
+            <div class="card-earnings-title">
+              <span><i class="fa-solid fa-money-bill"></i></span>
+              <p>Caja Soles Por Clase Hoy</p>
+            </div>
+            <h2 class="card-earnings-text">
+              <?php echo " S/" . $rAPago['total'] ?>
+            </h2>
+          </div>
+          <div class="card-earnings-sol">
+            <div class="card-earnings-title">
+              <span><i class="fa-solid fa-money-bill"></i></span>
+              <p>Caja Soles Total Hoy</p>
+            </div>
+            <h2 class="card-earnings-text">
+              <?php echo  " S/" . $rMatricula['total'] + $rAPago['total'] ?>
+            </h2>
+          </div>
+        </div>
+        <div class="content-left-earnings">
+          <!-- INGRESO MENSUAL -->
+          <div class="card-earnings-ma">
+            <div class="card-earnings-title">
+              <span><i class="fa-solid fa-newspaper"></i></span>
+              <p>
+                Matriculados
+              </p>
+            </div>
+            <h2 class="card-earnings-text">
+              <?php echo $rMatric['countmatricula'] ?>
+            </h2>
+          </div>
 
-                <div class="content-left-tables">
-                  <!-- LOS 20 CLIENTES QUE MÁS ASISTEN -->
-                    <div class="table">
-                        <h3>Los Matriculados que más asisten</h3>
-                        <div class="content-table-one">
-                        <?php
+          <div class="card-earnings-ma">
+            <div class="card-earnings-title">
+              <span><i class="fa-solid  fa-door-open"></i></span>
+              <p>Asistencia Hoy Matriculados</p>
+            </div>
+            <h2 class="card-earnings-text">
+              <?php echo $r_mat['asistencia']; ?>
+            </h2>
+          </div>
+          <div class="card-earnings-ma">
+            <div class="card-earnings-title">
+              <span><i class="fa-solid  fa-door-open"></i></span>
+              <p>Asistencia Hoy Por Clase</p>
+            </div>
+            <h2 class="card-earnings-text">
+              <?php echo $r_cla['asistencia']; ?>
+            </h2>
+          </div>
+          <div class="card-earnings-ma">
+            <div class="card-earnings-title">
+              <span><i class="fa-solid  fa-door-open"></i></span>
+              <p>Asistencia Total Hoy</p>
+            </div>
+            <h2 class="card-earnings-text">
+              <?php echo ($r_mat['asistencia'] + $r_cla['asistencia']); ?>
+            </h2>
+          </div>
+        </div>
+
+        <div class="content-left-tables">
+          <!-- LOS 20 CLIENTES QUE MÁS ASISTEN -->
+          <div class="table">
+            <h3>Los Matriculados que más asisten</h3>
+            <div class="content-table-one">
+              <?php
                         while ($r_a20 = mysqli_fetch_assoc($f_a20)) {
                         ?>
-                          <div class="table-card">
-                            <div class="table-card-info">
-                              <div class="card-info">
-                                <img src="assets/images/cliente/<?php echo $r_a20['dni_cli'] ?>.jpg" width="30px" height="30px">
-                              </div>
-                              <div>
-                                <?php echo $r_a20['persona'] . " (" . $r_a20['membresia'] . ")"; ?>
-                              </div>
-                            </div>
-                            <div class="table-card-days">
-                              <?php echo $r_a20['asistencia']; ?> asistencia
-                            </div>
-                          </div>
-                        <?php } ?>
-                        </div>
-                    </div>
-                  <!-- MATRICULADOS A VENCER -->
-                    <div class="table">
-                        <h3>Matriculas a Vencer</h3>
-                        <div class="content-table-one">
-                        <?php
+              <div class="table-card">
+                <div class="table-card-info">
+                  <div class="card-info">
+                    <img src="assets/images/cliente/<?php echo $r_a20['dni_cli'] ?>.jpg" width="30px" height="30px">
+                  </div>
+                  <div>
+                    <?php echo $r_a20['persona'] . " (" . $r_a20['membresia'] . ")"; ?>
+                  </div>
+                </div>
+                <div class="table-card-days">
+                  <?php echo $r_a20['asistencia']; ?> asistencia
+                </div>
+              </div>
+              <?php } ?>
+            </div>
+          </div>
+          <!-- MATRICULADOS A VENCER -->
+          <div class="table">
+            <h3>Matriculas a Vencer</h3>
+            <div class="content-table-one">
+              <?php
                         $Matriculas_acabar = "SELECT 
                     cl.nombre_cli, 
                     cl.apellido_cli, 
@@ -341,91 +355,138 @@ $precios[] = $fila['total_precios'];
 
                         while ($rMFaltante = mysqli_fetch_assoc($fMFaltante)) {
                         ?>
-                          <div class="table-card">
-                            <div class="table-card-info">
-                              <div class="card-info">
-                                <img src="assets/images/cliente/<?php echo $rMFaltante['dni_cli'] ?>.jpg" alt="">
-                              </div>
-                              <div><?php echo $rMFaltante['nombre_cli']  . " " . $rMFaltante['apellido_cli'] ?></div>
-                            </div>
-                            <div class="table-card-days">
-                              <?php echo "Quedan " . $rMFaltante['dias_restantes'] . " Dias" ?>
-                            </div>
-                          </div>
-                        <?php
+              <div class="table-card">
+                <div class="table-card-info">
+                  <div class="card-info">
+                    <img src="assets/images/cliente/<?php echo $rMFaltante['dni_cli'] ?>.jpg" alt="">
+                  </div>
+                  <div>
+                    <?php echo $rMFaltante['nombre_cli']  . " " . $rMFaltante['apellido_cli'] ?>
+                  </div>
+                </div>
+                <div class="table-card-days">
+                  <?php echo "Quedan " . $rMFaltante['dias_restantes'] . " Dias" ?>
+                </div>
+              </div>
+              <?php
                         }
                         ?>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <div class="main-content-right">
-                <!-- <div class="total-earnings">
+          </div>
+        </div>
+      </div>
+      <div class="main-content-right">
+        <!-- <div class="total-earnings">
                   ingresos totales
               </div> -->
-                <div class="stats-total-earnings">
-                    <h3>Ingreso Hombres y Mujeres (%)</h3>
-                    <div>
-                        <canvas id="pie-hm"></canvas>
-                    </div>
-                </div>
-            </div>
+        <div class="stats-total-earnings">
+          <h3>Ingreso Hombres y Mujeres (%)</h3>
+          <div>
+            <canvas id="pie-hm"></canvas>
+          </div>
         </div>
-        <div class="main-content-bottom">
-            <div class="ingresos-mes-dia">
-                <canvas id="barra-ingresos"></canvas>
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="main-content-bottom">
+    <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a  class="nav-link active" id="ingreso-dia-mes" >Ingreso de los Días del Mes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="ingreso-mes-año">Ingreso Meses del año</a>
+                </li>
+            </ul>
+      <div class="ingresos-mes-dia">
+        <canvas id="chart-barra-ingreso-dia-mes"></canvas>
+        <canvas id="chart-barra-ingreso-mes-año" style="display: none;"></canvas>
+      </div>
+    </div>
+  </div>
 </div>
 
 
-
-<?php
-include_once("inc/estructura/parte_inferior.php")
-?>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-    <script src="assets/js/chartjs/pie-ingresos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="assets/js/chartjs/pie-ingresos.js"></script>
+<script src="assets/js/tabs-asistencia/tabs-barras.js"></script>
 <script>
-  const xd = document.getElementById('barra-ingresos');
-
-  new Chart(xd, {
+const ingresoDiaMes= document.getElementById('chart-barra-ingreso-dia-mes');
+new Chart(ingresoDiaMes, {
     type: 'bar',
     data: {
-      labels: <?php echo json_encode($dias); ?>,
-    datasets: [{
-      label: 'Ingreso diario',
-      data: <?php echo json_encode($precios); ?>,
-      borderWidth: 1,
-      backgroundColor: [
-      'rgb(255, 99, 132)',
-      'rgb(54, 162, 235)',
-      'rgb(255, 205, 86)',
-      'rgba(153, 102, 255)',
-      'rgba(75, 192, 192)',
-      'rgba(201, 203, 207)',
-    ],
-      borderColor: '#36A2EB',
-      borderWidth: 1
-    }]
-  },
-    options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
+        labels: <?php echo json_encode($dias); ?>,
+        datasets: [{
+            label: 'Ingreso diario',
+            data: <?php echo json_encode($precios); ?>,
+            borderWidth: 1,
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgba(153, 102, 255)',
+                'rgba(75, 192, 192)',
+                'rgba(201, 203, 207)',
+            ],
+            borderColor: '#36A2EB',
+        }]
     },
-    plugins: {
-      title: {
-        display: true,
-        text: 'Ingresos De los dias del Mes', // Puedes cambiar el título según tus necesidades
-        font: {
-          size: 16
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+        plugins: {
+            title: {
+                display: true,
+                text: 'Ingresos de los Días del Mes',
+                font: {
+                    size: 16
+                }
+            }
         }
-      }
     }
-  }
+});
+
+const ingresoMesAño = document.getElementById('chart-barra-ingreso-mes-año');
+new Chart(ingresoMesAño, {
+    type: 'bar',
+    data: {
+        labels: <?php echo json_encode($dias); ?>,
+        datasets: [{
+            label: 'Ingreso Mensual',
+            data: <?php echo json_encode($precios); ?>,
+            borderWidth: 1,
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgba(153, 102, 255)',
+                'rgba(75, 192, 192)',
+                'rgba(201, 203, 207)',
+            ],
+            borderColor: '#36A2EB',
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+        plugins: {
+            title: {
+                display: true,
+                text: 'Ingresos de los Meses del Año',
+                font: {
+                    size: 16
+                }
+            }
+        }
+    }
 });
 
 </script>
+<?php
+include_once("inc/estructura/parte_inferior.php")
+?>

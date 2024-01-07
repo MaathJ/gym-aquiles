@@ -128,16 +128,8 @@
 }
 .main-content-bottom .ingresos-mes-dia {
   background-color: white;
-  border-radius: 1rem;
+  border-radius: 0 0 1rem 1rem;
 }
 .main-content-bottom .ingresos-mes-dia canvas {
-  padding: 1.5rem;
-}
-.main-content-bottom .ingresos-mes {
-  margin-top: 3rem;
-  background-color: white;
-  border-radius: 1rem;
-}
-.main-content-bottom .ingresos-mes canvas {
   padding: 1.5rem;
 }/*# sourceMappingURL=dashboard.css.map */
