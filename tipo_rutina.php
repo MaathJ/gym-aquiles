@@ -13,60 +13,60 @@ include_once('config/dbconnect.php');
     <div class="main-content">
         <div>
             <button class="servicio" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
-            Nuevo Tipo Rutina
+                Nuevo Tipo Rutina
             </button>
-        </div> 
+        </div>
         <div class="col-md-12">
-                            <table class="table table-striped"  id="table_tiporutina">
+            <table class="table table-striped" id="table_tiporutina">
 
-                                <thead align="center" class=""  style="color: #fff; background-color:#f05941;">
-                                    <tr >
-                                        <th> CODIGO </th>
-                                        <th> NOMBRE </th>
-                                        <th> PRECIO </th>
-                                        <th> OPCIONES</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <?php
-                                include('config/dbconnect.php');
-                                $sql = "select * from tipo_rutina";
-                                $f = mysqli_query($cn, $sql);
-                                while ($r = mysqli_fetch_assoc($f)) {
+                <thead align="center" class="" style="color: #fff; background-color:#f05941;">
+                    <tr>
+                        <th> CODIGO </th>
+                        <th> NOMBRE </th>
+                        <th> PRECIO </th>
+                        <th> OPCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    include('config/dbconnect.php');
+                    $sql = "select * from tipo_rutina";
+                    $f = mysqli_query($cn, $sql);
+                    while ($r = mysqli_fetch_assoc($f)) {
 
 
-                                ?>
+                    ?>
 
-                                    <td align="center"><?php echo $r['id_tiru'] ?></td>
-                                    <td align="center"><?php echo $r['nombre_tiru'] ?></td>
-                                    <td align="center"><?php echo $r['precio_tiru'] ?></td>
-                                    <td>
-                                        <center>
+                        <td align="center"><?php echo $r['id_tiru'] ?></td>
+                        <td align="center"><?php echo $r['nombre_tiru'] ?></td>
+                        <td align="center"><?php echo $r['precio_tiru'] ?></td>
+                        <td>
+                            <center>
 
-                                            <a class="btn btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
+                                <a class="btn btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
                                                 'id': '<?php echo $r['id_tiru'] ?? ''; ?>',
                                                 'nombre': '<?php echo $r['nombre_tiru'] ?? ''; ?>',
                                                 'precio': '<?php echo $r['precio_tiru'] ?? ''; ?>'
                                             });">
-                                                <i class="fas fa-edit"> </i></a>
+                                    <i class="fas fa-edit"> </i></a>
 
 
-                                            <a href="tipo_rutina/D_tipo_rutina.php?d=<?php echo $r['id_tiru'] ?>" class="btn btn-danger btn-circle " target="_parent">
-                                                <i class="fas fa-trash"> </i></a>
-                                        </center>
+                                <a href="tipo_rutina/D_tipo_rutina.php?d=<?php echo $r['id_tiru'] ?>" class="btn btn-danger btn-circle " target="_parent">
+                                    <i class="fas fa-trash"> </i></a>
+                            </center>
 
-                                    </td>
+                        </td>
 
-                                    </tr>
-                                <?php
-                                }
-                                ?>
+                        </tr>
+                    <?php
+                    }
+                    ?>
 
 
-                                </tbody>
-                            </table>
+                </tbody>
+            </table>
 
-                        </div>
+        </div>
     </div>
 </div>
 <!-- MODAL REGISTRO DE TIPO DE RUTINA  -->
@@ -159,66 +159,61 @@ include_once('config/dbconnect.php');
         </div>
     </div>
 </div>
-                        
+
 <?php
 include_once("inc/estructura/parte_inferior.php")
 ?>
 
 <script type="text/javascript">
- function cargar_info(dato) {
+    function cargar_info(dato) {
 
-document.getElementById('recipient_name').value = dato.id;
-document.getElementById('recipient_name2').value = dato.id;
-document.getElementById('nombre_name').value = dato.nombre;
-document.getElementById('txtprecio').value = dato.precio;
+        document.getElementById('recipient_name').value = dato.id;
+        document.getElementById('recipient_name2').value = dato.id;
+        document.getElementById('nombre_name').value = dato.nombre;
+        document.getElementById('txtprecio').value = dato.precio;
 
-}
+    }
 
-      
-let table = new DataTable('#table_tiporutina', {
-    language: {
-                "lengthMenu": "Mostrar _MENU_ registros",
-                "zeroRecords": "No se encontraron resultados",
-                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sSearch": "Buscar:",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast":"Último",
-                    "sNext":"Siguiente",
-                    "sPrevious": "Anterior"
-			     },
-			     "sProcessing":"Procesando...",
-            }   ,
+
+    let table = new DataTable('#table_tiporutina', {
+        language: {
+            "lengthMenu": "Mostrar _MENU_ registros",
+            "zeroRecords": "No se encontraron resultados",
+            "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sSearch": "Buscar:",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "sProcessing": "Procesando...",
+        },
         //para usar los botones   
         responsive: "true",
-        dom: 'Bfrtilp',       
-        buttons:[ 
-			{
-				extend:    'excelHtml5',
-				text:      '<i class="fa-regular fa-file-excel"></i> ',
-				titleAttr: 'Exportar a Excel',
-				// className: 'btn btn-success'
-			},
-			{
-				extend:    'pdfHtml5',
-				text:      '<i class="fa-regular fa-file-pdf"></i>',
-				titleAttr: 'Exportar a PDF',
-				// className: 'btn btn-danger',
-                orientation: 'landscape' 
-			},
-			{
-				extend:    'print',
-				text:      '<i class="fa-solid fa-print"></i>',
-				titleAttr: 'Imprimir',
-				// className: 'btn btn-info'
-			},
-		]	      
+        dom: 'Bfrtilp',
+        buttons: [{
+                extend: 'excelHtml5',
+                text: '<i class="fa-regular fa-file-excel"></i> ',
+                titleAttr: 'Exportar a Excel',
+                // className: 'btn btn-success'
+            },
+            {
+                extend: 'pdfHtml5',
+                text: '<i class="fa-regular fa-file-pdf"></i>',
+                titleAttr: 'Exportar a PDF',
+                // className: 'btn btn-danger',
+                orientation: 'landscape'
+            },
+            {
+                extend: 'print',
+                text: '<i class="fa-solid fa-print"></i>',
+                titleAttr: 'Imprimir',
+                // className: 'btn btn-info'
+            },
+        ]
 
-});
-
+    });
 </script>
-
-
-
