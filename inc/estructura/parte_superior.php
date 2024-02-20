@@ -7,11 +7,13 @@
     <title>Gym Aquiles</title>
     <link rel="icon" type="image/png" href="assets/images/logo/logo-gym-aquiles.png">
     <link rel="stylesheet" href="plantilla.css">
+    <link rel="stylesheet" src="style.css" href="assets/css/datatables/datatables.css">
+    <link rel="stylesheet" src="style.css" href="assets/css/bootstrap/bootstrap.css">
 </head>
+
 <body>
     <div class="app">
-
-        <div class="app-header">
+        <div class="app-header" id="header">
             <div class="app-header-logo">
                 <div class="logo">
                     <span class="logo-icon">
@@ -29,7 +31,7 @@
                     <span><img src="assets/images/avatar/avatar-1.jpg" alt=""></span>
                 </button>
                 <div class="app-header-actions-buttons">
-                    <a href="./cerrar_sesion.php">Cerrar Sesion</a>
+                    <a id="button-config" href="./cerrar_sesion.php">Cerrar Sesion</a>
                 </div>
             </div>
         </div>
@@ -52,8 +54,8 @@
                                 <span>Asistencia</span>
                             </a>
                         </li>
-                         <!-- Registro Asistencia -->
-                         <li class="section-item-options" id="rAsistencias">
+                        <!-- Registro Asistencia -->
+                        <li class="section-item-options" id="rAsistencias">
                             <div class="section-item-container">
                                 <div class="section-item-box">
                                     <a class="item-options">
@@ -151,6 +153,14 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                    </div>
+                    <div>
+                        <li class="section-item">
+                            <a href="configuracion.php" style="display: flex;  align-items: center;">
+                                <i class="fa-solid fa-gear"></i>
+                                <span>Configuración</span>
+                            </a>
                         </li>
                     </div>
                 </div>

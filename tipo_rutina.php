@@ -73,7 +73,7 @@ include_once('config/dbconnect.php');
 <div class="modal fade  " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header " style="background-color: #0B5ED7; color: #ffffff;">
+            <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
                 <h4 class="modal-title" id="exampleModalLabel">REGISTRO TIPO DE RUTINA</h4>
                 <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -116,7 +116,7 @@ include_once('config/dbconnect.php');
 <div class="modal fade  " id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: -20px;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header " style="background-color: #0B5ED7; color: #ffffff;">
+            <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
                 <h4 class="modal-title" id="exampleModalLabel">EDITAR TIPO RUTINA</h4>
                 <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>

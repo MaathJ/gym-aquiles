@@ -77,6 +77,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-between;
   padding: 1rem;
   min-height: 100%;
   border-radius: 1rem 1rem 0 0;
@@ -88,6 +89,16 @@ body {
 }
 .navigation-section li {
   margin-bottom: 2rem;
+}
+
+.navigation-section div:nth-child(1) {
+  position: sticky;
+  top: 0;
+}
+
+.navigation-section div:nth-child(2) {
+  position: sticky;
+  bottom: 0;
 }
 
 .navigation {
@@ -193,4 +204,25 @@ body {
   overflow: hidden;
   margin-left: 1.5rem;
   flex-shrink: 0;
+}
+
+.fa-file-excel {
+  background-color: green;
+  padding: 0.6rem;
+  color: white;
+  border-radius: 8px;
+}
+
+.fa-file-pdf {
+  background-color: red;
+  padding: 0.6rem;
+  color: white;
+  border-radius: 8px;
+}
+
+.fa-print {
+  background-color: cornflowerblue;
+  padding: 0.6rem;
+  color: white;
+  border-radius: 8px;
 }/*# sourceMappingURL=plantilla.css.map */

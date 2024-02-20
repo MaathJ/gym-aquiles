@@ -84,7 +84,7 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
     <div class="modal fade  " id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header " style="background-color: #04f2da; color: #ffffff;">
+                <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
                     <h4 class="modal-title" id="exampleModalLabel">EDITAR USUARIO:</h4>
 
                     <h1 id=""></h1>
@@ -190,7 +190,7 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
     <div class="modal fade  " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header " style="background-color: #0B5ED7; color: #ffffff;">
+                <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
                     <h4 class="modal-title" id="exampleModalLabel">REGISTRO USUARIO:</h4>
                     <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>

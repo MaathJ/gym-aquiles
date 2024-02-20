@@ -49,6 +49,12 @@ if (isset($_POST['searchTerm'])) {
     
                         
                     </div>
+
+                    <div>
+                        <a class="btn btn-sm btn-success btn-circle text-white" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(' . $id . ', '. $desc .')">
+                            <i class="fas fa-print"></i> IMPRIMIR
+                        </a>
+                    </div>  
                 </div>';
         } else {
             // Si ya existe un registro de asistencia para hoy, muestra una alerta

@@ -95,6 +95,9 @@ date_default_timezone_set('America/Lima');
                             <a href="asistencia_dia/D_asistencia_dia.php?d=<?php echo $r['id_asip'] ?>"
                                 class="btn btn-danger btn-circle " target="_parent">
                                 <i class="fas fa-trash"> </i></a>
+                            <a class="btn btn-sm btn-success btn-circle text-white" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(<?php echo $r['id_as']; ?>, 'a_mat')">
+                                <i class="fas fa-print"></i>
+                            </a>
                         </center>
 
                     </td>
@@ -193,7 +196,7 @@ date_default_timezone_set('America/Lima');
         style="margin-top: -20px;">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header " style="background-color: #0B5ED7; color: #ffffff;">
+                <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
                     <h4 class="modal-title" id="exampleModalLabel">EDITAR REGISTRO ASISTENCIA POR DIA</h4>
                     <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal"
                         aria-label="Close"></button>
@@ -272,7 +275,10 @@ date_default_timezone_set('America/Lima');
 
 
     <?php
-include_once("inc/estructura/parte_inferior.php")
+include_once("inc/estructura/parte_inferior.php");
+//Trae el modal y el script
+include_once('ticket_extension.php');
+//--------------------------
 ?>
     <script src="assets/js/tabs-asistencia/tabs-asis.js"></script>
     <script type="text/javascript">

@@ -1,0 +1,26 @@
+.container-configuracion{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: #ffff;
+}
+
+.form-configuracion{
+    display: flex;
+    align-items: center;
+
+}
+
+.fr-conf-inputs{
+    display: flex;
+    flex-direction: column;
+}
+
+.fr-conf-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
