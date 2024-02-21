@@ -227,4 +227,30 @@ body {
   padding: 0.6rem;
   color: white;
   border-radius: 8px;
+}
+
+.active-button {
+  background: #01c408;
+}
+
+.inactive-button {
+  background: #e40000;
+}
+
+.waiting-button {
+  background: orange;
+}
+
+.active-button,
+.inactive-button,
+.waiting-button {
+  width: auto;
+  border: none;
+  font-size: 12px;
+  border-radius: 12px;
+  padding: 0.3rem 1.7rem;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  place-content: center;
 }/*# sourceMappingURL=plantilla.css.map */

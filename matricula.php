@@ -17,11 +17,11 @@ include_once('ticket_extension.php');
                 Nueva Matricula
             </button>
         </div>
-        <div class="col-md-12">
-            <table class="table table-striped" id="table_matricula">
-                <thead align="center" class="" style="color: #fff; background-color:#f05941;">
+        <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
+            <table class="table table-sm" id="table_matricula" style="font-size: .8rem;">
+                <thead align="center" class="" style="color: #fff;">
                     <tr>
-                        <th>ID</th>
+                        <!-- <th>ID</th> -->
                         <th>Foto</th>
                         <th>Cliente</th>
                         <th>DNI</th>
@@ -56,10 +56,10 @@ include_once('ticket_extension.php');
                     ?>
 
                         <tr>
-                            <td><?php echo $r['id_ma'] ?></td>
+                            
                             <td>
-                                <img class="img-cliente" src="assets/images/cliente/<?php echo $r['dni_cli']; ?>.jpg" alt="">
-                            <td style="display: flex; flex-direction: row; text-transform: capitalize; text-wrap: wrap; text-align: center;"><?php echo $r['apellido_cli'] . ', ' . $r['nombre_cli'] ?></td>
+                                <img style="border-radius: 50%; align-self: center; height: 40px; width: 40px;" class="img-cliente" src="assets/images/cliente/<?php echo $r['dni_cli']; ?>.jpg" alt="">
+                            <td style="display: flex; flex-direction: row; text-transform: capitalize;"><?php echo $r['apellido_cli'] . ', ' . $r['nombre_cli'] ?></td>
                             <td>
                                 <?php echo $r['dni_cli']; ?>
 
@@ -108,8 +108,10 @@ include_once('ticket_extension.php');
 
 
 
-                            <td class="<?php echo ($r['estado_ma'] == 'ACTIVO') ? 'tdactivo' : 'tdculminado'; ?>">
-                                <p><?php echo $estado ?></p>
+                            <td align="center">
+                                <button class="<?php echo ($r['estado_ma'] == 'ACTIVO') ? 'active-button' : 'inactive-button'; ?>">
+                                    <?php echo $r['estado_ma']?>
+                                </button>
                             </td>
 
                             <td><?php echo $r['nombre_us'] ?></td>
@@ -636,7 +638,7 @@ if (
     });
 </script>
 
-<style>
+<!-- <style>
     .tdactivo {
         display: grid;
         place-items: center;
@@ -675,5 +677,5 @@ if (
         border-radius: 1000%;
         -o-object-fit: cover;
         object-fit: cover;
-    }
+    } -->
 </style>

@@ -176,7 +176,10 @@ include_once('config/dbconnect.php');
     </div>
     <!-- Page-body end -->
 </div>
+<?php
+require_once ("inc/estructura/parte_inferior.php");
 
+?>
 <script>
     function cargar_info(dato) {
 
@@ -250,7 +253,3 @@ if (isset($_GET['cargo'])) {
 
 
 
-<?php
-require_once ("inc/estructura/parte_inferior.php");
-
-?>
