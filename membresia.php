@@ -4,8 +4,6 @@ include_once("inc/estructura/parte_superior.php");
 include_once('config/dbconnect.php');
 ?>
 <link rel="stylesheet" src="style.css" href="assets/css/membresia/membresia.css">
-<link rel="stylesheet" src="style.css" href="assets/css/datatables/datatables.css">
-<link rel="stylesheet" src="style.css" href="assets/css/bootstrap/bootstrap.css">
 <div class="app-body-main-content">
     <div>
         <p>Pages<span> / Membresia</span></p>
@@ -23,7 +21,7 @@ include_once('config/dbconnect.php');
                     <!-- PRUEBA CARDS -->
                     <div class="card-columns">
                         <?php
-                        $cn = mysqli_connect("localhost", "root", "", "gym_aquiles");
+                        $cn = mysqli_connect("localhost", "root", "", "bd_gym2023");
 
                         $sql = "SELECT m.*, s.nombre_se FROM membresia m LEFT JOIN servicio s ON m.id_se=s.id_se";
 
@@ -119,7 +117,7 @@ include_once('config/dbconnect.php');
                                                     <select class="form-select form-select-lg mb-3" name="lst_serv" id="recipient_servicio" required>
                                                         <?php
 
-                                                        $cn = mysqli_connect("localhost", "root", "", "gym_aquiles");
+                                                        $cn = mysqli_connect("localhost", "root", "", "bd_gym2023");
 
                                                         $sql_lst = "select * from servicio";
 
@@ -189,7 +187,7 @@ include_once('config/dbconnect.php');
                                                         <option value="" disabled selected>Selecciona un servicio</option>
                                                         <?php
 
-                                                        $cn = mysqli_connect("localhost", "root", "", "gym_aquiles");
+                                                        $cn = mysqli_connect("localhost", "root", "", "bd_gym2023");
 
                                                         $sql_lst = "select * from servicio";
 

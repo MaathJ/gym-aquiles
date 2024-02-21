@@ -71,7 +71,7 @@ include('config/dbconnect.php');
 <div class="modal fade  " id="ModalrolEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header " style="background-color: #0B5ED7; color: #ffffff;">
+            <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
                 <h4 class="modal-title" id="exampleModalLabel">EDITAR ROL:</h4>
                 <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -111,7 +111,7 @@ include('config/dbconnect.php');
 <div class="modal fade  " id="ModalrolRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header " style="background-color: #0B5ED7; color: #ffffff;">
+            <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
                 <h4 class="modal-title" id="exampleModalLabel">REGISTRO ROL:</h4>
                 <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>

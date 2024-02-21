@@ -1,6 +1,9 @@
 <?php
 include_once('auth.php');
 include('inc/estructura/parte_superior.php');
+//Trae el modal y el script
+include_once('ticket_extension.php');
+//--------------------------
 ?>
 <link rel="stylesheet" src="style.css" href="assets/css/asistencia/asistencia.css">
 <div class="app-body-main-content">
@@ -36,6 +39,32 @@ include('inc/estructura/parte_superior.php');
                                             <?php  
                                                 }
                                             ?>
+                    </select>
+
+                    <!-- Medio de pago -->
+                    <label for="tipo_pago">
+                        Tipo de pago:
+                    </label>
+                    <select class="form-select" name="lst_tp" id="lst_tp" required>
+
+                        <option disabled selected value="0">Selecciona un tipo de pago</option>
+
+                        <?php
+                        $sql_tp = "SELECT * FROM tipo_pago";
+                        $f_tp = mysqli_query($cn, $sql_tp);
+
+                        while ($r_tp = mysqli_fetch_assoc($f_tp)) {
+
+
+                        ?>
+                            <option value="<?php echo $r_tp['id_tp'] ?>"><?php echo $r_tp['desc_tp'];?></option>
+
+                        <?php
+                        }
+
+                        ?>
+
+
                     </select>
 
                     <input class="btn-regis" type="submit" value="Registrar">
@@ -131,4 +160,74 @@ $(document).ready(function () {
     }
 });
 
+//AJAX PARA ASISTENCIA HOY
+$(document).ready(function () {
+    var timeoutId;
+
+    $('#registro_hoy').on('click', function (event) {
+        var txt_nombre = $('#txt_nombre').val();
+        var lst_rutina = $('#lst_rutina').val();
+        var lst_tp = $('#lst_tp').val();
+
+        if (txt_nombre !== "" && lst_rutina !== 0 && lst_tp !== 0) {
+            $.ajax({
+                type: 'POST',
+                url: 'asistencia_dia/R_asistencia_dia.php',
+                data: { txt_nombre: txt_nombre,
+                        lst_rutina: lst_rutina,
+                        lst_tp: lst_tp},
+                success: function (response) {
+                    if (response.trim() !== "") {
+                        // Mostrar alerta de éxito
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Se registró con Éxito',
+                            text: 'Su ingreso',
+                            showConfirmButton: false
+                        });
+
+                        // Actualizar el contenido de matri-content con los resultados de la búsqueda
+                        $('.matri-content').html(response);
+
+                        // Limpiar el contenido después de 15 segundos
+                        clearTimeout(timeoutId);
+                        timeoutId = setTimeout(function () {
+                            $('.matri-content').empty();
+                        }, 15000);
+
+                        // Limpiar el campo de búsqueda después de mostrar los resultados
+                        $('#txt_nombre').val("");
+                        $('#lst_rutina').val(0);
+                        $('#lst_tp').val(0);
+                    } else {
+                        // Mostrar alerta de error
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Registro falliso',
+                            text: 'Verifique los campos registrados'
+                        });
+
+                        // Limpiar el contenido si el término de búsqueda no devuelve resultados
+                        $('.matri-content').empty();
+                    }
+                }
+            });
+        } else {
+            // Mostrar alerta de error si el término de búsqueda es menor a 3 caracteres
+            Swal.fire({
+                icon: 'error',
+                title: 'Registro fallido',
+                text: 'Vuelva a intentarlo'
+            });
+
+            // Limpiar el contenido si el término de búsqueda es menor a 3 caracteres
+            $('.matri-content').empty();
+
+            // Limpiar el campo de búsqueda después de mostrar la alerta de error
+            $('#txt_nombre').val("");
+            $('#lst_rutina').val(0);
+            $('#lst_tp').val(0);
+        }
+    });
+});
 </script>

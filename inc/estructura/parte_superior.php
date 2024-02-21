@@ -7,19 +7,27 @@
     <title>Gym Aquiles</title>
     <link rel="icon" type="image/png" href="assets/images/logo/logo-gym-aquiles.png">
     <link rel="stylesheet" href="plantilla.css">
+    <link rel="stylesheet" src="style.css" href="assets/css/datatables/datatables.css">
+    <link rel="stylesheet" src="style.css" href="assets/css/bootstrap/bootstrap.css">
 </head>
+
 <body>
     <div class="app">
-
-        <div class="app-header">
+        <div class="app-header" id="header">
             <div class="app-header-logo">
                 <div class="logo">
                     <span class="logo-icon">
                         <img src="assets/images/logo/logo-gym-aquiles.png" alt="">
                     </span>
                     <h1 class="logo-title">
-                        <span>Gym</span>
-                        <span>Aquiles</span>
+                        <span><?php 
+                        include_once('./auth.php');
+                        include_once('./config/dbconnect.php');
+                        $sql_gym="SELECT * from configurador_historial where estado_conf='ACTIVO'";
+                        $fsqlgym=mysqli_query($cn,$sql_gym);
+                        $rsqlgym=mysqli_fetch_assoc($fsqlgym);
+                        echo $rsqlgym["txt_negocio"];
+                        ?></span>
                     </h1>
                 </div>
             </div>
@@ -29,7 +37,7 @@
                     <span><img src="assets/images/avatar/avatar-1.jpg" alt=""></span>
                 </button>
                 <div class="app-header-actions-buttons">
-                    <a href="./cerrar_sesion.php">Cerrar Sesion</a>
+                    <a id="button-config" href="./cerrar_sesion.php">Cerrar Sesion</a>
                 </div>
             </div>
         </div>
@@ -52,8 +60,8 @@
                                 <span>Asistencia</span>
                             </a>
                         </li>
-                         <!-- Registro Asistencia -->
-                         <li class="section-item-options" id="rAsistencias">
+                        <!-- Registro Asistencia -->
+                        <li class="section-item-options" id="rAsistencias">
                             <div class="section-item-container">
                                 <div class="section-item-box">
                                     <a class="item-options">
@@ -119,6 +127,39 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <li class="section-item-options" id="suscripcione">
+                            <div class="section-item-container">
+                                <div class="section-item-box">
+                                    <a class="item-options">
+                                        <i class="fas fa-money-check-dollar"></i>
+                                        <span>OPERARIO</span>
+                                    </a>
+                                </div>
+                                <span>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </div>
+                            <ul class="optionsxd3">
+                                <li>
+                                    <a href="asistenciaop.php">
+                                        <span>Asistencia Operario</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="operario.php">
+                                        <span>Operario</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="turno.php">
+                                        <span>Turno</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
                         <!-- Cliente -->
                         <li class="section-item">
                             <a href="cliente.php">
@@ -151,6 +192,14 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                    </div>
+                    <div>
+                        <li class="section-item">
+                            <a href="configuracion.php" style="display: flex;  align-items: center;">
+                                <i class="fa-solid fa-gear"></i>
+                                <span>Configuración</span>
+                            </a>
                         </li>
                     </div>
                 </div>
