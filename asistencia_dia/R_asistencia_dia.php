@@ -1,6 +1,6 @@
 <?php  
 
-include('../conexion.php');
+include('../config/dbconnect.php');
 
 if(isset($_POST['txt_nombre']) && isset($_POST['lst_rutina']) && isset($_POST['lst_tp'])){
     $nom =$_POST['txt_nombre'];
