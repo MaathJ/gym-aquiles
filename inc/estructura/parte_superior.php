@@ -41,6 +41,11 @@
                 </div>
             </div>
         </div>
+
+
+
+
+    <!-- Barra de Navegación -->
         <div class="app-body">
             <div class="app-body-navigation">
                 <div class="navigation-section">
@@ -133,7 +138,7 @@
                                 <div class="section-item-box">
                                     <a class="item-options">
                                         <i class="fas fa-money-check-dollar"></i>
-                                        <span>OPERARIO</span>
+                                        <span>Operario</span>
                                     </a>
                                 </div>
                                 <span>
@@ -193,14 +198,89 @@
                                 </li>
                             </ul>
                         </li>
-                    </div>
-                    <div>
+
                         <li class="section-item">
                             <a href="configuracion.php" style="display: flex;  align-items: center;">
                                 <i class="fa-solid fa-gear"></i>
                                 <span>Configuración</span>
                             </a>
                         </li>
+
+
                     </div>
+                    
+                        
+                    
                 </div>
             </div>
+
+        
+
+            <script>
+                    
+                    document.addEventListener("DOMContentLoaded", function() {
+                        var registroAsistencia = document.getElementById("rAsistencias");
+                        var suscripciones = document.getElementById("suscripciones");
+                        var operario = document.getElementById("suscripcione");
+                        var users = document.getElementById("usuario");
+
+                        registroAsistencia.addEventListener("click", function() {
+                            var sublista = registroAsistencia.querySelector(".optionsxd3");
+                            sublista.classList.toggle("show");
+                            var icono = registroAsistencia.querySelector("i.fa-solid.fa-chevron-down");
+                            icono.classList.toggle("rotated");
+                        });
+
+                        suscripciones.addEventListener("click", function() {
+                            var sublista = suscripciones.querySelector(".optionsxd2");
+                            sublista.classList.toggle("show");
+                            var icono = suscripciones.querySelector("i.fa-solid.fa-chevron-down");
+                            icono.classList.toggle("rotated");
+                        });
+
+                        operario.addEventListener("click", function() {
+                            var sublista = operario.querySelector(".optionsxd3");
+                            sublista.classList.toggle("show");
+                            var icono = operario.querySelector("i.fa-solid.fa-chevron-down");
+                            icono.classList.toggle("rotated");
+                        });
+
+                        users.addEventListener("click", function() {
+                            var sublista = users.querySelector(".optionsxd");
+                            sublista.classList.toggle("show");
+                            var icono = users.querySelector("i.fa-solid.fa-chevron-down");
+                            icono.classList.toggle("rotated");
+                        });
+                    });
+
+
+
+            </script>
+
+            <style>
+                
+                .rotated {
+                    transform: rotate(180deg);
+                }
+
+                .optionsxd3,.optionsxd2,.optionsxd {
+                        display: none;
+                        animation: slideDown 0.5s ease;
+                    }
+
+                    .optionsxd3.show,.optionsxd2.show,.optionsxd.show {
+                        display: block;
+                    }
+
+                    @keyframes slideDown {
+                        from {
+                            opacity: 0;
+                            transform: translateY(-10px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+
+            </style>
