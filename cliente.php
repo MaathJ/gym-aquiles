@@ -1,4 +1,5 @@
 <?php
+include_once('auth.php');
 include_once("inc/estructura/parte_superior.php");
 include_once('config/dbconnect.php');
 ?>
@@ -251,7 +252,7 @@ include_once('config/dbconnect.php');
 
                                     <div class="mb-3">
                                         <label for="genero-name" class="col-form-label" style="color: black;">Genero:</label>
-                                        <select name="lstgenero" id="Genero-name" class="form-select" aria-label="Default select example">
+                                        <select class="form-control" name="lstgenero" id="Genero-name" class="form-select" aria-label="Default select example">
                                             <option selected> -------- SELECCIONE -------- </option>
                                             <option value="MASCULINO">MASCULINO</option>
                                             <option value="FEMENINO">FEMENINO</option>
@@ -273,7 +274,7 @@ include_once('config/dbconnect.php');
 
                                     <div class="mb-3" style="margin-left: 15px;">
                                         <img src="assets/images/img_fond.jpg" alt="avatar" id="img" width="200" height="200" required>
-                                        <input type="file" name="foto" id="foto" accept="image/*" required>
+                                        <input type="file" class="form-control" name="foto" id="foto" accept="image/*" required>
                                         <label class="btn_img btn-danger" for="foto">CAMBIAR FOTO</label>
                                     </div>
                                 </div>
@@ -290,9 +291,25 @@ include_once('config/dbconnect.php');
                 </div>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <?php
+        if (isset($_SESSION['error_client'])) {
+            echo
+            '<script>
+                setTimeout(() => {
+                Swal.fire({
+                    title: "¡Ups!",
+                    text: "' . $_SESSION['error_client'] . '",
+                    icon: "error",
+                    });
+                }, 500);
+            </script>';
+            unset($_SESSION['error_client']);
+        }
+        ?>
 
         <?php
-        include_once("inc/estructura/parte_inferior.php")
+        include_once("inc/estructura/parte_inferior.php");
         ?>
 
         <script type="text/javascript">

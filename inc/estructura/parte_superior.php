@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="plantilla.css">
     <link rel="stylesheet" src="style.css" href="assets/css/datatables/datatables.css">
     <link rel="stylesheet" src="style.css" href="assets/css/bootstrap/bootstrap.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>

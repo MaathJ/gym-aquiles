@@ -23,7 +23,8 @@ include_once('ticket_extension.php');
                     <tr>
                         <!-- <th>ID</th> -->
                         <th>Foto</th>
-                        <th>Cliente</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
                         <th>DNI</th>
                         <th>Membresia-Servicio</th>
                         <th>Fecha Inicio</th>
@@ -54,22 +55,16 @@ include_once('ticket_extension.php');
 
 
                     ?>
-
                         <tr>
-                            
                             <td>
                                 <img style="border-radius: 50%; align-self: center; height: 40px; width: 40px;" class="img-cliente" src="assets/images/cliente/<?php echo $r['dni_cli']; ?>.jpg" alt="">
-                            <td style="display: flex; flex-direction: row; text-transform: capitalize;"><?php echo $r['apellido_cli'] . ', ' . $r['nombre_cli'] ?></td>
+                            <td style="text-transform: capitalize;"><?php echo  $r['nombre_cli'] ?></td>
+                            <td style="text-transform: capitalize;"><?php echo $r['apellido_cli'] ?></td>
                             <td>
                                 <?php echo $r['dni_cli']; ?>
-
                             </td>
-
-
-                            <td><?php echo $r['nombre_me'] . '<p class="text-membre">' . $r['nombre_se'] . '</p>' ?></td>
-
+                            <td><?php echo $r['nombre_me'] . $r['nombre_se'] ?></td>
                             <td><?php echo date('d-m-Y', strtotime($r['fechainicio_ma'])) ?></td>
-
                             <?php
                             $fechaFin = new DateTime($r['fechafin_ma']);
                             $fechaFin->modify('-1 day');
@@ -86,10 +81,8 @@ include_once('ticket_extension.php');
 
                             $estado = $r['estado_ma'];
                             $colorLetra = '';
-
                             // Ajustar a cero si la diferencia es menor a 0 días
                             $diasRestantes = max($diasRestantes, 0);
-
                             // Ajustar a cero si la fecha actual ha superado la fecha de finalización
                             if ($fechaHoy > $fechaFin) {
                                 $diasRestantes = 0;
@@ -103,14 +96,10 @@ include_once('ticket_extension.php');
                                 // Tu lógica para el estado ACTIVO
                             }
                             ?>
-
                             <td style="font-weight: 800;"><?php echo $diasRestantes . ' días' ?></td>
-
-
-
                             <td align="center">
                                 <button class="<?php echo ($r['estado_ma'] == 'ACTIVO') ? 'active-button' : 'inactive-button'; ?>">
-                                    <?php echo $r['estado_ma']?>
+                                    <?php echo $r['estado_ma'] ?>
                                 </button>
                             </td>
 
@@ -119,9 +108,6 @@ include_once('ticket_extension.php');
                             <td><?php echo $r['desc_tp'] ?></td>
 
                             <td style="display: flex; gap: 1rem; justify-content: center; align-items: center;">
-
-
-
                                 <a class="btn btn-sm btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#ModalEditar" data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
                                                 'id_ma':'<?php echo $r['id_ma']; ?>',
                                                 'precio_ma':'<?php echo $r['precio_me']; ?>',
@@ -133,7 +119,6 @@ include_once('ticket_extension.php');
                                                 'tp_ma':'<?php echo $r['id_tp'] ?? ''; ?>'
                                                 });">
                                     <i class="fas fa-edit"> </i></a>
-
 
                                 <a href="matricula/D_matricula.php?cod=<?php echo $r['id_ma'] ?>" class="btn btn-sm btn-danger" target="_parent"><i class="fas fa-trash"> </i></a>
 

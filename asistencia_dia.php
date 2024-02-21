@@ -17,25 +17,17 @@ date_default_timezone_set('America/Lima');
         <div>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a  class="nav-link active" id="regis-asis-hoy" >Registro De Asistencias Hoy</a>
+                    <a class="nav-link active" id="regis-asis-hoy">Registro De Asistencias Hoy</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="regis-asis-mes" href="#">Registro de Asistencias del Mes</a>
                 </li>
             </ul>
-            <!-- <button class="servicio" data-bs-toggle="collapse" href="#collapseExample" role="button"
-                aria-expanded="false" aria-controls="collapseExample">
-                Registro De Asistencias Hoy
-            </button>
-            <button class="servicio" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2"
-                aria-expanded="false" aria-controls="collapseExample">
-                Registro De Asistencias Del Mes
-            </button> -->
         </div>
-        <div  id="collapseExample">
-            <div style="color: #f05941; font-weight: bolder; font-size: 2rem; text-align:center;">Asistencias Hoy</div>
-            <div class="col-md-12">
+        <div id="collapseExample">
 
+            <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
+                <div style="color: #f05941; font-weight: bolder; font-size: 2rem; text-align:center;">Asistencias Hoy</div>
                 <table class="table table-striped" id="table_asistencia">
 
                     <thead style="color: #fff; background-color:#f05941;">
@@ -49,74 +41,71 @@ date_default_timezone_set('America/Lima');
                         </tr>
                     </thead>
                     <?php
-                                            include('config/dbconnect.php');
-                                            
-                                           
-                                            $fechaHoy = date('Y-m-d');  
-    
-                                            $sql = "SELECT * FROM asistencia_pago ap 
+                    include('config/dbconnect.php');
+
+
+                    $fechaHoy = date('Y-m-d');
+
+                    $sql = "SELECT * FROM asistencia_pago ap 
                                                     INNER JOIN tipo_rutina tr ON ap.id_tiru = tr.id_tiru 
                                                     WHERE DATE(ap.fech_asip) = DATE(NOW()) 
                                                     ORDER BY ap.id_asip DESC";
-                                            $f = mysqli_query($cn, $sql);
-    
-                                            while ($r = mysqli_fetch_assoc($f)) {
-    
-    
-                                            ?>
-                    <td align="center">
-                        <?php echo $r['id_asip'] ?>
-                    </td>
-                    <td align="center">
-                        <?php echo $r['nomb_asip'] ?>
-                    </td>
-                    <td align="center">
-                        <?php echo $r['fech_asip'] ?>
-                    </td>
-                    <td align="center">
-                        <?php echo $r['precio_tiru'] ?>
-                    </td>
-                    <td align="center">
-                        <?php echo $r['nombre_tiru'] ?>
-                    </td>
-                    <td>
-                        <center>
+                    $f = mysqli_query($cn, $sql);
 
-                            <a class="btn btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                                data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
+                    while ($r = mysqli_fetch_assoc($f)) {
+
+
+                    ?>
+                        <td align="center">
+                            <?php echo $r['id_asip'] ?>
+                        </td>
+                        <td align="center">
+                            <?php echo $r['nomb_asip'] ?>
+                        </td>
+                        <td align="center">
+                            <?php echo $r['fech_asip'] ?>
+                        </td>
+                        <td align="center">
+                            <?php echo $r['precio_tiru'] ?>
+                        </td>
+                        <td align="center">
+                            <?php echo $r['nombre_tiru'] ?>
+                        </td>
+                        <td>
+                            <center>
+
+                                <a class="btn btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
                                                 'id': '<?php echo $r['id_asip'] ?? ''; ?>',
                                                 'nombre': '<?php echo $r['nomb_asip'] ?? ''; ?>',
                                                 'fecha': '<?php echo $r['fech_asip'] ?? ''; ?>',
                                                 'rutina': '<?php echo $r['nombre_tiru'] ?? ''; ?>'
                                             });">
-                                <i class="fas fa-edit"> </i></a>
+                                    <i class="fas fa-edit"> </i></a>
 
 
-                            <a href="asistencia_dia/D_asistencia_dia.php?d=<?php echo $r['id_asip'] ?>"
-                                class="btn btn-danger btn-circle " target="_parent">
-                                <i class="fas fa-trash"> </i></a>
-                            <a class="btn btn-sm btn-success btn-circle text-white" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(<?php echo $r['id_as']; ?>, 'a_mat')">
-                                <i class="fas fa-print"></i>
-                            </a>
-                        </center>
+                                <a href="asistencia_dia/D_asistencia_dia.php?d=<?php echo $r['id_asip'] ?>" class="btn btn-danger btn-circle " target="_parent">
+                                    <i class="fas fa-trash"> </i></a>
+                                <a class="btn btn-sm btn-success btn-circle text-white" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(<?php echo $r['id_as']; ?>, 'a_mat')">
+                                    <i class="fas fa-print"></i>
+                                </a>
+                            </center>
 
-                    </td>
+                        </td>
 
-                    </tr>
+                        </tr>
                     <?php
-                                            }
-                                            ?>
+                    }
+                    ?>
 
 
 
                 </table>
             </div>
         </div>
-        <div  id="collapseExample2">
-            <div style="color: #f05941; font-weight: bolder; font-size: 2rem; text-align:center;">Asistencias Mensuales
-            </div>
-            <div class="col-md-12">
-
+        <div id="collapseExample2">
+            <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
+                <div style="color: #f05941; font-weight: bolder; font-size: 2rem; text-align:center;">Asistencias Mensuales
+                </div>
                 <table class="table table-striped" id="table_asistencia2">
 
                     <thead style="color: #fff; background-color:#f05941;">
@@ -130,60 +119,58 @@ date_default_timezone_set('America/Lima');
                         </tr>
                     </thead>
                     <?php
-                                            include('config/dbconnect.php');
-    
-                                            date_default_timezone_set('America/Lima');
-                                            $fechaHoy = date('Y-m-d');  
-    
-                                            $sql = "SELECT * FROM asistencia_pago ap 
+                    include('config/dbconnect.php');
+
+                    date_default_timezone_set('America/Lima');
+                    $fechaHoy = date('Y-m-d');
+
+                    $sql = "SELECT * FROM asistencia_pago ap 
                                                     INNER JOIN tipo_rutina tr ON ap.id_tiru = tr.id_tiru 
                                                     WHERE MONTH(ap.fech_asip) = MONTH('$fechaHoy') 
                                                     ORDER BY ap.id_asip DESC";
-    
-                                            $f = mysqli_query($cn, $sql);
-                                            while ($r = mysqli_fetch_assoc($f)) {
-    
-    
-                                            ?>
-                    <td align="center">
-                        <?php echo $r['id_asip'] ?>
-                    </td>
-                    <td align="center">
-                        <?php echo $r['nomb_asip'] ?>
-                    </td>
-                    <td align="center">
-                        <?php echo $r['fech_asip'] ?>
-                    </td>
-                    <td align="center">
-                        <?php echo $r['precio_tiru'] ?>
-                    </td>
-                    <td align="center">
-                        <?php echo $r['nombre_tiru'] ?>
-                    </td>
-                    <td>
-                        <center>
 
-                            <a class="btn btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                                data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
+                    $f = mysqli_query($cn, $sql);
+                    while ($r = mysqli_fetch_assoc($f)) {
+
+
+                    ?>
+                        <td align="center">
+                            <?php echo $r['id_asip'] ?>
+                        </td>
+                        <td align="center">
+                            <?php echo $r['nomb_asip'] ?>
+                        </td>
+                        <td align="center">
+                            <?php echo $r['fech_asip'] ?>
+                        </td>
+                        <td align="center">
+                            <?php echo $r['precio_tiru'] ?>
+                        </td>
+                        <td align="center">
+                            <?php echo $r['nombre_tiru'] ?>
+                        </td>
+                        <td>
+                            <center>
+
+                                <a class="btn btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
                                                 'id': '<?php echo $r['id_asip'] ?? ''; ?>',
                                                 'nombre': '<?php echo $r['nomb_asip'] ?? ''; ?>',
                                                 'fecha': '<?php echo $r['fech_asip'] ?? ''; ?>',
                                                 'rutina': '<?php echo $r['nombre_tiru'] ?? ''; ?>'
                                             });">
-                                <i class="fas fa-edit"> </i></a>
+                                    <i class="fas fa-edit"> </i></a>
 
 
-                            <a href="asistencia_dia/D_asistencia_dia.php?d=<?php echo $r['id_asip'] ?>"
-                                class="btn btn-danger btn-circle " target="_parent">
-                                <i class="fas fa-trash"> </i></a>
-                        </center>
+                                <a href="asistencia_dia/D_asistencia_dia.php?d=<?php echo $r['id_asip'] ?>" class="btn btn-danger btn-circle " target="_parent">
+                                    <i class="fas fa-trash"> </i></a>
+                            </center>
 
-                    </td>
+                        </td>
 
-                    </tr>
+                        </tr>
                     <?php
-                                            }
-                                            ?>
+                    }
+                    ?>
 
 
 
@@ -192,14 +179,12 @@ date_default_timezone_set('America/Lima');
         </div>
     </div>
 
-    <div class="modal fade  " id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-        style="margin-top: -20px;">
+    <div class="modal fade  " id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: -20px;">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
                     <h4 class="modal-title" id="exampleModalLabel">EDITAR REGISTRO ASISTENCIA POR DIA</h4>
-                    <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
@@ -208,16 +193,12 @@ date_default_timezone_set('America/Lima');
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label"
-                                        style="color: black;">CODIGO:</label>
-                                    <input type="text" name="txtcodigo" class="form-control" id="recipient_name"
-                                        value="" disabled>
-                                    <input type="text" name="txtcod" class="form-control" id="recipient_name2" value=""
-                                        hidden>
+                                    <label for="recipient-name" class="col-form-label" style="color: black;">CODIGO:</label>
+                                    <input type="text" name="txtcodigo" class="form-control" id="recipient_name" value="" disabled>
+                                    <input type="text" name="txtcod" class="form-control" id="recipient_name2" value="" hidden>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="Nombre-name" class="col-form-label"
-                                        style="color: black;">NOMBRE:</label>
+                                    <label for="Nombre-name" class="col-form-label" style="color: black;">NOMBRE:</label>
                                     <input type="text" name="txtnombre" class="form-control" id="nombre_name" required>
                                 </div>
 
@@ -226,17 +207,14 @@ date_default_timezone_set('America/Lima');
                             <div class="col-md-6">
 
                                 <div class="mb-3">
-                                    <label for="Telefono-name" class="col-form-label"
-                                        style="color: black;">FECHA:</label>
-                                    <input type="datetime-local" name="txtfecha" class="form-control" maxlength="9"
-                                        id="Fecha_name" disabled>
+                                    <label for="Telefono-name" class="col-form-label" style="color: black;">FECHA:</label>
+                                    <input type="datetime-local" name="txtfecha" class="form-control" maxlength="9" id="Fecha_name" disabled>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="Edad-name" class="col-form-label" style="color: black;">RUTINA:</label>
 
-                                    <select name="txt_rutina" id="rutina_name" class="form-select"
-                                        aria-label="Default select example">
+                                    <select name="txt_rutina" id="rutina_name" class="form-select" aria-label="Default select example">
                                         <?php
                                         include('conexion.php');
                                         $sql_2 = "select * from tipo_rutina";
@@ -244,16 +222,15 @@ date_default_timezone_set('America/Lima');
                                         while ($r = mysqli_fetch_assoc($f)) {
                                         ?>
 
-                                        <option value="<?php echo $r['nombre_tiru'] ?>">
-                                            <?php echo $r['nombre_tiru'] ?>
-                                        </option>
+                                            <option value="<?php echo $r['nombre_tiru'] ?>">
+                                                <?php echo $r['nombre_tiru'] ?>
+                                            </option>
                                         <?php
                                         }
                                         ?>
                                     </select>
 
-                                    <input type="text" name="txtrutina" class="form-control" min="0" id="Rutina_name"
-                                        hidden>
+                                    <input type="text" name="txtrutina" class="form-control" min="0" id="Rutina_name" hidden>
 
                                 </div>
 
@@ -275,11 +252,11 @@ date_default_timezone_set('America/Lima');
 
 
     <?php
-include_once("inc/estructura/parte_inferior.php");
-//Trae el modal y el script
-include_once('ticket_extension.php');
-//--------------------------
-?>
+    include_once("inc/estructura/parte_inferior.php");
+    //Trae el modal y el script
+    include_once('ticket_extension.php');
+    //--------------------------
+    ?>
     <script src="assets/js/tabs-asistencia/tabs-asis.js"></script>
     <script type="text/javascript">
         function cargar_info(dato) {
@@ -321,8 +298,7 @@ include_once('ticket_extension.php');
             //para usar los botones   
             responsive: "true",
             dom: 'Bfrtilp',
-            buttons: [
-                {
+            buttons: [{
                     extend: 'excelHtml5',
                     text: '<i class="fa-regular fa-file-excel"></i> ',
                     titleAttr: 'Exportar a Excel',
@@ -364,8 +340,7 @@ include_once('ticket_extension.php');
             //para usar los botones   
             responsive: "true",
             dom: 'Bfrtilp',
-            buttons: [
-                {
+            buttons: [{
                     extend: 'excelHtml5',
                     text: '<i class="fa-regular fa-file-excel"></i> ',
                     titleAttr: 'Exportar a Excel',

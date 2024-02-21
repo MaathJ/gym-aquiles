@@ -1794,6 +1794,22 @@ pre code {
   border: 0;
 }
 
+.form-select {
+  display: block;
+  width: 100%;
+  height: calc(1.2em + 0.65rem + 2px);
+  padding: 0.375rem 0.65rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
 .form-control {
   display: block;
   width: 100%;
@@ -1811,21 +1827,25 @@ pre code {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .form-control {
+  .form-control,
+  .form-select {
     transition: none;
   }
 }
-.form-control::-ms-expand {
+.form-control::-ms-expand,
+.form-select::-ms-expand {
   background-color: transparent;
   border: 0;
 }
 
-.form-control:-moz-focusring {
+.form-control:-moz-focusring,
+.form-select:-moz-focusring {
   color: transparent;
   text-shadow: 0 0 0 #495057;
 }
 
-.form-control:focus {
+.form-control:focus,
+.form-select:focus {
   color: #495057;
   background-color: #fff;
   border-color: #80bdff;
@@ -1833,12 +1853,19 @@ pre code {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-.form-control::-moz-placeholder {
+.form-control::-moz-placeholder,
+.form-select::-moz-placeholder {
   color: #6c757d;
   opacity: 1;
 }
 
-.form-control::placeholder {
+.form-control::-moz-placeholder, .form-select::-moz-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::placeholder,
+.form-select::placeholder {
   color: #6c757d;
   opacity: 1;
 }

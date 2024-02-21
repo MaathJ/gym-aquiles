@@ -17,7 +17,7 @@ include('config/dbconnect.php');
             Nuevo Rutina
             </button>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
                             <table class="table table-striped"  id="table_rol">
                                 <thead align="center" class=""  style="color: #fff; background-color:#f05941;">
                                     <tr>
