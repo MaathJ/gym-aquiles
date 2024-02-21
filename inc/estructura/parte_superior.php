@@ -33,7 +33,14 @@
             </div>
             <div class="app-header-actions">
                 <button class="user-profile">
-                    <span>Anthony</span>
+                    <span style="text-transform: capitalize;">
+                    <?php 
+                    if( $_SESSION["name_user"] ){
+                        $user = $_SESSION["name_user"];
+                        echo $user;
+                    }
+                    
+                    ?></span>
                     <span><img src="assets/images/avatar/avatar-1.jpg" alt=""></span>
                 </button>
                 <div class="app-header-actions-buttons">
@@ -128,7 +135,7 @@
                             </ul>
                         </li>
 
-                        <li class="section-item-options" id="suscripcione">
+                        <li class="section-item-options" id="rOperario">
                             <div class="section-item-container">
                                 <div class="section-item-box">
                                     <a class="item-options">
@@ -140,7 +147,7 @@
                                     <i class="fa-solid fa-chevron-down"></i>
                                 </span>
                             </div>
-                            <ul class="optionsxd3">
+                            <ul class="optionsxd4">
                                 <li>
                                     <a href="asistenciaop.php">
                                         <span>Asistencia Operario</span>

@@ -15,6 +15,7 @@ $valor=$r["id_us"];
 if($r){
    $_SESSION["usuario"]=$valor;
    $_SESSION["auth"]=1;
+   $_SESSION["name_user"] =$usuario;
 
     $mensajeIngre="USUARIO correcto";
 
