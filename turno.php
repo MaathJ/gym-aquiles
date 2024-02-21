@@ -1,42 +1,26 @@
 <?php
+include_once('auth.php');
 include_once("inc/estructura/parte_superior.php");
 include_once('config/dbconnect.php');
 ?>
 
 
-<!-- Page-header end -->
-<div class="pcoded-inner-content">
-    <!-- Main-body start -->
-    <div class="main-body">
-        <div class="page-wrapper">
-            <!-- Page-body start -->
-            <div class="page-body">
-                <div class="row">
+<link rel="stylesheet" src="style.css" href="assets/css/matricula/matricula.css">
+<div class="app-body-main-content">
+    <div>
+        <p>Aquiles<span> / Turno</span></p>
+        <h3>Turno</h3>
+    </div>
+    <div class="main-content">
+        <div>
+            <button class="matricula" data-bs-toggle="modal" data-bs-target="#ModalRegistroTurno" data-bs-whatever="@mdo">
+                Nuevo Turno
+            </button>
+        </div>
 
-                    <div class="container">
-
-
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-4">
-
-                                    <button type="button" class="btn btn-lg " style="background: #17a2b8;" data-bs-toggle="modal" data-bs-target="#ModalrolRegistro" data-bs-whatever="@mdo">
-                                    <i class="fa-solid fa-plus text-white" ></i><span class="text-white"> Nuevo Turno</span>
-                                    </button>
-
-                                  
-
-                                </div>
-                                <div class="col-md-4"></div>
-                                <div class="col-md-4"></div>
-
-                            </div>
-                        </div>
-                        <br>
-
-                        <div class="col-md-12">
-                            <table class="table table-striped"  id="table_Turno">
-                                <thead align="center" class=""  style="color: #fff; background-color:#17a2b8;">
+        <div class="col-md-12">
+            <table class="table table-striped"  id="table_Turno">
+                <thead align="center" class=""  style="color: #fff; background-color:#f05941;">
                                     <tr>
                                         <th>ID</th>
                                         <th>TURNO</th>
@@ -59,11 +43,11 @@ include_once('config/dbconnect.php');
          
 
                                         <tr>
-                                            <td><?php echo $r['id_tu']?></td>
-                                            <td><?php echo $r['nombre_tu']?></td>
-                                            <td><?php echo $r['estado_tu']?></td>
-                                            <td>
-                                            <a class="btn btn-sm btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#ModalrolEditar" 
+                                            <td align="center"><?php echo $r['id_tu']?></td>
+                                            <td align="center"><?php echo $r['nombre_tu']?></td>
+                                            <td align="center"><?php echo $r['estado_tu']?></td>
+                                            <td align="center">
+                                            <a class="btn btn-sm btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#ModalEditarTurno" 
                                             data-bs-whatever="@mdo" target="_parent" onclick=" cargar_info({
                                                 'id':' <?php echo $r['id_tu'] ?? ''; ?> ',
                                                 'nombre':'<?php echo $r['nombre_tu']??'';?>',
@@ -109,10 +93,10 @@ include_once('config/dbconnect.php');
 
 
 <!-- MODAL PARA EDITAR ROLES  -->
-<div class="modal fade  " id="ModalrolEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade" id="ModalEditarTurno" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: -20px;">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header " style="background-color: #0B5ED7; color: #ffffff;">
+            <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
                 <h4 class="modal-title" id="exampleModalLabel">EDITAR TURNO:</h4>
                 <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -121,34 +105,29 @@ include_once('config/dbconnect.php');
 
                 <form action="Turno/U_turno.php" method="post">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
+                        <div class="col-12 mb-3">
                                 <label for="rol" class="col-form-label" style="color: black;">Turno:</label>
                                 <input type="text" name="txtnombre" placeholder="Ingrese el Turno" class="form-control" id="txt_nombre" required>
                                 <input type="text" name="txtid" placeholder="Ingrese el Turno" class="form-control" id="txt_id" hidden>
+
+                                <br>
+                                <label for="Estado-name" class="col-form-label" style="color: black;">Estado:</label>
+                                    <select name="txtestado" id="txt_estado" class="form-control" aria-label="Default select example">
+                                        <option value="ACTIVO">ACTIVO</option>
+                                        <option value="INACTIVO">INACTIVO</option>
+                                    </select>
                             </div>
 
 
 
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                    <label for="Estado-name" class="col-form-label" style="color: black;">Estado:</label>
-                                    <select name="txtestado" id="txt_estado" class="form-select" aria-label="Default select example">
-                                        <option value="ACTIVO">ACTIVO</option>
-                                        <option value="INACTIVO">INACTIVO</option>
-                                    </select>
-
-                                  
-                                </div>
-
-                        </div>
+            
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                        <button type="submit" class="btn btn-primary" id="registrar">MODIFICAR</button>
+                        <button type="submit" class="btn btn-primary" id="registrar" style="background-color:#f05941; border-color: #f05941;">MODIFICAR</button>
                         <input type="hidden" name="id_us" id="id_ro" value="">
                     </div>
                 </form>
@@ -158,12 +137,12 @@ include_once('config/dbconnect.php');
     <!-- Page-body end -->
 </div>
 
-<!-- MODAL PARA REGISTRO ROLES  -->
-<div class="modal fade  " id="ModalrolRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<!-- MODAL PARA REGISTRO TURNO  -->
+<div class="modal fade  " id="ModalRegistroTurno" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: -20px;">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header " style="background-color: #0B5ED7; color: #ffffff;">
-                <h4 class="modal-title" id="exampleModalLabel">REGISTRO ROL:</h4>
+            <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
+                <h4 class="modal-title" id="exampleModalLabel">REGISTRO DE TURNO:</h4>
                 <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -171,24 +150,17 @@ include_once('config/dbconnect.php');
 
                 <form action="turno.php" method="get">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
+                        <div class="col-12 mb-3">
+                            
                                 <label for="rol" class="col-form-label" style="color: black;">Turno:</label>
                                 <input type="text" name="turno" placeholder="Ingrese el Turno" class="form-control" id="turno" required>
-                            </div>
-
-
-                        </div>
-
-                        <div class="col-md-6">
-
-
+                            
                         </div>
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                        <button type="submit" class="btn btn-primary" id="registrar">Registrar</button>
+                        <button type="submit" class="btn btn-primary" id="registrar" style="background-color:#f05941; border-color: #f05941;">Registrar</button>
                     </div>
                 </form>
             </div>
@@ -196,6 +168,8 @@ include_once('config/dbconnect.php');
     </div>
     <!-- Page-body end -->
 </div>
+
+
 
 <script>    
 
@@ -219,7 +193,6 @@ include_once('config/dbconnect.php');
 
         }
 
-    
 let table = new DataTable('#table_Turno', {
     language: {
                 "lengthMenu": "Mostrar _MENU_ registros",
@@ -281,9 +254,9 @@ if (isset($_GET['turno'])) {
 
 ?>
 
-
-
 <?php
-require_once "inc/estructura/parte_inferior.php"
+require_once ("inc/estructura/parte_inferior.php");
 
 ?>
+
+

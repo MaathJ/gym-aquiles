@@ -1,42 +1,25 @@
 <?php
+include_once('auth.php');
 include_once("inc/estructura/parte_superior.php");
 include_once('config/dbconnect.php');
 ?>
 
-
-<!-- Page-header end -->
-<div class="pcoded-inner-content">
-    <!-- Main-body start -->
-    <div class="main-body">
-        <div class="page-wrapper">
-            <!-- Page-body start -->
-            <div class="page-body">
-                <div class="row">
-
-                    <div class="container">
-
-
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-4">
-
-                                    <button type="button" class="btn btn-lg " style="background: #17a2b8;" data-bs-toggle="modal" data-bs-target="#ModalrolRegistro" data-bs-whatever="@mdo">
-                                        <i class="fa-solid fa-plus text-white"></i><span class="text-white"> Nuevo Cargo</span>
-                                    </button>
-
-
-
-                                </div>
-                                <div class="col-md-4"></div>
-                                <div class="col-md-4"></div>
-
-                            </div>
-                        </div>
-                        <br>
+<link rel="stylesheet" src="style.css" href="assets/css/matricula/matricula.css">
+<div class="app-body-main-content">
+    <div>
+        <p>Aquiles<span> / Cargo</span></p>
+        <h3>Cargo</h3>
+    </div>
+    <div class="main-content">
+        <div>
+            <button class="matricula" data-bs-toggle="modal" data-bs-target="#ModalRegistroCargo" data-bs-whatever="@mdo">
+                Nuevo Cargo
+            </button>
+        </div>
 
                         <div class="col-md-12">
                             <table class="table table-striped" id="table_rol">
-                                <thead align="center" class="" style="color: #fff; background-color:#17a2b8;">
+                                <thead align="center" class="" style="color: #fff; background-color:#f05941;">
                                     <tr>
                                         <th>ID</th>
                                         <th>CARGO</th>
@@ -56,11 +39,11 @@ include_once('config/dbconnect.php');
                                     ?>
 
                                         <tr>
-                                            <td><?php echo $r['id_ca'] ?></td>
+                                            <td align="center"><?php echo $r['id_ca'] ?></td>
                                           
-                                            <td><?php echo $r['nombre_ca'] ?></td>
-                                            <td><?php echo $r['estado_ca'] ?></td>
-                                            <td>
+                                            <td align="center"><?php echo $r['nombre_ca'] ?></td>
+                                            <td align="center"><?php echo $r['estado_ca'] ?></td>
+                                            <td align="center">
                                                 <a class="btn btn-sm btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#Modalcargoupdate" data-bs-whatever="@mdo" target="_parent" onclick=" cargar_info({
                                                 'id':' <?php echo $r['id_ca'] ?? ''; ?> ',
                                                 'nombre':'<?php echo $r['nombre_ca'] ?? ''; ?>',
@@ -106,10 +89,10 @@ include_once('config/dbconnect.php');
 
 
 <!-- MODAL PARA EDITAR ROLES  -->
-<div class="modal fade  " id="Modalcargoupdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade  " id="Modalcargoupdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: -20px;">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header " style="background-color: #0B5ED7; color: #ffffff;">
+            <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
                 <h4 class="modal-title" id="exampleModalLabel">EDITAR CARGO:</h4>
                 <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -118,17 +101,10 @@ include_once('config/dbconnect.php');
 
                 <form action="cargo/U_cargo.php" method="post">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
+                    <div class="col-12 mb-3">
                                 <label for="rol" class="col-form-label" style="color: black;">CARGO:</label>
                                 <input type="text" name="u_cargo" placeholder="Ingrese el cargo" class="form-control" id="u_cargo" required>
-                            </div>
-
-
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="mb-3">
+                            
                                 <label for="estado" class="col-form-label" style="color: black;">ESTADO:</label>
                                 <select class="form-control" name="u_estado" id="u_estado">
                                     <option  value="ACTIVO">ACTIVO</option>
@@ -136,14 +112,14 @@ include_once('config/dbconnect.php');
                                                                   
                                 </select>
 
-                            </div>
+                        </div>
 
                         </div>
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                        <button type="submit" class="btn btn-primary" id="">MODIFICAR</button>
+                        <button type="submit" class="btn btn-primary" id="" style="background-color:#f05941; border-color: #f05941;">MODIFICAR</button>
                         <input type="hidden" name="u_cod" id="u_cod" >
 
                     </div>
@@ -155,11 +131,11 @@ include_once('config/dbconnect.php');
 </div>
 
 <!-- MODAL PARA REGISTRO cargos  -->
-<div class="modal fade  " id="ModalrolRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade  " id="ModalRegistroCargo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: -20px;">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header " style="background-color: #0B5ED7; color: #ffffff;">
-                <h4 class="modal-title" id="exampleModalLabel">REGISTRO CARGO:</h4>
+            <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
+                <h4 class="modal-title" id="exampleModalLabel">REGISTRO DE CARGO:</h4>
                 <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -167,8 +143,7 @@ include_once('config/dbconnect.php');
 
                 <form action="cargo.php" method="get">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
+                    <div class="col-12 mb-3">
                                 <label for="rol" class="col-form-label" style="color: black;">CARGO:</label>
                                 <input type="text" name="cargo" placeholder="Ingrese el cargo" class="form-control" id="cargo" required>
                             </div>
@@ -193,7 +168,7 @@ include_once('config/dbconnect.php');
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                        <button type="submit" class="btn btn-primary" id="registrar">Registrar</button>
+                        <button type="submit" class="btn btn-primary" id="registrar" style="background-color:#f05941; border-color: #f05941;">Registrar</button>
                     </div>
                 </form>
             </div>
@@ -276,6 +251,6 @@ if (isset($_GET['cargo'])) {
 
 
 <?php
-require_once "inc/estructura/parte_inferior.php"
+require_once ("inc/estructura/parte_inferior.php");
 
 ?>
