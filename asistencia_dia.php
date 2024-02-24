@@ -32,12 +32,12 @@ date_default_timezone_set('America/Lima');
 
                     <thead style="color: #fff; background-color:#f05941;">
                         <tr align="center">
-                            <th> CODIGO </th>
-                            <th> NOMBRE </th>
-                            <th> FECHA </th>
-                            <th> PRECIO </th>
-                            <th> RUTINA </th>
-                            <th> OPCIONES</th>
+                            <th class="text-center"> CODIGO </th>
+                            <th class="text-center"> NOMBRE </th>
+                            <th class="text-center"> FECHA </th>
+                            <th class="text-center"> PRECIO </th>
+                            <th class="text-center"> RUTINA </th>
+                            <th class="text-center"> OPCIONES</th>
                         </tr>
                     </thead>
                     <?php
@@ -110,12 +110,12 @@ date_default_timezone_set('America/Lima');
 
                     <thead style="color: #fff; background-color:#f05941;">
                         <tr align="center">
-                            <th> CODIGO </th>
-                            <th> NOMBRE </th>
-                            <th> FECHA </th>
-                            <th> PRECIO </th>
-                            <th> RUTINA </th>
-                            <th> OPCIONES</th>
+                            <th class="text-center"> CODIGO </th>
+                            <th class="text-center"> NOMBRE </th>
+                            <th class="text-center"> FECHA </th>
+                            <th class="text-center"> PRECIO </th>
+                            <th class="text-center"> RUTINA </th>
+                            <th class="text-center"> OPCIONES</th>
                         </tr>
                     </thead>
                     <?php

@@ -16,15 +16,15 @@ include_once('config/dbconnect.php');
                 Nuevo Tipo Rutina
             </button>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
             <table class="table table-striped" id="table_tiporutina">
 
                 <thead align="center" class="" style="color: #fff; background-color:#f05941;">
                     <tr>
-                        <th> CODIGO </th>
-                        <th> NOMBRE </th>
-                        <th> PRECIO </th>
-                        <th> OPCIONES</th>
+                        <th class="text-center"> CODIGO </th>
+                        <th class="text-center"> NOMBRE </th>
+                        <th class="text-center"> PRECIO </th>
+                        <th class="text-center"> OPCIONES</th>
                     </tr>
                 </thead>
                 <tbody>

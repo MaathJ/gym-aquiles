@@ -22,19 +22,19 @@ include_once('ticket_extension.php');
                 <thead align="center" class="" style="color: #fff;">
                     <tr>
                         <!-- <th>ID</th> -->
-                        <th>Foto</th>
-                        <th>Nombres</th>
-                        <th>Apellidos</th>
-                        <th>DNI</th>
-                        <th>Membresia-Servicio</th>
-                        <th>Fecha Inicio</th>
-                        <th>Fecha Vencimiento</th>
-                        <th>Dias Restantes</th>
-                        <th>Estado</th>
-                        <th>Empleado</th>
-                        <th>Fecha Registro</th>
-                        <th>Medio de pago</th>
-                        <th>Opciones</th>
+                        <th class="text-center">Foto</th>
+                        <th class="text-center">Nombres</th>
+                        <th class="text-center">Apellidos</th>
+                        <th class="text-center">DNI</th>
+                        <th class="text-center">Membresia-Servicio</th>
+                        <th class="text-center">Fecha Inicio</th>
+                        <th class="text-center">Fecha Vencimiento</th>
+                        <th class="text-center">Dias Restantes</th>
+                        <th class="text-center">Estado</th>
+                        <th class="text-center">Empleado</th>
+                        <th class="text-center">Fecha Registro</th>
+                        <th class="text-center">Medio de pago</th>
+                        <th class="text-center">Opciones</th>
                     </tr>
 
                 </thead>

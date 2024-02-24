@@ -20,9 +20,9 @@ include_once('config/dbconnect.php');
                             <table class="table table-striped"  id="table_servicio">
                                 <thead class=""  style="color: #fff; background-color:#f05941;">
                                     <tr>
-                                        <th>Id</th>
-                                        <th>Servicio</th>
-                                        <th>Opciones</th>
+                                        <th class="text-center">Id</th>
+                                        <th class="text-center">Servicio</th>
+                                        <th class="text-center">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -34,15 +34,15 @@ include_once('config/dbconnect.php');
                                 while ($r = mysqli_fetch_assoc($f)) {
                                 ?>
                                     <tr>
-                                        <td>
+                                        <td align="center">
                                             <?php echo $r['id_se']; ?>
                                         </td>
-                                        <td>
+                                        <td align="center">
                                             <?php echo $r['nombre_se']; ?>
                                         </td>
-                                        <td class="section-buttons">
+                                        <td align="center">
                                             <!-- BOTON EDITAR -->
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#U_servicio<?php echo $r['id_se']; ?>"> EDITAR </button>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#U_servicio<?php echo $r['id_se']; ?>"><i class="fas fa-edit"> </i></a></button>
 
                                             <!-- MODAL PARA EDITAR  -->
                                             <div class="modal fade" id="U_servicio<?php echo $r['id_se']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -77,7 +77,7 @@ include_once('config/dbconnect.php');
 
 
                                             <!-- BOTON ELIMINAR -->
-                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#D_servicio<?php echo $r['id_se']; ?>"> Eliminar</button>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#D_servicio<?php echo $r['id_se']; ?>"><i class="fas fa-trash"> </i></button>
 
                                             <!-- MODAL PARA ELIMINAR  -->
                                             <div class="modal fade" id="D_servicio<?php echo $r['id_se']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
