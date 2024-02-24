@@ -25,19 +25,28 @@ include_once('config/dbconnect.php');
 
                                             <!-- <a href="#" class="btn btn-sm btn-primary"> Ver Asistencias</a> -->
 
-                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Ver Asistencias</button>
+                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" style="margin-top:27px; background-color:#f05941; border-color: #f05941;">Ver Asistencias</button>
 
                                         </div>
                                         <div class="col-md-12 modal-ope d-none">
-                                             <div class="seconds-left">10</div>
-                                            <h3 class="text-title"> Informacion del Operador</h3>
-                                            <img style="border-radius: 50%; width:  180px;"  src="" id="peradorimg" alt="">
-                                            <h5>Nombre:</h5> <span id="operadorNombre"></span>
-                                            <h5>Apellido:</h5> <span id="operadorApellido"></span>
-                                            <h5>ESTADO:</h5> <span id="operadorEstado"></span>
-                                            <h5>FECHA Y HORA :</h5> <span id="operadorFechaHora"></span>
-                                            
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 id="exampleModalLabel" style="margin-left:80px;">Información del Operador</h4>
+                                                    </div>
+                                                    <div class="modal-body text-center">
+                                                        <div class="seconds-left" style="margin-left:168px;">10</div>
+                                                        <br>
+                                                        <img style="border-radius: 10%; width: 180px;" src="" id="peradorimg" alt=""><br>
+                                                        <h5>Nombre:</h5> <span id="operadorNombre"></span>
+                                                        <h5>Apellido:</h5> <span id="operadorApellido"></span>
+                                                        <h5>Estado:</h5> <span id="operadorEstado"></span>
+                                                        <h5>Fecha y Hora:</h5> <span id="operadorFechaHora"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+
 
                                     </div>
                                 </div>
@@ -62,16 +71,16 @@ include_once('config/dbconnect.php');
       
     
 
-      <table class="table table-striped" id="table_asistencia">
-        <thead>
+      <table class="table table-striped" id="table_asistencia_Op">
+        <thead  style="color: white;">
             <tr>
-                <th>ID</th>
-                <th>OPERARIO</th>
-                <th>DNI</th>
-                <th>TURNO</th>
-                <th>ESTADO</th>
-                <th>FECHA Y HORA</th>
-                <th>OPCIONES</th>
+                <th class="text-center">ID</th>
+                <th class="text-center">OPERARIO</th>
+                <th class="text-center">DNI</th>
+                <th class="text-center">TURNO</th>
+                <th class="text-center">ESTADO</th>
+                <th class="text-center">FECHA Y HORA</th>
+                
             </tr>
    
 
@@ -90,13 +99,13 @@ include_once('config/dbconnect.php');
         ?>
 
          <tr>
-            <td><?php echo $ras['id_aop']?></td>
-            <td><?php echo $ras['apellido_op'] .' '.$ras['nombre_op']?></td>
-            <td><?php echo $ras['dni_op'] ?></td>
-            <td><?php echo $ras['nombre_tu'] ?></td>
-            <td><?php echo $ras['estado_aop'] ?></td>
-            <td><?php echo $ras['fecha_aop']?></td>
-            <td></td>
+            <td align="center"><?php echo $ras['id_aop']?></td>
+            <td align="center"><?php echo $ras['apellido_op'] .' '.$ras['nombre_op']?></td>
+            <td align="center"><?php echo $ras['dni_op'] ?></td>
+            <td align="center"><?php echo $ras['nombre_tu'] ?></td>
+            <td align="center"><?php echo $ras['estado_aop'] ?></td>
+            <td align="center"  ><?php echo $ras['fecha_aop']?></td>
+            
          </tr>
 
          <?php 
@@ -115,16 +124,18 @@ include_once('config/dbconnect.php');
 
 <style>
 .modal-ope{
-    margin: 10px 10px;
-    border:1px solid #020001;
+    margin-left: -320px;
     padding: 20px;
-    border-radius:  30px;
-    background-color: white;
+    border-radius: 30px;
 }
+
+
 
 </style>
 
-
+<?php
+include_once('./inc/estructura/parte_inferior.php')
+?>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -217,7 +228,7 @@ include_once('config/dbconnect.php');
 <script>
 
          
-let table = new DataTable('#table_asistencia', {
+let table = new DataTable('#table_asistencia_Op', {
     language: {
                 "lengthMenu": "Mostrar _MENU_ registros",
                 "zeroRecords": "No se encontraron resultados",
@@ -240,37 +251,32 @@ let table = new DataTable('#table_asistencia', {
 			{
 				extend:    'excelHtml5',
 				text:      '<i class="fas fa-file-excel"></i> ',
-				titleAttr: 'Exportar a Excel',
-				className: 'btn btn-success'
+				titleAttr: 'Exportar a Excel'
 			},
 			{
 				extend:    'pdfHtml5',
 				text:      '<i class="fas fa-file-pdf"></i> ',
 				titleAttr: 'Exportar a PDF',
-				className: 'btn btn-danger',
                 orientation: 'landscape' 
 			},
 			{
 				extend:    'print',
 				text:      '<i class="fa fa-print"></i> ',
-				titleAttr: 'Imprimir',
-				className: 'btn btn-info'
+				titleAttr: 'Imprimir'
 			},
 		]	      
 
 });
 </script>
-<?php
-include_once('./inc/estructura/parte_inferior.php')
-?>
+
 <style>
 
     .seconds-left{
         font-size: 20px;
-        background-color: #020001;
-        color: greenyellow;
+        background-color: #f05941;
+        color: white;
         padding: 5px;
         border-radius: 20px;
-        width: 25px;
+        width: 30px;
     }
 </style>

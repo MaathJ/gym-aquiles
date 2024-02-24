@@ -13,13 +13,16 @@ include_once('config/dbconnect.php');
     border-radius: 50%;
   }
 </style>
-<div class="app-body-main-content">
+<div class="app-body-main-content" style="padding-top:10px;">
     <div>
         <p>Pages<span> / Asistencias Matriculados</span></p>
         <h3>Asistencias Matriculados</h3>
     </div>
+    <br>
+    <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
     <div class="main-content">
         <div style="color: #f05941; font-weight: bolder; font-size: 3rem; text-align:center;">Asistencias De Matriculados</div>
+
         <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
             <table class="table table-striped table_id" id="table_asistencia">
 
@@ -77,6 +80,7 @@ include_once('config/dbconnect.php');
             </table>
         </div>
     </div>  
+</div>
 </div>
 
                         

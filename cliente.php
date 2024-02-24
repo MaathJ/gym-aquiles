@@ -21,18 +21,18 @@ include_once('config/dbconnect.php');
             <table class="table  table_id" id="table_cliente" style="font-size: .8rem;">
                 <thead align="center" class="" style="color: #fff;">
                     <tr align="center">
-                        <th> ID </th>
-                        <th> FOTO </th>
-                        <th> Nombre </th>
-                        <th> Apellido </th>
-                        <th> DNI </th>
-                        <th> Telefono </th>
-                        <th> Edad </th>
-                        <th> Genero </th>
-                        <th> Direc. </th>
-                        <th> Estado</th>
-                        <th> F.Registro</th>
-                        <th> Opciones</th>
+                        <th class="text-center"> ID </th>
+                        <th class="text-center"> FOTO </th>
+                        <th class="text-center"> Nombre </th>
+                        <th class="text-center"> Apellido </th>
+                        <th class="text-center"> DNI </th>
+                        <th class="text-center"> Telefono </th>
+                        <th class="text-center"> Edad </th>
+                        <th class="text-center"> Genero </th>
+                        <th class="text-center"> Direc. </th>
+                        <th class="text-center"> Estado</th>
+                        <th class="text-center"> F.Registro</th>
+                        <th class="text-center"> Opciones</th>
                     </tr>
                 </thead>
                 <?php
@@ -78,9 +78,137 @@ include_once('config/dbconnect.php');
                             </a>
 
 
-                            <a href="Cliente/D_cliente.php?d=<?php echo $r['id_cli'] ?>" class="btn-sm btn btn-danger btn-circle " target="_parent">
-                                <i class="fas fa-trash"> </i>
-                            </a>
+                            <a href="Cliente/D_cliente.php?d=<?php echo $r['id_cli'] ?>" class="btn-sm btn btn-danger btn-circle" data-bs-toggle="modal" data-bs-target="#ModalEliminarD" data-bs-whatever="@mdo" target="_parent" onclick="cargar_infoD('<?php echo $r['id_cli'] ?? ''; ?>');">
+    <i class="fas fa-trash"></i>
+</a>
+
+<div class="modal fade" id="ModalEliminarD" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #010133; color: #ffffff;">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmar Eliminación:</h5>
+            </div>
+            <div class="modal-body">
+                <form id="eliminarClienteForm" action="Cliente/D_cliente.php" method="get">
+                    <h4>IMPORTANTE: SE ELIMINARÁN MATRÍCULAS Y ASISTENCIAS DEL CLIENTE, ¿Está seguro de continuar?</h4>
+                    <input type="hidden" name="d" id="id_clienteD">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
+                        <button type="submit" class="btn btn-danger">ELIMINAR</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function cargar_infoD(idCliente) {
+        document.getElementById('id_clienteD').value = idCliente;
+    }
+</script>
+
+
+
+                                <a class="btn btn-sm btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#ModalCardInfomatri" data-bs-whatever="@mdo" onclick="infoI
+                                ('<?php echo $r['id_cli'] ?? ''; ?>', '<?php echo $r['nombre_cli'] ?? ''; ?>', 
+                                '<?php echo $r['apellido_cli'] ?? ''; ?>', '<?php echo $r['dni_cli'] ?? ''; ?>', '<?php echo $r['telefono_cli'] ?? ''; ?>', 
+                                '<?php echo $r['edad_cli'] ?? ''; ?>', 
+                                '<?php echo $r['genero_cli'] ?? '';?>', 
+                                '<?php echo $r['direccion_cli'] ?? ''; ?>', 
+                                '<?php echo $r['estado_cli'] ?? ''; ?>', 
+                                '<?php echo $r['fecha_cli'] ?? ''; ?>', 
+                                '<?php echo $r['enfermedad_cli'] ?? ''; ?>')">
+                                    <i class="fa-solid fa-info"></i>
+                                </a>
+                        
+
+
+
+
+
+
+<div class="modal fade" id="ModalCardInfomatri" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card-user-modal ">
+                    <div class="card-logo">
+                        
+
+                    </div>
+                    <div class="card-important-info">
+
+                    <input type="number" name="u_idcli" id="id_cliU" hidden>
+                        <div class="user-name" id="nom_cli" style="color: #010133; font-weight: bold; font-size: 1rem;">
+                        </div>
+                        <div class="user-edad" id="apell_cli"  style="color: #010133; font-weight: bold; font-size: 1rem;">
+                        </div>
+                        <div class="card-cont-important-info">
+    <div class="info-item">
+        <span id="est_cli"></span>
+    </div>
+    <div class="info-item">
+        <span id="dni_cli"></span>
+    </div>
+    <div class="info-item">
+        <span id="edad_cli"></span>
+    </div>
+</div>
+
+                    </div>
+                    <div class="card-more-info" >
+                        <div class="info-user-more telefono">
+                            <i class="fa-solid fa-phone"></i>
+                            <span id="tel_cli"></span>
+                        </div>
+                        <div class="info-user-more direccion">
+                            <i class="fa-solid fa-house"></i>
+                            <span id="direc_cli"></span>
+                        </div>
+                        <div class="info-user-more colegio">
+                        <i class="fa-solid fa-venus-mars"></i>
+                            <span id="gen_cli"></span>
+                        </div>
+                        <div class="info-user-more universidad">
+                        <i class="fa-solid fa-calendar-days"></i>
+                            <span id="fech_cli"></span>
+                        </div>
+                        <!-- Icono para Área -->
+                        <div class="info-user-more area" style="align-items: center;">
+                        <i class="fa-solid fa-virus"></i>
+                            <span id="enfer_cli"></span>
+                        </div>
+
+                     
+
+                    </div>
+                   
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+      
+        
+
+    <script>
+        function infoI(id_cli, nombre_cli, apellido_cli, dni_cli, telefono_cli,edad_cli,genero_cli,direccion_cli,estado_cli,fecha_cli,enfermedad_cli) {
+            document.getElementById("id_cliU").value = id_cli;
+            document.getElementById("nom_cli").textContent = nombre_cli || "No disponible";
+            document.getElementById("apell_cli").textContent = apellido_cli || "No disponible";
+            document.getElementById("dni_cli").textContent = dni_cli || "No disponible";
+            document.getElementById("tel_cli").textContent = telefono_cli || "No disponible";
+            document.getElementById("edad_cli").textContent = edad_cli || "No disponible";
+            document.getElementById("gen_cli").textContent = genero_cli || "No disponible";
+            document.getElementById("direc_cli").textContent = direccion_cli || "No disponible";
+            document.getElementById("est_cli").textContent = estado_cli || "No disponible";
+            document.getElementById("fech_cli").textContent = fecha_cli || "No disponible";
+            document.getElementById("enfer_cli").textContent = enfermedad_cli || "No disponible";
+        }
+    </script>
+
                         </center>
 
                     </td>
@@ -422,4 +550,14 @@ include_once('config/dbconnect.php');
                 padding-top: 5px;
                 height: 35px;
             }
+
+            .card-cont-important-info {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center; /* Centrar horizontalmente */
+}
+
+.info-item {
+    margin-right: 20px; /* Espacio entre elementos */
+}
         </style>

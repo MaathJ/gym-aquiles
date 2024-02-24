@@ -21,10 +21,10 @@ include_once('config/dbconnect.php');
 
                                 <thead align="center" class=""  style="color: #fff; background-color:#f05941;">
                                     <tr >
-                                        <th> CODIGO </th>
-                                        <th> NOMBRE </th>
-                                        <th> PRECIO </th>
-                                        <th> OPCIONES</th>
+                                        <th class="text-center"> CODIGO </th>
+                                        <th class="text-center"> NOMBRE </th>
+                                        <th class="text-center"> PRECIO </th>
+                                        <th class="text-center"> OPCIONES</th>
                                     </tr>
                                 </thead>
                                 <tbody>
