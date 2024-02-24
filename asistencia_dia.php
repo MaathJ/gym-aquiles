@@ -85,8 +85,8 @@ date_default_timezone_set('America/Lima');
 
                                 <a href="asistencia_dia/D_asistencia_dia.php?d=<?php echo $r['id_asip'] ?>" class="btn btn-danger btn-circle " target="_parent">
                                     <i class="fas fa-trash"> </i></a>
-                                <a class="btn btn-sm btn-success btn-circle text-white" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(<?php echo $r['id_as']; ?>, 'a_mat')">
-                                    <i class="fas fa-print"></i>
+                                <a class="btn btn-success btn-circle" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" target="_parent" onclick="pdf_cod(<?php echo $r['id_asip']; ?>, 'a_dia')">
+                                    <i class="fa fa-ticket"></i>
                                 </a>
                             </center>
 
@@ -163,6 +163,9 @@ date_default_timezone_set('America/Lima');
 
                                 <a href="asistencia_dia/D_asistencia_dia.php?d=<?php echo $r['id_asip'] ?>" class="btn btn-danger btn-circle " target="_parent">
                                     <i class="fas fa-trash"> </i></a>
+                                <a class="btn btn-success btn-circle" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" target="_parent" onclick="pdf_cod(<?php echo $r['id_asip']; ?>, 'a_dia')">
+                                    <i class="fa fa-ticket"></i>
+                                </a>
                             </center>
 
                         </td>

@@ -31,19 +31,17 @@ if(isset($_POST['txt_nombre']) && isset($_POST['lst_rutina']) && isset($_POST['l
     $nom_tp = $r['nombre_tp'];
     $nom_tr = $r['nombre_tr'];
     
-    echo '<div class="matri-content">
-            <div class="matri-content-info">
-                <p>' . $nom . '</p>
-                <p><span>Rutina: </span>' . $nom_tr . '</p>
-                <p><span>Tipo pago: </span>' . $nom_tp . '</p>
-                <p><span>Fecha de registro:</span>' . $fecha . '</p>
-            </div>
-            <div align="center">
+    echo '<div class="matriculados-info">
+            <div class="info-datos">
+                <h2>' . $nom . '</h2>
+                <h2><span>Rutina: </span>' . $nom_tr . '</h2>
+                <h2><span>Tipo pago: </span>' . $nom_tp . '</h2>
+                <h3><span>Fecha de registro:</span>' . $fecha . '</h3>
+            
                 <a class="btn btn-sm btn-success btn-circle text-white" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(' . $id . ', '.$dest.')">
-                    <i class="fas fa-print"></i> IMPRIMIR
+                    <i class="fas fa-ticket"></i> IMPRIMIR
                 </a>
             </div>
-            
         </div>';
 }else{
     echo "";
