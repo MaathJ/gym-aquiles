@@ -33,6 +33,10 @@ if (isset($_POST['searchTerm'])) {
             $sqlAsistencia = "INSERT INTO asistencia (id_ma) VALUES ($matricula)";
             $cn->query($sqlAsistencia);
 
+            // CAPTURO EL ID AL REGISTRAR
+            $id = $cn->insert_id;
+            $desc="'a_mat'";
+
             // Resto de tu código para construir el contenido HTML
             $fechaInicio = new DateTime();
             $fechaFin = new DateTime($row['fechafin_ma']);
@@ -47,12 +51,8 @@ if (isset($_POST['searchTerm'])) {
                         <h2>' . $row['apellido_cli'] . ' ' . $row['nombre_cli'] . '</h2>
                         <h3>Te quedan '. $diasRestantes . ' días Restantes</h3>
     
-                        
-                    </div>
-
-                    <div>
                         <a class="btn btn-sm btn-success btn-circle text-white" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(' . $id . ', '. $desc .')">
-                            <i class="fas fa-print"></i> IMPRIMIR
+                            <i class="fas fa-ticket"></i> IMPRIMIR
                         </a>
                     </div>  
                 </div>';

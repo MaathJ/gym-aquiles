@@ -2,6 +2,7 @@
 include_once("auth.php");
 include_once("inc/estructura/parte_superior.php");
 include('config/dbconnect.php');
+include_once('matricula/U_estadoMatricula.php');
 
 $fechaHoy = new DateTime();
 $mesactual = $fechaHoy->format('m');
@@ -59,9 +60,6 @@ $fM = mysqli_query($cn, $sqlM);
 $rCirM = mysqli_fetch_assoc($fM);
 $MUJER = (int)$rCirM['porcentaje_mujeres_con_asistencia'];
 //FIN CONSULTA PARA GRAFICO CIRCULAR 
-
-
-
 
 // INICIO  CONSULTA PARA GANANCIA
 $sql_g = "SELECT SUM(ganancia) as total
