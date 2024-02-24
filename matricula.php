@@ -8,7 +8,7 @@ include_once('ticket_extension.php');
 <link rel="stylesheet" src="style.css" href="assets/css/matricula/matricula.css">
 <div class="app-body-main-content">
     <div>
-        <p>Pages<span> / Matricula</span></p>
+        <p>Pages<span> / Matricula PRUEBA</span></p>
         <h3>Matricula</h3>
     </div>
     <div class="main-content">
