@@ -23,10 +23,10 @@ include_once('config/dbconnect.php');
             <table class="table table-hover table-responsive-sm" id="table_Turno" >
                 <thead style="color: white;">
                     <tr>
-                        <th>ID</th>
-                        <th>TURNO</th>
-                        <th>ESTADO</th>
-                        <th>OPCIONES</th>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">TURNO</th>
+                        <th class="text-center">ESTADO</th>
+                        <th class="text-center">OPCIONES</th>
                     </tr>
                 </thead>
                 <tbody>

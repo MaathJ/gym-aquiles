@@ -21,9 +21,9 @@ include('config/dbconnect.php');
                             <table class="table table-striped"  id="table_rol">
                                 <thead align="center" class=""  style="color: #fff; background-color:#f05941;">
                                     <tr>
-                                        <th>ID</th>
-                                        <th>ROL</th>
-                                        <th>OPCIONES</th>
+                                        <th class="text-center">ID</th>
+                                        <th class="text-center">ROL</th>
+                                        <th class="text-center">OPCIONES</th>
                                     </tr>
 
 
@@ -39,9 +39,9 @@ include('config/dbconnect.php');
                                     ?>
 
                                         <tr>
-                                            <td><?php echo $r['id_ro']?></td>
-                                            <td><?php echo $r['nombre_ro']?></td>
-                                            <td>
+                                            <td align="center"><?php echo $r['id_ro']?></td>
+                                            <td align="center"><?php echo $r['nombre_ro']?></td>
+                                            <td align="center">
                                             <a class="btn btn-sm btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#ModalrolEditar" 
                                             data-bs-whatever="@mdo" target="_parent" onclick=" cargar_info({
                                                 'id':' <?php echo $r['id_ro'] ?? ''; ?> ',
