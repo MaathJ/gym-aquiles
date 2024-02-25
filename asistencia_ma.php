@@ -198,6 +198,3 @@ let table2 = new DataTable('#table_asistencia2', {
 
 });
 </script>
-
-
-
