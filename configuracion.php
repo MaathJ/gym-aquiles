@@ -6,6 +6,17 @@ include('config/dbconnect.php');
 $sql = "SELECT * FROM configurador_historial WHERE estado_conf = 'ACTIVO'";
 $f = mysqli_query($cn, $sql);
 $r = mysqli_fetch_assoc($f);
+
+if (!$r) {
+    $r = array(
+        'txt_negocio' => 'Name', 
+        'ruc_negocio' => '',
+        'direccion_negocio' => '',
+        'telefono_negocio' => '',
+        'color_negocio' => '',
+        'foto_conf' => ''
+    );
+}
 ?>
 <link rel="stylesheet" src="style.css" href="assets/css/configuracion/configuracion.css">
 <div class="app-body-main-content">
@@ -23,34 +34,34 @@ $r = mysqli_fetch_assoc($f);
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fa-solid fa-building"></i></span>
                             </div>
-                            <input type="text" name="txt_name" class="form-control" placeholder="Ingrese el nombre..." maxlength="20" value="<?php echo $r['txt_negocio'] ?>">
+                            <input type="text" name="txt_name" class="form-control" placeholder="Ingrese el nombre..." maxlength="20" value="<?php echo isset($r['txt_negocio']) ? $r['txt_negocio'] : '' ?>">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fa-solid fa-truck"></i></i></span>
                             </div>
-                            <input type="text" name="txt_ruc" class="form-control" placeholder="Ingrese el numero de Ruc..." maxlength="8" value="<?php echo $r['ruc_negocio'] ?>">
+                            <input type="text" name="txt_ruc" class="form-control" placeholder="Ingrese el numero de Ruc..." maxlength="8" value="<?php echo isset($r['ruc_negocio']) ? $r['ruc_negocio'] : '' ?>">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fa-solid fa-location-dot"></i></span>
                             </div>
-                            <input type="text" name="txt_direccion" class="form-control" placeholder="Ingrese su dirección..." maxlength="40" value="<?php echo $r['direccion_negocio'] ?>">
+                            <input type="text" name="txt_direccion" class="form-control" placeholder="Ingrese su dirección..." maxlength="40" value="<?php echo isset($r['direccion_negocio']) ? $r['direccion_negocio'] : ''   ?>">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fa-solid fa-phone"></i></span>
                             </div>
-                            <input type="text" name="txt_telefono" class="form-control" placeholder="Ingrese el número de telefono..." maxlength="9" value="<?php echo $r['telefono_negocio'] ?>">
+                            <input type="text" name="txt_telefono" class="form-control" placeholder="Ingrese el número de telefono..." maxlength="9" value="<?php echo isset($r['telefono_negocio']) ? $r['telefono_negocio'] : '' ?>">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fa-solid fa-palette"></i></span>
                             </div>
-                            <input type="color" name="txt_color" class="form-control form-control-color" id="color-picker" value="<?php echo $r['color_negocio'] ?>">
+                            <input type="color" name="txt_color" class="form-control form-control-color" id="color-picker" value="<?php echo isset($r['color_negocio']) ? $r['color_negocio'] : '' ?>">
                         </div>
                         <div class="input-group mb-3">
-                            <input value="<?php echo $r['foto_conf'] ?>" type="file" name="foto" id="foto" accept="image/*">
+                            <input value="<?php echo isset($r['foto_conf']) ? $r['foto_conf'] : '' ?>" type="file" name="foto" id="foto" accept="image/*">
                             <label class="btn_img btn-danger" for="foto">CAMBIAR FOTO</label>
                         </div>
                     </div>
@@ -95,7 +106,7 @@ $r = mysqli_fetch_assoc($f);
                 if (span || buttons) {
                     span.style.color = colorValue;
                     buttons.style.background = colorValue;
-                    document.getElementById("color_value").value = colorValue; 
+                    document.getElementById("color_value").value = colorValue;
                 }
             }
 

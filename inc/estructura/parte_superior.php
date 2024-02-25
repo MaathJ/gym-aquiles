@@ -27,6 +27,11 @@
                         $sql_gym="SELECT * from configurador_historial where estado_conf='ACTIVO'";
                         $fsqlgym=mysqli_query($cn,$sql_gym);
                         $rsqlgym=mysqli_fetch_assoc($fsqlgym);
+                        if (!$rsqlgym) {
+                            $rsqlgym = array(
+                                'txt_negocio' => 'Name', 
+                            );
+                        }
                         echo $rsqlgym["txt_negocio"];
                         ?></span>
                     </h1>

@@ -35,7 +35,7 @@ if($archivo !=null){
 
         //CREAR EL NUEVO REGISTRO
         $sql="INSERT INTO configurador_historial
-            (txt_negocio, ruc_negocio, direccion_negocio, telefono_negocio, colorValue_negocio, estado_conf) 
+            (txt_negocio, ruc_negocio, direccion_negocio, telefono_negocio, color_negocio, estado_conf) 
             VALUES
             ('$name', '$ruc', '$dire', '$tele', '$colorValue', 'ACTIVO')";
 
