@@ -22,73 +22,65 @@ include_once('config/dbconnect.php');
     <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
     <div class="main-content">
         <div style="color: #f05941; font-weight: bolder; font-size: 3rem; text-align:center;">Asistencias De Matriculados</div>
+        <div class="col-md-12">
+                            <table class="table table-striped table_id" id="table_asistencia">
 
-        <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
-            <table class="table table-striped table_id" id="table_asistencia">
-
-                <thead align="center" class="" style="color: #fff; background-color:#f05941;">
-                    <tr align="center">
-                        <th> ID </th>
-                        <th> Foto </th>
-                        <th> Matriculado </th>
-                        <th> DNI </th>
-                        <th> Membresia </th>
-                        <th> Fecha Registro </th>
-                        <th> Opciones </th>
-                    </tr>
-                </thead>
-                <?php
-                include('config/dbconnect.php');
-                $sql = "SELECT asi.*, ma.*, me.*, se.*, cli.*, us.*
-                FROM asistencia as asi 
-                INNER JOIN matricula as ma ON asi.id_ma=ma.id_ma
-                INNER JOIN membresia me ON ma.id_me = me.id_me
-                INNER JOIN servicio se ON me.id_se = se.id_se
-                INNER JOIN cliente cli ON ma.id_cli = cli.id_cli
-                INNER JOIN usuario us ON ma.id_us = us.id_us
-                ORDER BY fecha_as DESC";
-                $f = mysqli_query($cn, $sql);
-                while ($r = mysqli_fetch_assoc($f)) {
+                                <thead align="center" class="" style="color: #fff; background-color:#f05941;">
+                                    <tr align="center">
+                                        <th class="text-center"> ID </th>
+                                        <th class="text-center"> Foto </th>
+                                        <th class="text-center"> Matriculado </th>
+                                        <th class="text-center"> DNI </th>
+                                        <th class="text-center"> Membresia </th>
+                                        <th class="text-center"> Fecha Registro </th>
+                                    </tr>
+                                </thead>
+                                <?php
+                                include('config/dbconnect.php');
+                                $sql = "SELECT asi.*, ma.*, me.*, se.*, cli.*, us.*
+                                FROM asistencia as asi 
+                                INNER JOIN matricula as ma ON asi.id_ma=ma.id_ma
+                                INNER JOIN membresia me ON ma.id_me = me.id_me
+                                INNER JOIN servicio se ON me.id_se = se.id_se
+                                INNER JOIN cliente cli ON ma.id_cli = cli.id_cli
+                                INNER JOIN usuario us ON ma.id_us = us.id_us
+                                ORDER BY fecha_as DESC";
+                                $f = mysqli_query($cn, $sql);
+                                while ($r = mysqli_fetch_assoc($f)) {
 
 
-                ?>
-                    
-                    <td align="center"><?php echo $r['id_as'] ?></td>
-                    <td align="center">
-                        <p class="img-cliente">
-                            <img src="assets/images/cliente/<?php echo $r['dni_cli']; ?>.jpg" alt="">
-                        </p>
-                    </td>
-                    <td align="center"><?php echo $r['apellido_cli'] . ' ,' . $r['nombre_cli'] ?></td>
-                    <td align="center"><?php echo $r['dni_cli'] ?></td>
-                    <td align="center"><?php echo $r['nombre_me'] . '</br> ( ' . $r['nombre_se'] . ')'  ?></td>
-                    <td align="center"><?php echo date('d-m-Y H:i:s',strtotime($r['fecha_as']))  ?></td>
+                                ?>
+                                    
+                                    <td align="center"><?php echo $r['id_as'] ?></td>
+                                    <td align="center">
+                                        <p class="img-cliente">
+                                            <img src="assets/images/cliente/<?php echo $r['dni_cli']; ?>.jpg" alt="">
+                                        </p>
+                                    </td>
+                                    <td align="center"><?php echo $r['apellido_cli'] . ' ,' . $r['nombre_cli'] ?></td>
+                                    <td align="center"><?php echo $r['dni_cli'] ?></td>
+                                    <td align="center"><?php echo $r['nombre_me'] . '</br> ( ' . $r['nombre_se'] . ')'  ?></td>
+                                    <td align="center"><?php echo date('d-m-Y H:i:s',strtotime($r['fecha_as']))  ?></td>
 
-                    <td>
-                        <a class="btn btn-sm btn-success btn-circle text-white" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(<?php echo $r['id_as']; ?>, 'a_mat')">
-                            <i class="fas fa-ticket"></i>
-                        </a>
-                    </td>
+                                    <!-- <td>
+                                    </td> -->
 
-                    </tr>
-                <?php
-                }
-                ?>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
 
 
 
-            </table>
-        </div>
+                            </table>
+                        </div>
     </div>  
 </div>
 </div>
 
                         
 <?php
-include_once("inc/estructura/parte_inferior.php");
-//Trae el modal y el script
-include_once('ticket_extension.php');
-//--------------------------
+include_once("inc/estructura/parte_inferior.php")
 ?>
 
 <script type="text/javascript">
