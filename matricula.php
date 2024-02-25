@@ -346,7 +346,7 @@ setTimeout(() => {
             <div class="modal-body">
 
 
-                <form action="matricula/r_matricula.php" method="post">
+                <form action="matricula/R_matricula.php" method="post">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
