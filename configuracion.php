@@ -3,7 +3,7 @@ include_once('auth.php');
 include_once("inc/estructura/parte_superior.php");
 include('config/dbconnect.php');
 
-$sql="SELECT * FROM configurador_historial WHERE estado_conf = 'ACTIVO'";
+$sql = "SELECT * FROM configurador_historial WHERE estado_conf = 'ACTIVO'";
 $f = mysqli_query($cn, $sql);
 $r = mysqli_fetch_assoc($f);
 ?>
@@ -16,7 +16,7 @@ $r = mysqli_fetch_assoc($f);
     <div class="main-content">
         <div class="container-configuracion">
             <form action="config_historial/R_configHist.php" method="post" enctype="multipart/form-data">
-                <div class="form-configuracion" >
+                <div class="form-configuracion">
                     <div class="fr-conf-inputs" style="flex: 1.2;">
                         <h1 style="margin-bottom: 10px;">INGRESE LOS DATOS A CAMBIAR:</h1>
                         <div class="input-group mb-3">
@@ -55,73 +55,77 @@ $r = mysqli_fetch_assoc($f);
                         </div>
                     </div>
                     <div class="fr-conf-image" style="flex: 1;">
-                    <img src="<?php echo $r['foto_conf'] ?>" alt="avatar" id="img" width="400" height="400">
+                        <img src="<?php echo $r['foto_conf'] ?>" alt="avatar" id="img" width="400" height="400">
                     </div>
                 </div>
                 <div class="form-footer-configuracion">
+                    <input type="hidden" name="color_value" id="color_value" value="<?php echo $r['color_negocio'] ?>">
                     <button type="submit" id="button-config">Guardar</button>
                 </div>
             </form>
         </div>
     </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-    let foto = document.getElementById("foto");
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let foto = document.getElementById("foto");
 
-    fetch("config_historial/imagencargada.php")
-    .then(response => response.text())
-    .then(rutaImagen => {
-        foto.src = "./"+rutaImagen;
-    });
-    
-    let inputPickerColor;
-    window.addEventListener("load", changeColor, false);
-    function changeColor() {
-        inputPickerColor = document.querySelector('#color-picker')
-        inputPickerColor.addEventListener("input", updateFirst, false);
-        inputPickerColor.addEventListener("change", updateAll, false);
-        inputPickerColor.select();
+            fetch("config_historial/imagencargada.php")
+                .then(response => response.text())
+                .then(rutaImagen => {
+                    foto.src = "./" + rutaImagen;
+                });
 
-    }
-    function updateFirst(event) {
-        const span = document.querySelector("span");
-        const buttons = document.getElementById("button-config")
-        const colorValue = event.target.value;
+            let inputPickerColor;
+            window.addEventListener("load", changeColor, false);
 
-        if (span || buttons) {
-            span.style.color = colorValue;
-            buttons.style.background = colorValue;
-            console.log(colorValue);
-        }
-        
-    }
+            function changeColor() {
+                inputPickerColor = document.querySelector('#color-picker')
+                inputPickerColor.addEventListener("input", updateFirst, false);
+                inputPickerColor.addEventListener("change", updateAll, false);
+                inputPickerColor.select();
 
-    function updateAll(event) {
-        document.querySelectorAll("span").forEach((span) => {
-            span.style.color = event.target.value;
+            }
+
+            function updateFirst(event) {
+                const span = document.querySelector("span");
+                const buttons = document.getElementById("button-config");
+                const colorValue = event.target.value;
+
+                if (span || buttons) {
+                    span.style.color = colorValue;
+                    buttons.style.background = colorValue;
+                    document.getElementById("color_value").value = colorValue; 
+                }
+            }
+
+
+            function updateAll(event) {
+                document.querySelectorAll("span").forEach((span) => {
+                    span.style.color = event.target.value;
+                });
+            }
         });
-    }
-});
-</script>
-<script src="assets/js/imagenes/imagenes2.js"></script>
-<style type="text/css">
-    #foto {
-        display: none;
-    }
+    </script>
+    <script src="assets/js/imagenes/imagenes2.js"></script>
+    <style type="text/css">
+        #foto {
+            display: none;
+        }
 
-    .btn_img {
-        width: 200px;
-        text-align: center;
-        border-radius: 10px;
-        margin-top: 5px;
-        padding-top: 5px;
-        height: 35px;
-    }
-    .fr-conf-image{
-        margin-left: 10px
-    }
-</style>
+        .btn_img {
+            width: 200px;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 5px;
+            padding-top: 5px;
+            height: 35px;
+        }
+
+        .fr-conf-image {
+            margin-left: 10px
+        }
+    </style>
     <?php
     include_once("inc/estructura/parte_inferior.php")
     ?>

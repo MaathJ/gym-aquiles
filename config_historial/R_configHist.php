@@ -5,7 +5,7 @@ $name = $_POST['txt_name'];
 $ruc = $_POST['txt_ruc'];
 $dire = $_POST['txt_direccion'];
 $tele = $_POST['txt_telefono'];
-$color = $_POST['txt_color'];
+$colorValue = $_POST['color_value'];
 
 $ruta="";
 
@@ -35,9 +35,9 @@ if($archivo !=null){
 
         //CREAR EL NUEVO REGISTRO
         $sql="INSERT INTO configurador_historial
-            (txt_negocio, ruc_negocio, direccion_negocio, telefono_negocio, color_negocio, estado_conf) 
+            (txt_negocio, ruc_negocio, direccion_negocio, telefono_negocio, colorValue_negocio, estado_conf) 
             VALUES
-            ('$name', '$ruc', '$dire', '$tele', '$color', 'ACTIVO')";
+            ('$name', '$ruc', '$dire', '$tele', '$colorValue', 'ACTIVO')";
 
         mysqli_query($cn, $sql);
         $id = mysqli_insert_id($cn);
