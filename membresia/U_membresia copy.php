@@ -1,5 +1,5 @@
 <?php
-$cn=mysqli_connect("localhost","root","","gym_aquiles");
+include('../config/dbconnect.php');
 
 $id=$_POST['txt_id'];
 $nombre = $_POST['txt_nomb'];

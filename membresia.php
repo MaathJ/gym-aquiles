@@ -4,6 +4,7 @@ include_once("inc/estructura/parte_superior.php");
 include_once('config/dbconnect.php');
 ?>
 <link rel="stylesheet" src="style.css" href="assets/css/membresia/membresia.css">
+
 <div class="app-body-main-content">
     <div>
         <p>Pages<span> / Membresia</span></p>
