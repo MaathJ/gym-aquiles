@@ -156,7 +156,7 @@
                             <ul class="optionsxd4">
                                 <li>
                                     <a href="asistenciaop.php">
-                                        <span>Asistencia Operario</span>
+                                        <span>Asist. Operario</span>
                                     </a>
                                 </li>
 
@@ -229,7 +229,7 @@
                     document.addEventListener("DOMContentLoaded", function() {
                         var registroAsistencia = document.getElementById("rAsistencias");
                         var suscripciones = document.getElementById("suscripciones");
-                        var operario = document.getElementById("suscripcione");
+                        var operario = document.getElementById("rOperario");
                         var users = document.getElementById("usuario");
 
                         registroAsistencia.addEventListener("click", function() {
@@ -247,7 +247,7 @@
                         });
 
                         operario.addEventListener("click", function() {
-                            var sublista = operario.querySelector(".optionsxd3");
+                            var sublista = operario.querySelector(".optionsxd4");
                             sublista.classList.toggle("show");
                             var icono = operario.querySelector("i.fa-solid.fa-chevron-down");
                             icono.classList.toggle("rotated");
@@ -259,6 +259,7 @@
                             var icono = users.querySelector("i.fa-solid.fa-chevron-down");
                             icono.classList.toggle("rotated");
                         });
+                        
                     });
 
 

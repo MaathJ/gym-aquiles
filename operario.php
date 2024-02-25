@@ -5,46 +5,36 @@ require_once "inc/estructura/parte_superior.php"
 
 ?>
 
-<!-- Page-header end -->
-<div class="pcoded-inner-content" style="background-color: #fff;">
-    <!-- Main-body start -->
-    <div class="main-body">
-        <div class="page-wrapper">
-            <!-- Page-body start -->
-            <div class="page-body">
-                <div class="row">
+<link rel="stylesheet" src="style.css" href="assets/css/matricula/matricula.css">
+<div class="app-body-main-content">
 
-                    <div class="container"> 
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <button type="button" class="btn btn-lg " style="background: #17a2b8;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
-                                        <i class="fa-solid fa-plus text-white"></i> <span class="text-white">Nuevo Operario</span>
-                                    </button>
-                                </div>
-                                <div class="col-md-4"></div>
-                                <div class="col-md-4"></div>
+    <div>
+        <p>Aquiles<span> / Operario</span></p>
+        <h3>Operario</h3>
+    </div>
+    <div class="main-content">
+        <div>
+            <button class="matricula" data-bs-toggle="modal" data-bs-target="#ModalRegistroOperario" data-bs-whatever="@mdo">
+                Nuevo Operario
+            </button>
+        </div>
 
-                            </div>
-                        </div>
-                        <br>
+        <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
+                            <table class="table table-hover table-responsive-sm"  id="table_Operario">
 
-                        <div class="col-md-12">
-                            <table class="table table-striped table_id"  id="table_cliente">
-
-                                <thead align="center" class=""  style="color: #fff; background-color:#17a2b8;">
-                                    <tr align="center">
-                                        <th> ID </th>
-                                        <th> FOTO </th>
-                                        <th> OPERARIO</th>
-                                        <th> DNI </th>
-                                        <th> Telefono </th>
-                                        <th> Edad </th>
-                                        <th> Estado</th>
-                                        <th> F.Registro</th>
-                                        <th> Turno</th>
-                                        <th> Cargo</th>
-                                        <th> Opciones</th>
+                                <thead style="color: white;">
+                                    <tr>
+                                        <th class="text-center"> ID </th>
+                                        <th class="text-center"> FOTO </th>
+                                        <th class="text-center"> OPERARIO</th>
+                                        <th class="text-center"> DNI </th>
+                                        <th class="text-center"> Telefono </th>
+                                        <th class="text-center"> Edad </th>
+                                        <th class="text-center"> Estado</th>
+                                        <th class="text-center"> F.Registro</th>
+                                        <th class="text-center"> Turno</th>
+                                        <th class="text-center"> Cargo</th>
+                                        <th class="text-center"> Opciones</th>
                                     </tr>
                                 </thead>
                                 <?php
@@ -68,7 +58,7 @@ require_once "inc/estructura/parte_superior.php"
                                     <td>
                                         <center>
 
-                                            <a class="btn btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#exampleModalEditar" data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
+                                            <a class="btn btn-sm btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#exampleModalEditar" data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
                                                         'id': '<?php echo $r['id_op'] ?? ''; ?>',
                                                         'nombre': '<?php echo $r['nombre_op'] ?? ''; ?>',
                                                         'apellido': '<?php echo $r['apellido_op'] ?? ''; ?>',
@@ -83,7 +73,7 @@ require_once "inc/estructura/parte_superior.php"
                                                 <i class="fas fa-edit"> </i></a>
 
 
-                                         <a href="operario/D_operario.php?d=<?php echo $r['id_op'] ?>" class="btn btn-danger btn-circle " target="_parent">
+                                         <a href="operario/D_operario.php?d=<?php echo $r['id_op'] ?>" class="btn btn-sm btn-danger btn-circle " target="_parent">
                                                 <i class="fas fa-trash"> </i></a>
                                         </center>
 
@@ -112,10 +102,10 @@ require_once "inc/estructura/parte_superior.php"
 
 <!-- PARA EDITAR  -->
 
-<div class="modal fade  " id="exampleModalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade  " id="exampleModalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: -20px;">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header " style="background-color: #0B5ED7; color: #ffffff;">
+                <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
                     <h4 class="modal-title" id="exampleModalLabel">EDITAR OPERARIO</h4>
                                 
                      
@@ -159,7 +149,7 @@ require_once "inc/estructura/parte_superior.php"
                                  <div class="mb-3">
                                     <label for="Edad-name" class="col-form-label" style="color: black;">Estado:</label>
 
-                                    <select name="lstestado" id="u_estado">
+                                    <select name="lstestado" id="u_estado" class="form-control">
                                         <option value=""  selected>Selecciona un estado</option>
                                         
                                         <option value="ACTIVO">ACTIVO</option>
@@ -230,14 +220,14 @@ require_once "inc/estructura/parte_superior.php"
                                 <div class="mb-3" style="margin-left: 15px;">
                                     <img src="assets/images/img_fond.jpg" alt="avatar" id="img2" width="200" height="200">
                                     <input type="file" name="foto2" id="foto2" accept="image/*">
-                                    <label class="btn_img btn-primary" for="foto2">CAMBIAR FOTO</label>
+                                    <label class="btn_img btn-primary" style="background-color:#f05941; border-color: #f05941;" for="foto2">CAMBIAR FOTO</label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                            <button type="submit" class="btn btn-primary">Modificar</button>
+                            <button type="submit" class="btn btn-primary" style="background-color:#f05941; border-color: #f05941;">Modificar</button>
                             <input type="hidden" name="cod" id="u_id" >
                         </div>
 
@@ -251,10 +241,10 @@ require_once "inc/estructura/parte_superior.php"
 
 
     <!-- PARA REGISTRAR  -->
-<div class="modal fade  " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade  " id="ModalRegistroOperario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: -20px;">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header " style="background-color: #0B5ED7; color: #ffffff;">
+                <div class="modal-header " style="background-color: #f05941 ; color: #ffffff;">
                     <h4 class="modal-title" id="exampleModalLabel">REGISTRO OPERARIO</h4>
                                 
                      
@@ -262,6 +252,7 @@ require_once "inc/estructura/parte_superior.php"
                     <br>
                  
                 </div>
+                <br>
                 <span>Es importante Completar todos los campos</span>
                 <div class="modal-body">
 
@@ -359,7 +350,7 @@ require_once "inc/estructura/parte_superior.php"
                                 <div class="mb-3" style="margin-left: 15px;">
                                     <img src="assets/images/img_fond.jpg" alt="avatar" id="img" width="200" height="200"required>
                                     <input type="file" name="foto" id="foto" accept="image/*" required>
-                                    <label class="btn_img btn-primary" for="foto">AGREGAR FOTO</label> <br>
+                                    <label class="btn_img btn-primary" style="background-color:#f05941; border-color: #f05941;" for="foto">AGREGAR FOTO</label> <br>
                                     <span> (OBLIGATORIO) Tomar una foto al cliente , descargalo desde WhatsApp y cargar aquí</span>
                                 </div>
                             </div>
@@ -367,7 +358,7 @@ require_once "inc/estructura/parte_superior.php"
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                            <button type="submit" class="btn btn-primary">REGISTRARSE</button>
+                            <button type="submit" class="btn btn-primary" style="background-color:#f05941; border-color: #f05941;">REGISTRARSE</button>
                           
                         </div>
 
@@ -431,7 +422,7 @@ require_once "inc/estructura/parte_inferior.php"
         }
 
       
-let table = new DataTable('#table_cliente', {
+let table = new DataTable('#table_Operario', {
     language: {
                 "lengthMenu": "Mostrar _MENU_ registros",
                 "zeroRecords": "No se encontraron resultados",
@@ -454,21 +445,19 @@ let table = new DataTable('#table_cliente', {
 			{
 				extend:    'excelHtml5',
 				text:      '<i class="fas fa-file-excel"></i> ',
-				titleAttr: 'Exportar a Excel',
-				className: 'btn btn-success'
+				titleAttr: 'Exportar a Excel'
+				
 			},
 			{
 				extend:    'pdfHtml5',
 				text:      '<i class="fas fa-file-pdf"></i> ',
 				titleAttr: 'Exportar a PDF',
-				className: 'btn btn-danger',
                 orientation: 'landscape' 
 			},
 			{
 				extend:    'print',
 				text:      '<i class="fa fa-print"></i> ',
-				titleAttr: 'Imprimir',
-				className: 'btn btn-info'
+				titleAttr: 'Imprimir'
 			},
 		]	      
 
@@ -477,13 +466,6 @@ let table = new DataTable('#table_cliente', {
 
 <script src="assets/js/img.js"></script>
 <script src="assets/img2.js"></script>
-
-
-
-
-
-
-
 
 <style type="text/css">
     #foto {
