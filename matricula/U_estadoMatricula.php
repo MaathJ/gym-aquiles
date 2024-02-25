@@ -13,8 +13,6 @@ while($r_est = mysqli_fetch_assoc($f_est)){
     $fechaFin = new DateTime($r_est['fechafin_ma']);
     $fechaIni = new DateTime($r_est['fechainicio_ma']);
 
-    $sql_upd = "";
-
     if($estado == "EN ESPERA" && $fechaHoy >= $fechaIni && $fechaHoy < $fechaFin){
         $estado = "ACTIVO";
 
@@ -26,7 +24,5 @@ while($r_est = mysqli_fetch_assoc($f_est)){
         $sql_upd="UPDATE matricula set estado_ma = '$estado' WHERE id_ma = $id";
         mysqli_query($cn, $sql_upd);
     }
-
-    echo $sql_upd.",";
 }
 ?>
