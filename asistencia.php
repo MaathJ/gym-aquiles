@@ -23,52 +23,50 @@ include_once('ticket_extension.php');
         <div class="main-content-inscripcion" style="flex: 1">
             <div class="inscripcion-content">
                 <h2 style="color:#f05941; text-transform: capitalize; font-weight:bolder;">Inscripciones por dia</h2>
-                <form action="asistencia_dia/R_asistencia_dia.php" method="post">
-                    <label for="tittle_nombres">Nombres y Apellidos:</label>
-                    <input required type="text" id="txt_nombre" name="txt_nombre" placeholder="Ingresa el nombre completo..">
-                    <label for="rutina">Rutina</label>
-                    <select id="rutina-name" name="text_rutina" class="form-select">
-                    <?php 
-                                                include('config/dbconnect.php');
-                                                $sql_2 = "select * from tipo_rutina";
-                                                $f = mysqli_query($cn,$sql_2);
-                                                while($r = mysqli_fetch_assoc($f)){
-                                            ?>
-                                            
-                                            <option value="<?php echo $r['id_tiru'] ?>"><?php echo $r['nombre_tiru'] ?></option>
-                                            <?php  
-                                                }
-                                            ?>
-                    </select>
+                <label for="tittle_nombres">Nombres y Apellidos:</label><br>
+                <input required type="text" id="txt_nombre" name="txt_nombre" placeholder="Ingresa el nombre completo.."><br>
+                <label for="rutina">Rutina</label><br>
+                <select id="lst_rutina" name="text_rutina" class="form-select">
+                <?php 
+                                            include('config/dbconnect.php');
+                                            $sql_2 = "select * from tipo_rutina";
+                                            $f = mysqli_query($cn,$sql_2);
+                                            while($r = mysqli_fetch_assoc($f)){
+                                        ?>
+                                        
+                                        <option value="<?php echo $r['id_tiru'] ?>"><?php echo $r['nombre_tiru'] ?></option>
+                                        <?php  
+                                            }
+                                        ?>
+                </select>
 
-                    <!-- Medio de pago -->
-                    <label for="tipo_pago">
-                        Tipo de pago:
-                    </label>
-                    <select class="form-select" name="lst_tp" id="lst_tp" required>
+                <!-- Medio de pago -->
+                <label for="tipo_pago">
+                    Tipo de pago:
+                </label>
+                <select class="form-select" name="lst_tp" id="lst_tp" required>
 
-                        <option disabled selected value="0">Selecciona un tipo de pago</option>
+                    <option disabled selected value="0">Selecciona un tipo de pago</option>
 
-                        <?php
-                        $sql_tp = "SELECT * FROM tipo_pago";
-                        $f_tp = mysqli_query($cn, $sql_tp);
+                    <?php
+                    $sql_tp = "SELECT * FROM tipo_pago";
+                    $f_tp = mysqli_query($cn, $sql_tp);
 
-                        while ($r_tp = mysqli_fetch_assoc($f_tp)) {
-
-
-                        ?>
-                            <option value="<?php echo $r_tp['id_tp'] ?>"><?php echo $r_tp['desc_tp'];?></option>
-
-                        <?php
-                        }
-
-                        ?>
+                    while ($r_tp = mysqli_fetch_assoc($f_tp)) {
 
 
-                    </select>
+                    ?>
+                        <option value="<?php echo $r_tp['id_tp'] ?>"><?php echo $r_tp['desc_tp'];?></option>
 
-                    <input class="btn-regis" type="submit" value="Registrar">
-                </form>
+                    <?php
+                    }
+
+                    ?>
+
+
+                </select>
+
+                <input id="registro_hoy" class="btn-regis" type="submit" value="Registrar">
             </div>
         </div>
     </div>
@@ -187,12 +185,12 @@ $(document).ready(function () {
                         });
 
                         // Actualizar el contenido de matri-content con los resultados de la búsqueda
-                        $('.matri-content').html(response);
+                        $('.matriculados-info').html(response);
 
                         // Limpiar el contenido después de 15 segundos
                         clearTimeout(timeoutId);
                         timeoutId = setTimeout(function () {
-                            $('.matri-content').empty();
+                            $('.matriculados-info').empty();
                         }, 15000);
 
                         // Limpiar el campo de búsqueda después de mostrar los resultados
@@ -208,7 +206,7 @@ $(document).ready(function () {
                         });
 
                         // Limpiar el contenido si el término de búsqueda no devuelve resultados
-                        $('.matri-content').empty();
+                        $('.matriculados-info').empty();
                     }
                 }
             });
@@ -221,7 +219,7 @@ $(document).ready(function () {
             });
 
             // Limpiar el contenido si el término de búsqueda es menor a 3 caracteres
-            $('.matri-content').empty();
+            $('.matriculados-info').empty();
 
             // Limpiar el campo de búsqueda después de mostrar la alerta de error
             $('#txt_nombre').val("");
