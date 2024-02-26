@@ -38,6 +38,10 @@ if (isset($_POST['searchTerm'])) {
             $fechaFin = new DateTime($row['fechafin_ma']);
             $diferencia = $fechaInicio->diff($fechaFin);
             $diasRestantes = $diferencia->days;
+            
+            $id = mysqli_insert_id($cn);
+            $dest="'a_mat'";
+
             echo '<div class="matriculados-info">
                     <div class="info-foto">
                         <img src="assets/images/cliente/' . $row['dni_cli'] . '.jpg' . '" alt="">
@@ -47,14 +51,10 @@ if (isset($_POST['searchTerm'])) {
                         <h2>' . $row['apellido_cli'] . ' ' . $row['nombre_cli'] . '</h2>
                         <h3>Te quedan '. $diasRestantes . ' días Restantes</h3>
     
-                        
-                    </div>
-
-                    <div>
-                        <a class="btn btn-sm btn-success btn-circle text-white" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(' . $id . ', '. $desc .')">
-                            <i class="fas fa-print"></i> IMPRIMIR
+                        <a class="btn btn-sm btn-success btn-circle text-white" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(' . $id . ', '. $dest .')">
+                            <i class="fas fa-ticket"></i> IMPRIMIR
                         </a>
-                    </div>  
+                    </div>
                 </div>';
         } else {
             // Si ya existe un registro de asistencia para hoy, muestra una alerta
