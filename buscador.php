@@ -19,7 +19,8 @@ if (isset($_POST['searchTerm'])) {
 
     while ($row = $result->fetch_assoc()) {
         $matricula = $row['id_ma'];
-
+       
+    
         // Verificar si ya existe un registro de asistencia para hoy
         $fechaHoy = date('Y-m-d');
         $sqlCheckAsistencia = "SELECT COUNT(*) as count FROM asistencia 
@@ -52,7 +53,7 @@ if (isset($_POST['searchTerm'])) {
 
                     <div>
                         <a class="btn btn-sm btn-success btn-circle text-white" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(' . $id . ', '. $desc .')">
-                            <i class="fas fa-print"></i> IMPRIMIR
+                        <i class="fas fa-print"></i> IMPRIMIR
                         </a>
                     </div>  
                 </div>';
