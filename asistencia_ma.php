@@ -27,12 +27,12 @@ include_once('config/dbconnect.php');
 
                                 <thead align="center" class="" style="color: #fff; background-color:#f05941;">
                                     <tr align="center">
-                                        <th class="text-center"> ID </th>
                                         <th class="text-center"> Foto </th>
                                         <th class="text-center"> Matriculado </th>
                                         <th class="text-center"> DNI </th>
                                         <th class="text-center"> Membresia </th>
                                         <th class="text-center"> Fecha Registro </th>
+                                        <th class="text-center"> OPCIONES </th>
                                     </tr>
                                 </thead>
                                 <?php
@@ -51,7 +51,6 @@ include_once('config/dbconnect.php');
 
                                 ?>
                                     
-                                    <td align="center"><?php echo $r['id_as'] ?></td>
                                     <td align="center">
                                         <p class="img-cliente">
                                             <img src="assets/images/cliente/<?php echo $r['dni_cli']; ?>.jpg" alt="">
@@ -62,8 +61,11 @@ include_once('config/dbconnect.php');
                                     <td align="center"><?php echo $r['nombre_me'] . '</br> ( ' . $r['nombre_se'] . ')'  ?></td>
                                     <td align="center"><?php echo date('d-m-Y H:i:s',strtotime($r['fecha_as']))  ?></td>
 
-                                    <!-- <td>
-                                    </td> -->
+                                    <td>
+                                        <a class="btn btn-success btn-circle text-white" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(<?php echo $r['id_as']; ?>, 'a_mat')">
+                                            <i class="fas fa-ticket"></i>
+                                        </a>
+                                    </td>
 
                                     </tr>
                                 <?php
@@ -80,7 +82,8 @@ include_once('config/dbconnect.php');
 
                         
 <?php
-include_once("inc/estructura/parte_inferior.php")
+include_once("inc/estructura/parte_inferior.php");
+include_once('ticket_extension.php');
 ?>
 
 <script type="text/javascript">

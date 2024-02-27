@@ -6,7 +6,17 @@ date_default_timezone_set('America/Lima');
 $usuario = $_SESSION["usuario"];
 $fechadesde = $_POST['fechadesde'];
 $fechahasta = $_POST['fechahasta'];
-$estado = 'ACTIVO';
+$estado = '';
+
+//ASIGNAR EL ESTADO POR LA FECHA
+$fechaHoy = new DateTime();
+$fechaIni = new DateTime($fechadesde);
+if($fechaHoy < $fechaIni){
+    $estado = 'EN ESPERA';
+}else{
+    $estado = 'ACTIVO';
+}
+
 $fechaActual = date('Y-m-d H:i:s');
 $cliente = $_POST['lstcliente'];
 $membresia = $_POST['lstmembresia'];
