@@ -2,7 +2,6 @@
 </div>
 <script type="text/javascript" src="assets/js/jquery/jquery.min.js "></script>
 <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.js "></script>
-<script src="assets/js/navbar/sections.js"></script>
 <script src="https://kit.fontawesome.com/dcf9386b9e.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="assets/js/jquery/jquery.min.js "></script>
 <!-- bootstrap bundle -->
