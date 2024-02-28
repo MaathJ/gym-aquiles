@@ -32,7 +32,6 @@ date_default_timezone_set('America/Lima');
 
                     <thead style="color: #fff; background-color:#f05941;">
                         <tr align="center">
-                            <th class="text-center"> CODIGO </th>
                             <th class="text-center"> NOMBRE </th>
                             <th class="text-center"> FECHA </th>
                             <th class="text-center"> PRECIO </th>
@@ -57,9 +56,6 @@ date_default_timezone_set('America/Lima');
 
                     ?>
                         <td align="center">
-                            <?php echo $r['id_asip'] ?>
-                        </td>
-                        <td align="center">
                             <?php echo $r['nomb_asip'] ?>
                         </td>
                         <td align="center">
@@ -83,10 +79,10 @@ date_default_timezone_set('America/Lima');
                                     <i class="fas fa-edit"> </i></a>
 
 
-                                <a href="asistencia_dia/D_asistencia_dia.php?d=<?php echo $r['id_asip'] ?>" class="btn btn-danger btn-circle " target="_parent">
+                                <a class="btn btn-danger btn-circle " data-bs-toggle="modal" data-bs-target="#delete_asistdia" data-bs-whatever="@mdo" onclick="cargar_delete({'id': '<?php echo $r['id_asip']; ?>'})">
                                     <i class="fas fa-trash"> </i></a>
-                                <a class="btn btn-sm btn-success btn-circle text-white" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(<?php echo $r['id_as']; ?>, 'a_mat')">
-                                    <i class="fas fa-print"></i>
+                                <a class="btn btn-success btn-circle text-white" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(<?php echo $r['id_asip']; ?>, 'a_dia')">
+                                    <i class="fas fa-ticket"></i>
                                 </a>
                             </center>
 
@@ -110,7 +106,6 @@ date_default_timezone_set('America/Lima');
 
                     <thead style="color: #fff; background-color:#f05941;">
                         <tr align="center">
-                            <th class="text-center"> CODIGO </th>
                             <th class="text-center"> NOMBRE </th>
                             <th class="text-center"> FECHA </th>
                             <th class="text-center"> PRECIO </th>
@@ -135,9 +130,6 @@ date_default_timezone_set('America/Lima');
 
                     ?>
                         <td align="center">
-                            <?php echo $r['id_asip'] ?>
-                        </td>
-                        <td align="center">
                             <?php echo $r['nomb_asip'] ?>
                         </td>
                         <td align="center">
@@ -161,8 +153,11 @@ date_default_timezone_set('America/Lima');
                                     <i class="fas fa-edit"> </i></a>
 
 
-                                <a href="asistencia_dia/D_asistencia_dia.php?d=<?php echo $r['id_asip'] ?>" class="btn btn-danger btn-circle " target="_parent">
+                                <a class="btn btn-danger btn-circle " data-bs-toggle="modal" data-bs-target="#delete_asistdia" data-bs-whatever="@mdo" onclick="cargar_delete({'id': '<?php echo $r['id_asip']; ?>'})">
                                     <i class="fas fa-trash"> </i></a>
+                                <a class="btn btn-success btn-circle text-white" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(<?php echo $r['id_asip']; ?>, 'a_dia')">
+                                    <i class="fas fa-ticket"></i>
+                                </a>
                             </center>
 
                         </td>
@@ -171,8 +166,6 @@ date_default_timezone_set('America/Lima');
                     <?php
                     }
                     ?>
-
-
 
                 </table>
             </div>
@@ -250,6 +243,34 @@ date_default_timezone_set('America/Lima');
         </div>
     </div>
 
+    <div class="modal fade" id="delete_asistdia" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: -20px;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
+                    <h4 class="modal-title" id="exampleModalLabel">¡ADVERTENCIA! Se eliminara el siguiente registro</h4>
+                    <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="asistencia_dia/D_asistencia_dia.php" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="col-form-label" style="color: black;">El registro eliminado no se podrá recuperar</label>
+                                    <input type="text" name="txt_id" class="form-control" id="d_id" hidden>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
+                            <button type="submit" class="btn btn-danger">CONFIRMAR</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <?php
     include_once("inc/estructura/parte_inferior.php");
@@ -276,6 +297,10 @@ date_default_timezone_set('America/Lima');
             }
 
 
+        }
+
+        function cargar_delete(dato){
+            document.getElementById('d_id').value = dato.id
         }
 
 

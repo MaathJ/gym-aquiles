@@ -2,7 +2,7 @@
 
 include('../config/dbconnect.php');
 
-$codigo = $_GET['d'];
+$codigo = $_POST['txt_id'];
 
 $sql = "delete from asistencia_pago where id_asip = '$codigo'";
 
