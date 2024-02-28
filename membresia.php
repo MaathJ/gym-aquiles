@@ -240,7 +240,66 @@ include_once('config/dbconnect.php');
     </div>
 
 </div>
+<?php
 
+if (isset($_SESSION['success_message'])) {
+    echo
+    '<script>
+    setTimeout(() => {
+        Swal.fire({
+            title: "¡Éxito!",
+            text: "' . $_SESSION['success_message'] . '",
+            icon: "success"
+        });
+    }, 200);
+</script>';
+    unset($_SESSION['success_message']);
+}
+
+if (isset($_SESSION['deleted_me'])) {
+    echo
+    '<script>
+    setTimeout(() => {
+        Swal.fire({
+            title: "¡Éxito!",
+            text: "' . $_SESSION['deleted_me'] . '",
+            icon: "success"
+        });
+    }, 500);
+</script>';
+    unset($_SESSION['deleted_me']);
+}
+
+
+if (isset($_SESSION['error_me'])) {
+    echo
+    '<script>
+    setTimeout(() => {
+        Swal.fire({
+            title: "¡Error!",
+            text: "' . $_SESSION['error_me'] . '",
+            icon: "error"
+        });
+    }, 500);
+    </script>';
+    unset($_SESSION['error_me']);
+}
+
+if (isset($_SESSION['alert_message'])) {
+    $alertMessage = $_SESSION['alert_message'];
+    echo '<script>
+    setTimeout(() => {
+        Swal.fire({
+            title: "¡Cuidado!",
+            text: "' . $alertMessage . '",
+            icon: "warning"
+        });
+    }, 500);
+    </script>';
+    unset($_SESSION['alert_message']);
+}
+
+?>
 
 
 <?php

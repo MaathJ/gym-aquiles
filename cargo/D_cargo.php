@@ -3,9 +3,6 @@ session_start();
 include('../config/dbconnect.php');
 
 $id = $_POST['cargo_id'];
-
-$sql = "DELETE FROM cargo WHERE id_ca = $id";
-
 try {
     $sql_select = "SELECT nombre_ca FROM cargo WHERE id_ca = $id";
     $result = mysqli_query($cn, $sql_select);
