@@ -175,6 +175,11 @@
                                         <span>Turno</span>
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="cargo.php">
+                                        <span>Cargo</span>
+                                    </a>
+                                </li>
 
                             </ul>
                         </li>
