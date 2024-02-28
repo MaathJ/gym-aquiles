@@ -2,9 +2,17 @@
 include_once('auth.php');
 include_once("inc/estructura/parte_superior.php");
 include_once('config/dbconnect.php');
+
+
 ?>
 
+
 <link rel="stylesheet" src="style.css" href="assets/css/matricula/matricula.css">
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
 <div class="app-body-main-content">
     <div>
         <p>Aquiles<span> / Cargo</span></p>
@@ -52,8 +60,18 @@ include_once('config/dbconnect.php');
                                                     <i class="fas fa-edit"> </i></a>
 
 
+                                                <!-- ELIMINAR CARGO  -->
+                                              
 
-                                                <a href="cargo/D_cargo.php?cod=<?php echo $r['id_ca'] ?>" class="btn btn-sm btn-danger" target="_parent"><i class="fas fa-trash"> </i></a>
+                                                <a class="btn btn-sm btn-danger btn-circle" 
+                                                target="_parent" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#DeleteModalCargo" 
+                                                data-bs-whatever="@mdo" 
+                                                data-id="<?php echo $r['id_ca']; ?>">
+                                                <i class="fas fa-trash"></i>
+                                                </a>
+
                                             </td>
                                         </tr>
                                     <?php
@@ -141,7 +159,7 @@ include_once('config/dbconnect.php');
             <div class="modal-body">
 
 
-                <form action="cargo.php" method="get">
+                <form action="cargo/R_cargo.php" method="post">
                     <div class="row">
                     <div class="col-12 mb-3">
                                 <label for="rol" class="col-form-label" style="color: black;">CARGO:</label>
@@ -176,10 +194,101 @@ include_once('config/dbconnect.php');
     </div>
     <!-- Page-body end -->
 </div>
+<!-- MODAL PARA ELIMINAR  -->
+<div class="modal fade" id="DeleteModalCargo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #010133; color: #ffffff;">
+                <h4 class="modal-title" id="exampleModalLabel">Eliminar Cargo</h4>
+            </div>
+            <div class="modal-body">
+                <form action="cargo/D_cargo.php" method="POST">
+                    <input type="hidden" id="deleteCargoId" name="cargo_id" value="">
+                    ¿Estás seguro de que quieres eliminar este cargo?
+                    <button class="btn btn-danger btn-circle">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<?php
+
+if (isset($_SESSION['success_message'])) {
+    echo
+    '<script>
+    setTimeout(() => {
+        Swal.fire({
+            title: "¡Éxito!",
+            text: "' . $_SESSION['success_message'] . '",
+            icon: "success"
+        });
+    }, 200);
+</script>';
+    unset($_SESSION['success_message']);
+}
+
+if (isset($_SESSION['deleted_cycle'])) {
+    echo
+    '<script>
+    setTimeout(() => {
+        Swal.fire({
+            title: "¡Éxito!",
+            text: "' . $_SESSION['deleted_cycle'] . '",
+            icon: "success"
+        });
+    }, 500);
+</script>';
+    unset($_SESSION['deleted_cycle']);
+}
+
+
+if (isset($_SESSION['error_cycle'])) {
+    echo
+    '<script>
+    setTimeout(() => {
+        Swal.fire({
+            title: "¡Error!",
+            text: "' . $_SESSION['error_cycle'] . '",
+            icon: "error"
+        });
+    }, 500);
+    </script>';
+    unset($_SESSION['error_cycle']);
+}
+
+if (isset($_SESSION['alert_message'])) {
+    $alertMessage = $_SESSION['alert_message'];
+    echo '<script>
+    setTimeout(() => {
+        Swal.fire({
+            title: "¡Cuidado!",
+            text: "' . $alertMessage . '",
+            icon: "warning"
+        });
+    }, 500);
+    </script>';
+    unset($_SESSION['alert_message']);
+}
+
+?>
+
+
 <?php
 require_once ("inc/estructura/parte_inferior.php");
 
 ?>
+<!-- SCRIPT PARA ELIMINAR  -->
+<script>
+    $('#DeleteModalCargo').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que activa el modal
+        var cargoId = button.data('id'); // Extraer el ID del botón de eliminación
+        var modal = $(this);
+        modal.find('#deleteCargoId').val(cargoId); // Actualizar el valor del input oculto con el ID
+    });
+</script>
+
 <script>
     function cargar_info(dato) {
 
@@ -234,22 +343,6 @@ require_once ("inc/estructura/parte_inferior.php");
     });
 </script>
 
-<?php
-
-if (isset($_GET['cargo'])) {
-
-    $cargo = strtoupper($_GET['cargo'] );
-    $estado = 'ACTIVO';
-
-
-    $sqlcargo = "INSERT INTO cargo (nombre_ca,estado_ca) VALUES('$cargo','$estado')";
-    mysqli_query($cn, $sqlcargo);
-
-    echo '<script>window.location.href = "cargo.php";</script>';
-
-}
-
-?>
 
 
 
