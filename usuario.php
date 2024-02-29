@@ -64,6 +64,7 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
                                             'estado': '<?php echo $r['estado_us'] ?? ''; ?>',
                                             'rol': '<?php echo $r['nombre_ro'] ?? ''; ?>',
                                             'id': '<?php echo $r['id_us'] ?? ''; ?>',
+                                            'data-id-rol':'<?php echo $r['id_ro']; ?>'
                                         });">
                                         <i class="fas fa-edit"></i>
                                     </a>
@@ -450,39 +451,38 @@ document.getElementById('cod_rol2').value = dato.id;
 
 
     function cargar_info(dato) {
-        document.getElementById('id_usuario').value = dato.usuario;
-        document.getElementById('pass2').value = dato.pass;
-        document.getElementById('Confpass2').value = dato.pass;
-        document.getElementById('nombre').value = dato.nombre;
-        document.getElementById('telefono').value = dato.telefono;
-        document.getElementById('estado').value = dato.estado;
-        document.getElementById('rol').value = dato.rol;
-        document.getElementById('id_us').value = dato.id;
+    document.getElementById('id_usuario').value = dato.usuario;
+    document.getElementById('pass2').value = dato.pass;
+    document.getElementById('Confpass2').value = dato.pass;
+    document.getElementById('nombre').value = dato.nombre;
+    document.getElementById('telefono').value = dato.telefono;
+    document.getElementById('estado').value = dato.estado;
+    document.getElementById('id_us').value = dato.id;
 
+    var idRol = dato['data-id-rol'];
+    var selectRol = document.getElementById('rol');
+    for (var i = 0; i < selectRol.options.length; i++) {
+        if (selectRol.options[i].getAttribute('data-id-rol') == idRol) {
+            selectRol.selectedIndex = i;
+            break;
+        }
     }
+    document.getElementById('id_rol_seleccionado').value = idRol;
+    console.log(idRol)
+}
 
-    $(document).ready(function() {
-        $('#rol').on('change', function() {
-            // Obtener el id_ro del rol seleccionado
-            var idRolSeleccionado = $(this).find(':selected').data('id-rol');
-
-            // Actualizar el valor del input hidden
-            $('#id_rol_seleccionado').val(idRolSeleccionado);
-        });
-    });
 
 
     
-    !-- //PARA EDITAR  -->
-
-    // JavaScript to capture the selected value and send it to PHP
-    document.getElementById('rol').addEventListener('change', function() {
+    const rol = document.getElementById('rol');
+    rol.addEventListener('change', function() {
+        console.log("Evento de cambio detectado en 'rol'");
         var selectedValue = this.value;
-        // Send the selected value to PHP using AJAX
+        console.log("Valor seleccionado en 'rol':", selectedValue);
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                // Do nothing, just send the value to PHP
+                console.log("Respuesta del servidor:", xhr.responseText);
             }
         };
         xhr.open('GET', 'usuario.php?selectedValue=' + selectedValue, true);
