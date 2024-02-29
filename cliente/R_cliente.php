@@ -32,6 +32,7 @@ if ($archivo != null) {
         $sql = "insert into cliente(nombre_cli, apellido_cli, dni_cli, telefono_cli, edad_cli, genero_cli, direccion_cli, estado_cli, enfermedad_cli) values ('$nombre','$apellido','$dni','$telefono','$edad','$genero','$direccion','ACTIVO','$enfermedad')";
         $f = mysqli_query($cn, $sql);
         move_uploaded_file($archivo, "../assets/images/cliente/" . $dni . ".jpg");
+        $_SESSION['register_client']=true;
         header('location: ../cliente.php');
     } else {
         header('location:../cliente.php');

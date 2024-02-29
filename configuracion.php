@@ -61,12 +61,12 @@ if (!$r) {
                             <input type="color" name="txt_color" class="form-control form-control-color" id="color-picker" value="<?php echo isset($r['color_negocio']) ? $r['color_negocio'] : '' ?>">
                         </div>
                         <div class="input-group mb-3">
-                            <input value="<?php echo isset($r['foto_conf']) ? $r['foto_conf'] : '' ?>" type="file" name="foto" id="foto" accept="image/*">
+                            <input type="file"  value="<?php echo isset($r['foto_conf']) ? $r['foto_conf'] : '' ?>" name="foto" id="foto" accept="image/*">
                             <label class="btn_img btn-danger" for="foto">CAMBIAR FOTO</label>
                         </div>
                     </div>
                     <div class="fr-conf-image" style="flex: 1;">
-                        <img src="<?php echo $r['foto_conf'] ?>" alt="avatar" id="img" width="400" height="400">
+                        <img src="<?php echo !empty($r['foto_conf']) ? $r['foto_conf'] : 'path/to/default_image.jpg'; ?>" alt="avatar" id="img" width="400" height="400">
                     </div>
                 </div>
                 <div class="form-footer-configuracion">
@@ -79,13 +79,52 @@ if (!$r) {
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            let foto = document.getElementById("foto");
+            function crearFileDesdeRuta(ruta) {
+            const nombreArchivo = ruta.split("/").pop();
+            const tipoArchivo = "image/jpeg"; // Reemplaza "image/jpeg" con el tipo de imagen real
 
-            fetch("config_historial/imagencargada.php")
-                .then(response => response.text())
-                .then(rutaImagen => {
-                    foto.src = "./" + rutaImagen;
-                });
+            const file = new File([""], nombreArchivo, {
+                type: tipoArchivo,
+            });
+
+            return file;
+            }
+            function crearArrayArchivos(file) {
+            const files = [file];
+
+            return files;
+            }
+
+            function cargarImagen(ruta) {
+            const file = crearFileDesdeRuta(ruta);
+            const files = crearArrayArchivos(file);
+            console.log(files);
+            document.getElementById("foto").files = files;
+            }
+
+
+            function obtenerRutaImagen() {
+            $.ajax({
+                url: "config_historial/imagencargada.php", // Reemplaza "ruta/al/archivo_php.php" con la ruta real al archivo PHP
+                method: "GET",
+                dataType: "json",
+                success: function(rutaImagen) {
+                cargarImagen(rutaImagen);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                // Mostrar mensaje al usuario
+                alert("Error al obtener la ruta de la imagen: " + textStatus);
+
+                // Registrar error en la consola
+                console.error("Error AJAX:", jqXHR, textStatus, errorThrown);
+                },
+            });
+            }
+
+
+
+            // Obtener la ruta de la imagen y cargarla
+            obtenerRutaImagen();
 
             let inputPickerColor;
             window.addEventListener("load", changeColor, false);
