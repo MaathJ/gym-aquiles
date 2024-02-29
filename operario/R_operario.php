@@ -1,5 +1,5 @@
 <?php  
-
+session_start();
 include('../config/dbconnect.php');
 
 
@@ -27,11 +27,21 @@ if ($e=="png" || $e=="jpg" || $e=="jpeg") {
 	$sql = "insert into operario(nombre_op,	apellido_op,  estado_op,	dni_op,	edad_op, telefono_op,	id_tu, id_ca) values 
     ('$nombre','$apellido','ACTIVO','$dni','$edad','$telefono','$turno','$cargo')";
 
-	$f = mysqli_query($cn, $sql);
+	$fOpe = mysqli_query($cn, $sql);
 
 	move_uploaded_file($archivo,"../assets/images/operario/".$dni.".jpg");
 	header('location: ../operario.php');
 
+        if ($fOpe) {
+
+            $_SESSION['success_message'] = 'Operario registrado exitosamente';
+            
+            
+        }else{
+            $_SESSION['alert_message'] = 'Error al preparar la consulta';
+        }
+        mysqli_close($cn);
+    header('location:../operario.php');
     }else{
     header('location:../operario.php');
 }

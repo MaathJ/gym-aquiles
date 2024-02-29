@@ -18,7 +18,7 @@ try {
         $_SESSION['deleted_cycle'] = "No se pudo obtener la información del periodo con ID: $id";
     }
 } catch (Exception $e) {
-    $_SESSION['error_cycle'] = "Error al eliminar el ciclo: $nombre_cargo";
+    $_SESSION['error_cycle'] = "Error al eliminar el cargo: $nombre_cargo";
 }
 
 header('location:../cargo.php');
