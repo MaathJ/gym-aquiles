@@ -8,13 +8,13 @@ include('config/dbconnect.php');
 <link rel="stylesheet" src="style.css" href="assets/css/bootstrap/bootstrap.css">
 <div class="app-body-main-content">
     <div>
-        <p>Pages<span> / Rutina</span></p>
-        <h3>Rutina</h3>
+        <p>Pages<span> / Roles</span></p>
+        <h3>Roles</h3>
     </div>
     <div class="main-content">
         <div>
             <button class="roles" data-bs-toggle="modal" data-bs-target="#ModalrolRegistro" data-bs-whatever="@mdo">
-            Nuevo Rutina
+            Nuevo Rol
             </button>
         </div>
         <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
@@ -50,8 +50,10 @@ include('config/dbconnect.php');
                                                 <i class="fas fa-edit"> </i></a>
 
 
+                                                <a class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#ModalEliminar" data-bs-whatever="@mdo" onclick=" cargar_info2({
+                                                'id':' <?php echo $r['id_ro'] ?? ''; ?> ',
+                                            } )"><i class="fas fa-trash"> </i></a>
 
-                                                <a href="rol/D_rol.php?cod=<?php echo $r['id_ro']?>" class="btn btn-sm btn-danger" target="parent"><i class="fas fa-trash"> </i></a>
                                             </td>
                                         </tr>
                                     <?php
@@ -68,8 +70,9 @@ include('config/dbconnect.php');
 </div>
 
 <!-- MODAL PARA EDITAR ROLES  -->
-<div class="modal fade  " id="ModalrolEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+
+<div class="modal fade" id="ModalrolEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: -20px;">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
                 <h4 class="modal-title" id="exampleModalLabel">EDITAR ROL:</h4>
@@ -78,50 +81,44 @@ include('config/dbconnect.php');
             <div class="modal-body">
 
 
-                <form action="roles.php" method="get">
+                <form action="rol/U_rol.php" method="post">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="rol" class="col-form-label" style="color: black;">Rol:</label>
-                                <input type="text" name="rol" placeholder="Ingrese el Rol" class="form-control" id="rol" required>
-                            </div>
-
-
-                        </div>
-
-                        <div class="col-md-6">
-
-
+                        <div class="col-12 mb-3">
+                            <label for="rol" class="col-form-label" style="color: black;">Rol:</label>
+                            <input type="text" name="txtnombre" placeholder="Ingrese el Rol" class="form-control" id="txt_nombre" required>
+                            <input type="text" name="txtid" placeholder="Ingrese el Rol" class="form-control" id="txt_id" hidden>
+                            
                         </div>
 
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                        <button type="submit" class="btn btn-primary" id="registrar">Registrar</button>
-                        <input type="hidden" name="id_us" id="id_ro" value="">
-                    </div>
-                </form>
+
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
+                <button type="submit" class="btn btn-primary" id="registrar" style="background-color:#f05941; border-color: #f05941;">MODIFICAR</button>
+                <input type="hidden" name="id_us" id="id_ro" value="">
+            </div>
+            </form>
         </div>
     </div>
-    <!-- Page-body end -->
+</div>
+<!-- Page-body end -->
 </div>
 
 <!-- MODAL PARA REGISTRO ROLES  -->
-<div class="modal fade  " id="ModalrolRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade  " id="ModalrolRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: -20px;">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
-                <h4 class="modal-title" id="exampleModalLabel">REGISTRO ROL:</h4>
+                <h4 class="modal-title" id="exampleModalLabel">REGISTRO DE ROL:</h4>
                 <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
 
-                <form action="roles.php" method="get">
+                <form action="rol/R_rol.php" method="post">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
+                        <div class="col-12 mb-3">
                                 <label for="rol" class="col-form-label" style="color: black;">Rol:</label>
                                 <input type="text" name="rol" placeholder="Ingrese el Rol" class="form-control" id="rol" required>
                             </div>
@@ -137,7 +134,7 @@ include('config/dbconnect.php');
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                        <button type="submit" class="btn btn-primary" id="registrar">Registrar</button>
+                        <button type="submit" class="btn btn-primary" id="registrar" style="background-color:#f05941; border-color: #f05941;">Registrar</button>
                     </div>
                 </form>
             </div>
@@ -145,17 +142,113 @@ include('config/dbconnect.php');
     </div>
     <!-- Page-body end -->
 </div>
+
+<!-- MODAL PARA ELIMINAR  -->
+<div class="modal fade  " id="ModalEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header "style="background-color: #f05941; color: #ffffff;">
+                <h4 class="modal-title" id="exampleModalLabel">CONFIRMAR ELIMINACIÓN:</h4>
+
+              
+            </div>
+            <div class="modal-body">
+                <form action="rol/D_rol.php" method="post">
+                                ¿Está seguro que desea eliminar el rol seleccionado?
+                                <input type="text" name="cod_rol2" id="cod_rol2" class="form-control" hidden>
+                        <div class=modal-footer>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
+                            <button type="submit" class="btn btn-danger" id="">ELIMINAR</button>
+                            <input type="hidden" name="id_us" id="id_us" value="">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<?php
+if (isset($_SESSION['success_message'])) {
+    echo
+    '<script>
+    setTimeout(() => {
+        Swal.fire({
+            title: "¡Éxito!",
+            text: "' . $_SESSION['success_message'] . '",
+            icon: "success"
+        });
+    }, 200);
+</script>';
+    unset($_SESSION['success_message']);
+}
+
+if (isset($_SESSION['deleted_ro'])) {
+    echo
+    '<script>
+    setTimeout(() => {
+        Swal.fire({
+            title: "¡Éxito!",
+            text: "' . $_SESSION['deleted_ro'] . '",
+            icon: "success"
+        });
+    }, 500);
+</script>';
+    unset($_SESSION['deleted_ro']);
+}
+
+
+if (isset($_SESSION['error_ro'])) {
+    echo
+    '<script>
+    setTimeout(() => {
+        Swal.fire({
+            title: "¡Error!",
+            text: "' . $_SESSION['error_ro'] . '",
+            icon: "error"
+        });
+    }, 500);
+    </script>';
+    unset($_SESSION['error_ro']);
+}
+
+if (isset($_SESSION['alert_message'])) {
+    $alertMessage = $_SESSION['alert_message'];
+    echo '<script>
+    setTimeout(() => {
+        Swal.fire({
+            title: "¡Cuidado!",
+            text: "' . $alertMessage . '",
+            icon: "warning"
+        });
+    }, 500);
+    </script>';
+    unset($_SESSION['alert_message']);
+}
+
+?>
+
 
 <?php
 include_once("inc/estructura/parte_inferior.php")
 ?>
 
 <script type="text/javascript">
+
+function cargar_info2(dato) {
+
+document.getElementById('cod_rol2').value = dato.id;
+}
+
 function cargar_info(dato) {
         
-        document.getElementById('rol').value= dato.nombre; 
+        document.getElementById('txt_nombre').value= dato.nombre; 
   
-        document.getElementById('id_ro').value=dato.id;
+        document.getElementById('txt_id').value=dato.id;
       
     }
       
@@ -202,21 +295,7 @@ let table = new DataTable('#table_rol', {
 
 });
 </script>
-<?php 
 
-if (isset($_GET['rol'])) {
-   
-    $rol = strtoupper($_GET['rol']) ;
-   
-
-    $sqlrol ="INSERT INTO rol (nombre_ro) VALUES('$rol')";
-    mysqli_query($cn,$sqlrol);
-
-    echo '<script>window.location.href = "roles.php";</script>';
-
-}
-
-?>
 
 
 
