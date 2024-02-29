@@ -1,6 +1,7 @@
 <?php
 include_once("auth.php");
 include_once("inc/estructura/parte_superior.php");
+include_once("matricula/U_estadoMatricula.php");
 include('config/dbconnect.php');
 
 $fechaHoy = new DateTime();

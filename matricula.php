@@ -1,6 +1,7 @@
 <?php
 include_once('auth.php');
 include_once("inc/estructura/parte_superior.php");
+include_once("matricula/U_estadoMatricula.php");
 //Trae el modal y el script
 include_once('ticket_extension.php');
 //--------------------------
