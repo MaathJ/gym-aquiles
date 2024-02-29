@@ -19,7 +19,8 @@ if (isset($_POST['searchTerm'])) {
 
     while ($row = $result->fetch_assoc()) {
         $matricula = $row['id_ma'];
-
+       
+    
         // Verificar si ya existe un registro de asistencia para hoy
         $fechaHoy = date('Y-m-d');
         $sqlCheckAsistencia = "SELECT COUNT(*) as count FROM asistencia 

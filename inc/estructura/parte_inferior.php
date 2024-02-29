@@ -2,7 +2,6 @@
 </div>
 <script type="text/javascript" src="assets/js/jquery/jquery.min.js "></script>
 <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.js "></script>
-<script src="assets/js/navbar/sections.js"></script>
 <script src="https://kit.fontawesome.com/dcf9386b9e.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="assets/js/jquery/jquery.min.js "></script>
 <!-- bootstrap bundle -->
@@ -17,6 +16,9 @@
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+
+<!-- para alertar  -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
