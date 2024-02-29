@@ -1,4 +1,5 @@
 <?php  
+session_start();
 
 include('../config/dbconnect.php');
 
@@ -30,6 +31,7 @@ $sql2="UPDATE cliente set nombre_cli = '$nombre', apellido_cli = '$apellido', dn
 mysqli_query($cn,$sql2);
 
     move_uploaded_file($archivo,"../assets/images/cliente/".$dni.".jpg");
+    $_SESSION['editar_client']=true;
     header('location: ../cliente.php');
 
     }else{
@@ -38,6 +40,7 @@ header('location:../cliente.php');
 }
 
 }else{
+    $_SESSION['editar_client']=true;
 	
     $sql3="UPDATE cliente set nombre_cli = '$nombre', apellido_cli = '$apellido', dni_cli='$dni', telefono_cli ='$telefono', edad_cli ='$edad',genero_cli = '$genero', direccion_cli = '$direccion', estado_cli ='$estado', enfermedad_cli ='$enfermedad' WHERE id_cli = '$codigo'";
 

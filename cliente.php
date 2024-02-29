@@ -76,7 +76,7 @@ include_once('config/dbconnect.php');
                             </a>
 
 
-                            <a href="Cliente/D_cliente.php?d=<?php echo $r['id_cli'] ?>" class="btn-sm btn btn-danger btn-circle" data-bs-toggle="modal" data-bs-target="#ModalEliminarD" data-bs-whatever="@mdo" target="_parent" onclick="cargar_infoD('<?php echo $r['id_cli'] ?? ''; ?>');">
+                            <a href="Cliente/D_cliente.php?d=<?php echo $r['id_cli'] ?>" class="btn-sm btn btn-danger btn-circle"  data-bs-toggle="modal" data-bs-target="#ModalEliminarD" data-bs-whatever="@mdo" target="_parent" onclick="cargar_infoD('<?php echo $r['id_cli'] ?? ''; ?>');">
                                 <i class="fas fa-trash"></i>
                             </a>
 
@@ -91,7 +91,7 @@ include_once('config/dbconnect.php');
                                                 <h4>IMPORTANTE: SE ELIMINARÁN MATRÍCULAS Y ASISTENCIAS DEL CLIENTE, ¿Está seguro de continuar?</h4>
                                                 <input type="hidden" name="d" id="id_clienteD">
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
+                                                    <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">CERRAR</button>
                                                     <button type="submit" class="btn btn-danger">ELIMINAR</button>
                                                 </div>
                                             </form>
@@ -431,6 +431,45 @@ include_once('config/dbconnect.php');
             </script>';
             unset($_SESSION['error_client']);
         }
+        if (isset($_SESSION['register_client'])) {
+            echo
+            '<script>
+                setTimeout(() => {
+                Swal.fire({
+                        title: "¡Guardado exitoso!",
+                        text: "",
+                        icon: "success",
+                    });
+                }, 500);
+            </script>';
+            unset($_SESSION['register_client']);
+        }
+        if (isset($_SESSION['eliminar_client'])) {
+            echo
+            '<script>
+                setTimeout(() => {
+                Swal.fire({
+                        title: "¡Eliminación exitosa!",
+                        text: "",
+                        icon: "success",
+                    });
+                }, 500);
+            </script>';
+            unset($_SESSION['eliminar_client']);
+        }
+        if (isset($_SESSION['editar_client'])) {
+            echo
+            '<script>
+                setTimeout(() => {
+                Swal.fire({
+                        title: "¡Actualización exitosa!",
+                        text: "",
+                        icon: "success",
+                    });
+                }, 500);
+            </script>';
+            unset($_SESSION['editar_client']);
+        }
         ?>
 
         <?php
@@ -438,6 +477,7 @@ include_once('config/dbconnect.php');
         ?>
 
         <script type="text/javascript">
+
             function cargar_info(dato) {
                 if (dato.genero === undefined || dato.genero === null) {
                     console.error("La propiedad 'genero' en 'dato' es nula o indefinida.");
@@ -479,7 +519,7 @@ include_once('config/dbconnect.php');
 
             }
 
-
+            
             let table = new DataTable('#table_cliente', {
                 language: {
                     "lengthMenu": "Mostrar _MENU_ registros",
