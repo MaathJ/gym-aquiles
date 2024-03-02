@@ -51,8 +51,53 @@ include_once('config/dbconnect.php');
                                     <i class="fas fa-edit"> </i></a>
 
 
-                                <a href="tipo_rutina/D_tipo_rutina.php?d=<?php echo $r['id_tiru'] ?>" class="btn btn-danger btn-circle " target="_parent">
-                                    <i class="fas fa-trash"> </i></a>
+                               
+                                
+                                
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal<?php echo $r['id_tiru']; ?>">
+    <i class="fas fa-trash"></i>
+</button>
+
+<!-- Modal para confirmar la eliminación -->
+<div class="modal fade" id="confirmDeleteModal<?php echo $r['id_tiru']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #EC7063; color: #ffffff;">
+                <h4 class="modal-title" id="exampleModalLabel">¡ADVERTENCIA! SE ELIMINARÁ EL SIGUIENTE TIPO DE RUTINA</h4>
+                <button type="button" class="btn-close" style="background-color: #ffffff;" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form class="delete-service-form" action="tipo_rutina/D_tipo_rutina.php" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <!-- Campo para el ID -->
+                                <input type="hidden" name="txt_id" class="rutin-id" value="<?php echo $r['id_tiru']; ?>">
+                                <label class="col-form-label" style="color: black;">Nombre:</label>
+                                <label class="col-form-label" style="color: black;">
+                                    <?php echo $r['nombre_tiru']; ?>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCELAR</button>
+                        <button type="submit" class="btn btn-danger">CONFIRMAR</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                                   
                             </center>
 
                         </td>
@@ -70,17 +115,15 @@ include_once('config/dbconnect.php');
     </div>
 </div>
 <!-- MODAL REGISTRO DE TIPO DE RUTINA  -->
-<div class="modal fade  " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header " style="background-color: #f05941; color: #ffffff;">
+            <div class="modal-header" style="background-color: #f05941; color: #ffffff;">
                 <h4 class="modal-title" id="exampleModalLabel">REGISTRO TIPO DE RUTINA</h4>
                 <button type="button" class="btn-close" style="background-color: #ffffff;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
-
-                <form action="tipo_rutina/R_tipo_rutina.php" method="post">
+                <form id="registroTipoRutinaForm" action="tipo_rutina/R_tipo_rutina.php" method="post">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
@@ -88,29 +131,25 @@ include_once('config/dbconnect.php');
                                 <input type="text" name="txtnombre" class="form-control" id="Nombre-name" required>
                             </div>
                         </div>
-
-
-
-
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="Telefono-name" class="col-form-label" style="color: black;">PRECIO:</label>
-                                <input type="text" name="txtprecio" class="form-control" maxlength="9" id="txtprecio-name" required>
+                                <label for="Precio-name" class="col-form-label" style="color: black;">PRECIO:</label>
+                                <input type="text" name="txtprecio" class="form-control" maxlength="9" id="Precio-name" required>
                             </div>
                         </div>
                     </div>
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
                         <button type="submit" class="btn btn-primary">REGISTRARSE</button>
                     </div>
-
                 </form>
             </div>
-
         </div>
     </div>
 </div>
+
+
+
 
 <!-- EDITAR TIPO DE RUTINA  -->
 <div class="modal fade  " id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: -20px;">
@@ -159,6 +198,13 @@ include_once('config/dbconnect.php');
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
 
 <?php
 include_once("inc/estructura/parte_inferior.php")
@@ -217,3 +263,85 @@ include_once("inc/estructura/parte_inferior.php")
 
     });
 </script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#registroTipoRutinaForm').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            title: 'Éxito',
+                            text: response.message,
+                            icon: 'success'
+                        }).then((result) => {
+                            // Opcional: Redireccionar a otra página
+                            // window.location.href = 'otra_pagina.php';
+                            // O recargar la página actual
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error',
+                            text: response.message,
+                            icon: 'error'
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+
+<script>
+$(document).ready(function(){
+    console.log("Script de eliminación de rutina cargado.");
+    $('.delete-service-form').submit(function(e) {
+        e.preventDefault();
+        
+        var rutinId = $(this).find('.rutin-id').val();
+        
+        // Obtener el ID único del modal de confirmación
+        var modalId = $(this).closest('.modal').attr('id');
+        
+        // Ejecutar directamente la solicitud AJAX para eliminar el servicio
+        $.ajax({
+            type: 'POST',
+            url: 'tipo_rutina/D_tipo_rutina.php',
+            data: { txt_id: rutinId },
+            dataType: 'json',
+            success: function(response) {
+                if(response.success) {
+                    Swal.fire({
+                        title: '¡Eliminado!',
+                        text: response.message,
+                        icon: 'success'
+                    }).then((result) => {
+                        // Cerrar el modal de confirmación
+                        $('#' + modalId).modal('hide');
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        title: '¡Error!',
+                        text: response.message,
+                        icon: 'error'
+                    });
+                }
+            }
+        });
+    });
+});
+</script>
+
+
+
+
+

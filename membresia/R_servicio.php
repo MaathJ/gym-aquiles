@@ -1,11 +1,24 @@
 <?php
 include('../config/dbconnect.php');
 
-$nombre = $_POST['txt_nomb'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nombre = $_POST['txt_nomb'];
 
-$sql="insert into servicio(nombre_se) values ('$nombre')";
+    $sql = "INSERT INTO servicio(nombre_se) VALUES ('$nombre')";
 
-mysqli_query($cn,$sql);
+    if(mysqli_query($cn, $sql)) {
+        $response = array(
+            'success' => true,
+            'message' => 'Servicio Registrado exitosamente'
+        );
+    } else {
+        $response = array(
+            'success' => false,
+            'message' => 'Hubo un problema al agregar el servicio.'
+        );
+    }
 
-header('location: ../servicio.php');
+    echo json_encode($response);
+    exit(); // Detener la ejecución del script después de enviar la respuesta
+}
 ?>
