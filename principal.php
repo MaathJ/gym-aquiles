@@ -61,9 +61,6 @@ $rCirM = mysqli_fetch_assoc($fM);
 $MUJER = (int)$rCirM['porcentaje_mujeres_con_asistencia'];
 //FIN CONSULTA PARA GRAFICO CIRCULAR 
 
-
-
-
 // INICIO  CONSULTA PARA GANANCIA
 $sql_g = "SELECT SUM(ganancia) as total
 FROM (
@@ -121,7 +118,28 @@ DATE(fech_asip) = DATE(NOW())";
 
 $f_cla = mysqli_query($cn, $sql_cla);
 $r_cla = mysqli_fetch_assoc($f_cla);
-// INICIO  CONSULTA PARA GRAFICO DE BARRAS
+
+//CONSULTA PARA DIFERENTES TIPO DE PAGO
+$sql_dtp="SELECT tpago.tipopago, SUM(tpago.total) AS total
+  FROM (SELECT tp.desc_tp as tipopago, sum(tr.precio_tiru) as total
+  FROM tipo_pago tp
+  INNER JOIN asistencia_pago ap on ap.id_tp = tp.id_tp
+  inner join tipo_rutina tr on ap.id_tiru = tr.id_tiru
+  WHERE DATE(ap.fech_asip) = CURDATE()
+  GROUP BY tp.desc_tp
+
+  UNION ALL
+
+  SELECT tp.desc_tp as tipopago, sum(men.precio_me) as total 
+  FROM tipo_pago tp
+  inner join matricula ma on ma.id_tp = tp.id_tp
+  inner join membresia men on ma.id_me = men.id_me 
+  WHERE DATE(ma.fecharegistro_ma) = CURDATE()
+  GROUP BY tp.desc_tp) as tpago
+  GROUP BY tpago.tipopago";
+
+$f_dtp = mysqli_query($cn, $sql_dtp);
+
 //------------------------------------------------------
 date_default_timezone_set('America/Lima');
  $fechaHoy = new DateTime();
@@ -170,7 +188,6 @@ $precios[] = $fila['total_precios'];
       <div class="main-content-left">
         <div class="content-left-earnings">
           <!-- INGRESO MENSUAL -->
-
           <?php 
                     $cod = $_SESSION["usuario"];
                     $sql = "SELECT * FROM usuario as us INNER JOIN rol as ro ON us.id_ro = ro.id_ro WHERE us.id_us = $cod AND ro.nombre_ro='ADMINISTRADOR'";
@@ -185,56 +202,29 @@ $precios[] = $fila['total_precios'];
               <span><i class="fa-solid fa-money-bill"></i></span>
               <p>Ingreso mes de:
                 <?php
-                          $mes = date("n");
-                          switch ($mes) {
-                            case 1:
-                              echo "Enero";
-                              break;
-                            case 2:
-                              echo "Febrero";
-                              break;
-                            case 3:
-                              echo "Marzo";
-                              break;
-                            case 4:
-                              echo "Abril";
-                              break;
-                            case 5:
-                              echo "Mayo";
-                              break;
-                            case 6:
-                              echo "Junio";
-                              break;
-                            case 7:
-                              echo "Julio";
-                              break;
-                            case 8:
-                              echo "Agosto";
-                              break;
-                            case 9:
-                              echo "Setiembre";
-                              break;
-                            case 10:
-                              echo "Octubre";
-                              break;
-                            case 11:
-                              echo "Noviembre";
-                              break;
-                            case 12:
-                              echo "Diciembre";
-                              break;
-                          }
-                          ?>
+                  $mes = date("n");
+                  switch ($mes) {
+                    case 1:echo "Enero"; break;
+                    case 2:echo "Febrero"; break;
+                    case 3:echo "Marzo";break;
+                    case 4:echo "Abril";break;
+                    case 5:echo "Mayo";break;
+                    case 6:echo "Junio";break;
+                    case 7:echo "Julio";break;
+                    case 8:echo "Agosto";break;
+                    case 9:echo "Setiembre";break;
+                    case 10:echo "Octubre";break;
+                    case 11:echo "Noviembre";break;
+                    case 12:echo "Diciembre";break;
+                  }
+                ?>
               </p>
             </div>
-            <h2 class="card-earnings-text">
+            <h2 class="card-earnings-text mb-1">
               <?php echo "S/. " . $r_g['total']; ?>
             </h2>
           </div>
-          <?php 
-                    }
-                      ?>
-
+          <?php } ?>
 
           <div class="card-earnings-sol">
             <div class="card-earnings-title">
@@ -265,6 +255,24 @@ $precios[] = $fila['total_precios'];
           </div>
         </div>
         <div class="content-left-earnings">
+          <!-- INGRESO POR TIPO DE PAGO -->
+          <?php 
+          while($r_dtp = mysqli_fetch_assoc($f_dtp)){
+          ?>
+            <div class="card-earnings-sol">
+              <div class="card-earnings-title">
+                <span><i class="fas fa-money-bills"></i></span>
+                <p>
+                  <?php echo $r_dtp['tipopago']; ?>
+                </p>
+              </div>
+              <h2 class="card-earnings-text">
+                S/ <?php echo $r_dtp['total']; ?>
+              </h2>
+            </div>
+          <?php } ?>
+        </div>
+        <div class="content-left-earnings">
           <!-- INGRESO MENSUAL -->
           <div class="card-earnings-ma">
             <div class="card-earnings-title">
@@ -287,6 +295,7 @@ $precios[] = $fila['total_precios'];
               <?php echo $r_mat['asistencia']; ?>
             </h2>
           </div>
+
           <div class="card-earnings-ma">
             <div class="card-earnings-title">
               <span><i class="fa-solid  fa-door-open"></i></span>
@@ -296,6 +305,7 @@ $precios[] = $fila['total_precios'];
               <?php echo $r_cla['asistencia']; ?>
             </h2>
           </div>
+
           <div class="card-earnings-ma">
             <div class="card-earnings-title">
               <span><i class="fa-solid  fa-door-open"></i></span>
@@ -305,7 +315,7 @@ $precios[] = $fila['total_precios'];
               <?php echo ($r_mat['asistencia'] + $r_cla['asistencia']); ?>
             </h2>
           </div>
-        </div>
+        </div>   
 
         <div class="content-left-tables">
           <!-- LOS 20 CLIENTES QUE MÁS ASISTEN -->
@@ -377,9 +387,6 @@ $precios[] = $fila['total_precios'];
         </div>
       </div>
       <div class="main-content-right">
-        <!-- <div class="total-earnings">
-                  ingresos totales
-              </div> -->
         <div class="stats-total-earnings">
           <h3>Ingreso Hombres y Mujeres (%)</h3>
           <div>
