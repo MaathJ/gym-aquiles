@@ -8,8 +8,8 @@ include('config/dbconnect.php');
 <link rel="stylesheet" src="style.css" href="assets/css/bootstrap/bootstrap.css">
 <div class="app-body-main-content">
     <div>
-        <p>Pages<span> / Rutina</span></p>
-        <h3>Rutina</h3>
+        <p>Pages<span> / Rol</span></p>
+        <h3>Rol</h3>
     </div>
     <div class="main-content">
         <div>

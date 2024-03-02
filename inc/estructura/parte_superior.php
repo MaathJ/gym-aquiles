@@ -143,6 +143,11 @@
                                         <span>Rutina</span>
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="tipoPago.php">
+                                        <span>Tipo de Pagos</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
