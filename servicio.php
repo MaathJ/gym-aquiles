@@ -79,38 +79,37 @@ include_once('config/dbconnect.php');
                                             <!-- BOTON ELIMINAR -->
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#D_servicio<?php echo $r['id_se']; ?>"><i class="fas fa-trash"> </i></button>
 
-                                            <!-- MODAL PARA ELIMINAR  -->
-                                            <div class="modal fade" id="D_servicio<?php echo $r['id_se']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header " style="background-color: #EC7063; color: #ffffff;">
-                                                            <h4 class="modal-title" id="exampleModalLabel">¡ADVERTENCIA! SE ELIMINARÁ EL SIGUIENTE SERVICIO</h4>
-                                                            <button type="button" class="btn-close" style="background-color: #ffffff;" data-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
+                                           <!-- MODAL PARA ELIMINAR  -->
+<div class="modal fade" id="D_servicio<?php echo $r['id_se']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #EC7063; color: #ffffff;">
+                <h4 class="modal-title" id="exampleModalLabel">¡ADVERTENCIA! SE ELIMINARÁ EL SIGUIENTE SERVICIO</h4>
+                <button type="button" class="btn-close" style="background-color: #ffffff;" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="delete-service-form" action="membresia/D_servicio.php" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <input type="hidden" name="txt_id" class="service-id" value="<?php echo $r['id_se']; ?>">
+                                <label for="recipient-name" class="col-form-label" style="color: black;">Nombre:</label>
+                                <label for="recipient-name" class="col-form-label" style="color: black;">
+                                    <?php echo $r['nombre_se']; ?>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCELAR</button>
+                        <button type="submit" class="btn btn-danger">CONFIRMAR</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-                                                            <form action="membresia/D_servicio.php" method="post">
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <div class="mb-3">
-                                                                            <input type="text" name="txt_id" class="form-control" id="recipient-name" required value="<?php echo $r['id_se']; ?>" hidden>
-                                                                            <label for="recipient-name" class="col-form-label" style="color: black;">Nombre:</label>
-                                                                            <label for="recipient-name" class="col-form-label" style="color: black;">
-                                                                                <?php echo $r['nombre_se']; ?>
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCELAR</button>
-                                                                    <button type="submit" class="btn btn-danger">CONFIRMAR</button>
-                                                                </div>
-                                                            </form>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -122,33 +121,32 @@ include_once('config/dbconnect.php');
 
 <!-- MODAL PARA REGISTRO  -->
 <div class="modal fade" id="R_servicio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header " style="background-color: #F39C12; color: #ffffff;">
-                                    <h4 class="modal-title" id="exampleModalLabel">REGISTRAR NUEVO SERVICIO</h4>
-                                    <button type="button" class="btn-close" style="background-color: #ffffff;" data-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-
-                                    <form action="membresia/R_servicio.php" method="post">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label for="recipient-name" class="col-form-label" style="color: black;">Nombre:</label>
-                                                    <input type="text" name="txt_nomb" class="form-control" id="recipient-name" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
-                                            <button type="submit" class="btn btn-primary">REGISTRAR</button>
-                                        </div>
-                                    </form>
-
-                                </div>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header " style="background-color: #F39C12; color: #ffffff;">
+                <h4 class="modal-title" id="exampleModalLabel">REGISTRAR NUEVO SERVICIO</h4>
+                <button type="button" class="btn-close" style="background-color: #ffffff;" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="R_servicio_form" method="post" action="membresia/R_servicio.php">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label" style="color: black;">Nombre:</label>
+                                <input type="text" name="txt_nomb" class="form-control" id="recipient-name" required>
                             </div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+                        <button type="submit" class="btn btn-primary">REGISTRAR</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 
@@ -243,6 +241,80 @@ let table = new DataTable('#table_servicio', {
 
 });
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).ready(function(){
+        console.log("Script de registro de servicio cargado.");
+        $('#R_servicio_form').submit(function(e) {
+            e.preventDefault();
+            
+            $.ajax({
+                type: 'POST',
+                url: 'membresia/R_servicio.php',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function(response) {
+                    if(response.success) {
+                        Swal.fire({
+                            title: '¡Registro exitoso!',
+                            text: response.message,
+                            icon: 'success'
+                        }).then((result) => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            title: '¡Error!',
+                            text: response.message,
+                            icon: 'error'
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function(){
+        console.log("Script de eliminación de servicio cargado.");
+        $('.delete-service-form').submit(function(e) {
+            e.preventDefault();
+            
+            var serviceId = $(this).find('.service-id').val();
+            
+            // Ejecutar directamente la solicitud AJAX para eliminar el servicio
+            $.ajax({
+                type: 'POST',
+                url: 'membresia/D_servicio.php',
+                data: { txt_id: serviceId },
+                dataType: 'json',
+                success: function(response) {
+                    if(response.success) {
+                        Swal.fire({
+                            title: '¡Eliminado!',
+                            text: response.message,
+                            icon: 'success'
+                        }).then((result) => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            title: '¡Error!',
+                            text: response.message,
+                            icon: 'error'
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
 
 
 

@@ -116,7 +116,7 @@ include_once('config/dbconnect.php');
       </table>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button>
+        <!-- <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button> -->
       </div>
     </div>
   </div>
