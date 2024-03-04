@@ -495,6 +495,7 @@ new Chart(ingresoMesAño, {
 });
 
 </script>
+<script src="./scrollTable.js"></script>
 <?php
 include_once("inc/estructura/parte_inferior.php")
 ?>

@@ -74,6 +74,15 @@
   color: white;
 }
 
+.content-table-one {
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+  max-height: 280.2px;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: #f05941;
+}
+
 .content-left-tables {
   padding: 1.5rem 0;
   display: flex;

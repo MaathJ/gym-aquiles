@@ -74,6 +74,15 @@
         }
     }
 }
+
+.content-table-one{
+    padding-left: .2rem;
+    padding-right: .2rem;
+    max-height: 280.2px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color:#f05941;
+}
 // tablas
 .content-left-tables {
     padding: 1.5rem 0;
