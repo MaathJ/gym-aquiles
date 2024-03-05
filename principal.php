@@ -120,7 +120,7 @@ $f_cla = mysqli_query($cn, $sql_cla);
 $r_cla = mysqli_fetch_assoc($f_cla);
 
 //CONSULTA PARA DIFERENTES TIPO DE PAGO
-$sql_dtp="SELECT tpago.tipopago, SUM(tpago.total) AS total
+$sql_dtp = "SELECT tpago.tipopago, SUM(tpago.total) AS total
   FROM (SELECT tp.desc_tp as tipopago, sum(tr.precio_tiru) as total
   FROM tipo_pago tp
   INNER JOIN asistencia_pago ap on ap.id_tp = tp.id_tp
@@ -142,11 +142,11 @@ $f_dtp = mysqli_query($cn, $sql_dtp);
 
 //------------------------------------------------------
 date_default_timezone_set('America/Lima');
- $fechaHoy = new DateTime();
- $mesactual =$fechaHoy->format('m') ;
- $añoactual =$fechaHoy->format('Y') ;
+$fechaHoy = new DateTime();
+$mesactual = $fechaHoy->format('m');
+$añoactual = $fechaHoy->format('Y');
 
- $sql = "SELECT dias, SUM(precios) as total_precios
+$sql = "SELECT dias, SUM(precios) as total_precios
  FROM (
      SELECT date(ma.fecharegistro_ma) as dias, SUM(me.precio_me) as precios
      FROM matricula as ma
@@ -172,8 +172,8 @@ $precios = array();
 
 // Recorrer los resultados y almacenar en los arrays
 while ($fila = mysqli_fetch_assoc($resultado)) {
-$dias[] = date('d-m-Y', strtotime($fila['dias']));
-$precios[] = $fila['total_precios'];
+  $dias[] = date('d-m-Y', strtotime($fila['dias']));
+  $precios[] = $fila['total_precios'];
 }
 ?>
 <link rel="stylesheet" src="style.css" href="assets/css/dashboard/dashboard.css">
@@ -188,42 +188,66 @@ $precios[] = $fila['total_precios'];
       <div class="main-content-left">
         <div class="content-left-earnings">
           <!-- INGRESO MENSUAL -->
-          <?php 
-                    $cod = $_SESSION["usuario"];
-                    $sql = "SELECT * FROM usuario as us INNER JOIN rol as ro ON us.id_ro = ro.id_ro WHERE us.id_us = $cod AND ro.nombre_ro='ADMINISTRADOR'";
-                    // Ejecutar la consulta y obtener el resultado...
-                    
-                    $resultado = mysqli_query($cn,$sql);
-                    // Verificar si el usuario tiene el rol de ADMINISTRADOR
-                    if ($resultado && mysqli_num_rows($resultado) > 0) {
-                    ?>
-          <div class="card-earnings-sol">
-            <div class="card-earnings-title">
-              <span><i class="fa-solid fa-money-bill"></i></span>
-              <p>Ingreso mes de:
-                <?php
+          <?php
+          $cod = $_SESSION["usuario"];
+          $sql = "SELECT * FROM usuario as us INNER JOIN rol as ro ON us.id_ro = ro.id_ro WHERE us.id_us = $cod AND ro.nombre_ro='ADMINISTRADOR'";
+          // Ejecutar la consulta y obtener el resultado...
+
+          $resultado = mysqli_query($cn, $sql);
+          // Verificar si el usuario tiene el rol de ADMINISTRADOR
+          if ($resultado && mysqli_num_rows($resultado) > 0) {
+          ?>
+            <div class="card-earnings-sol">
+              <div class="card-earnings-title">
+                <span><i class="fa-solid fa-money-bill"></i></span>
+                <p>Ingreso mes de:
+                  <?php
                   $mes = date("n");
                   switch ($mes) {
-                    case 1:echo "Enero"; break;
-                    case 2:echo "Febrero"; break;
-                    case 3:echo "Marzo";break;
-                    case 4:echo "Abril";break;
-                    case 5:echo "Mayo";break;
-                    case 6:echo "Junio";break;
-                    case 7:echo "Julio";break;
-                    case 8:echo "Agosto";break;
-                    case 9:echo "Setiembre";break;
-                    case 10:echo "Octubre";break;
-                    case 11:echo "Noviembre";break;
-                    case 12:echo "Diciembre";break;
+                    case 1:
+                      echo "Enero";
+                      break;
+                    case 2:
+                      echo "Febrero";
+                      break;
+                    case 3:
+                      echo "Marzo";
+                      break;
+                    case 4:
+                      echo "Abril";
+                      break;
+                    case 5:
+                      echo "Mayo";
+                      break;
+                    case 6:
+                      echo "Junio";
+                      break;
+                    case 7:
+                      echo "Julio";
+                      break;
+                    case 8:
+                      echo "Agosto";
+                      break;
+                    case 9:
+                      echo "Setiembre";
+                      break;
+                    case 10:
+                      echo "Octubre";
+                      break;
+                    case 11:
+                      echo "Noviembre";
+                      break;
+                    case 12:
+                      echo "Diciembre";
+                      break;
                   }
-                ?>
-              </p>
+                  ?>
+                </p>
+              </div>
+              <h2 class="card-earnings-text mb-1">
+                <?php echo "S/. " . $r_g['total']; ?>
+              </h2>
             </div>
-            <h2 class="card-earnings-text mb-1">
-              <?php echo "S/. " . $r_g['total']; ?>
-            </h2>
-          </div>
           <?php } ?>
 
           <div class="card-earnings-sol">
@@ -256,8 +280,8 @@ $precios[] = $fila['total_precios'];
         </div>
         <div class="content-left-earnings">
           <!-- INGRESO POR TIPO DE PAGO -->
-          <?php 
-          while($r_dtp = mysqli_fetch_assoc($f_dtp)){
+          <?php
+          while ($r_dtp = mysqli_fetch_assoc($f_dtp)) {
           ?>
             <div class="card-earnings-sol">
               <div class="card-earnings-title">
@@ -315,7 +339,7 @@ $precios[] = $fila['total_precios'];
               <?php echo ($r_mat['asistencia'] + $r_cla['asistencia']); ?>
             </h2>
           </div>
-        </div>   
+        </div>
 
         <div class="content-left-tables">
           <!-- LOS 20 CLIENTES QUE MÁS ASISTEN -->
@@ -323,21 +347,21 @@ $precios[] = $fila['total_precios'];
             <h3>Los Matriculados que más asisten</h3>
             <div class="content-table-one">
               <?php
-                        while ($r_a20 = mysqli_fetch_assoc($f_a20)) {
-                        ?>
-              <div class="table-card">
-                <div class="table-card-info">
-                  <div class="card-info">
-                    <img src="assets/images/cliente/<?php echo $r_a20['dni_cli'] ?>.jpg" width="30px" height="30px">
+              while ($r_a20 = mysqli_fetch_assoc($f_a20)) {
+              ?>
+                <div class="table-card">
+                  <div class="table-card-info">
+                    <div class="card-info">
+                      <img src="assets/images/cliente/<?php echo $r_a20['dni_cli'] ?>.jpg" width="30px" height="30px">
+                    </div>
+                    <div>
+                      <?php echo $r_a20['persona'] . " (" . $r_a20['membresia'] . ")"; ?>
+                    </div>
                   </div>
-                  <div>
-                    <?php echo $r_a20['persona'] . " (" . $r_a20['membresia'] . ")"; ?>
+                  <div class="table-card-days">
+                    <?php echo $r_a20['asistencia']; ?> asistencia
                   </div>
                 </div>
-                <div class="table-card-days">
-                  <?php echo $r_a20['asistencia']; ?> asistencia
-                </div>
-              </div>
               <?php } ?>
             </div>
           </div>
@@ -346,7 +370,7 @@ $precios[] = $fila['total_precios'];
             <h3>Matriculas a Vencer</h3>
             <div class="content-table-one">
               <?php
-                        $Matriculas_acabar = "SELECT 
+              $Matriculas_acabar = "SELECT 
                     cl.nombre_cli, 
                     cl.apellido_cli, 
                     cl.dni_cli, 
@@ -362,26 +386,26 @@ $precios[] = $fila['total_precios'];
                         DATEDIFF(DATE(mt.fechafin_ma), DATE(mt.fechainicio_ma)) DESC
                     LIMIT 10";
 
-                        $fMFaltante = mysqli_query($cn, $Matriculas_acabar);
+              $fMFaltante = mysqli_query($cn, $Matriculas_acabar);
 
-                        while ($rMFaltante = mysqli_fetch_assoc($fMFaltante)) {
-                        ?>
-              <div class="table-card">
-                <div class="table-card-info">
-                  <div class="card-info">
-                    <img src="assets/images/cliente/<?php echo $rMFaltante['dni_cli'] ?>.jpg" alt="">
+              while ($rMFaltante = mysqli_fetch_assoc($fMFaltante)) {
+              ?>
+                <div class="table-card">
+                  <div class="table-card-info">
+                    <div class="card-info">
+                      <img src="assets/images/cliente/<?php echo $rMFaltante['dni_cli'] ?>.jpg" alt="">
+                    </div>
+                    <div>
+                      <?php echo $rMFaltante['nombre_cli']  . " " . $rMFaltante['apellido_cli'] ?>
+                    </div>
                   </div>
-                  <div>
-                    <?php echo $rMFaltante['nombre_cli']  . " " . $rMFaltante['apellido_cli'] ?>
+                  <div class="table-card-days">
+                    <?php echo "Quedan " . $rMFaltante['dias_restantes'] . " Dias" ?>
                   </div>
                 </div>
-                <div class="table-card-days">
-                  <?php echo "Quedan " . $rMFaltante['dias_restantes'] . " Dias" ?>
-                </div>
-              </div>
               <?php
-                        }
-                        ?>
+              }
+              ?>
             </div>
           </div>
         </div>
@@ -396,106 +420,155 @@ $precios[] = $fila['total_precios'];
       </div>
     </div>
     <div class="main-content-bottom">
-    <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a  class="nav-link active" id="ingreso-dia-mes" >Ingreso de los Días del Mes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="ingreso-mes-año">Ingreso Meses del año</a>
-                </li>
-            </ul>
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="ingreso-matricula-hoy" data-bs-toggle="tab" data-bs-target="#ingreso-mat-hoy" type="button" role="tab" aria-controls="ingreso-mat-hoy" aria-selected="true">Matriculas Hoy</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link " id="ingreso-dia-mes" data-bs-toggle="tab" data-bs-target="#chart-barra-ingreso-dia-mes-container" type="button" role="tab" aria-controls="chart-barra-ingreso-dia-mes-container" aria-selected="false">Ingreso de los Días del Mes</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="ingreso-mes-año" data-bs-toggle="tab" data-bs-target="#chart-barra-ingreso-mes-año-container" type="button" role="tab" aria-controls="chart-barra-ingreso-mes-año-container" aria-selected="false">Ingreso Meses del año</button>
+        </li>
+      </ul>
       <div class="ingresos-mes-dia">
-        <canvas id="chart-barra-ingreso-dia-mes"></canvas>
-        <canvas id="chart-barra-ingreso-mes-año" style="display: none;"></canvas>
+        <div class="tab-pane fade" id="ingreso-mat-hoy" role="tabpanel" aria-labelledby="ingreso-matricula-hoy">
+          <div class="table">
+            <h3 style="color: #5E7FEF;">MATRICULAS DE HOY</h3>
+            <div class="content-table-one">
+              <?php
+              $HoyMatriculas = "SELECT  cli.* , men.*, ma.* ,us.* FROM matricula ma 
+                          INNER JOIN membresia men ON ma.id_me = men.id_me 
+                          INNER JOIN cliente cli ON ma.id_cli = cli.id_cli 
+                          INNER JOIN usuario us ON ma.id_us = us.id_us
+                          WHERE DATE(ma.fecharegistro_ma) = CURDATE() AND estado_ma = 'ACTIVO'";
+
+              $HoyMatriculass = mysqli_query($cn, $HoyMatriculas);
+              $totalMatricula = 0;
+
+              while ($rMatriculas = mysqli_fetch_assoc($HoyMatriculass)) {
+                $totalMatricula += $rMatriculas['precio_me'];
+              ?>
+                <div class="table-card">
+                  <div class="table-card-info">
+                    <div class="card-info">
+                      <img src="assets/images/cliente/<?php echo $rMatriculas['dni_cli'] ?>.jpg" alt="">
+                    </div>
+                    <div><?php echo strtoupper($rMatriculas['nombre_cli'] . " " . $rMatriculas['apellido_cli']) ?></div>
+                    <div style="font-weight: 800;"><?php echo $rMatriculas['nombre_me'] ?></div>
+                    <div style="font-weight: 500;"><?php echo date('d-m-Y H:i:s', strtotime($rMatriculas['fecharegistro_ma'])) ?></div>
+                    <div style="font-weight: 800;"><?php echo $rMatriculas['nombre_us'] ?></div>
+                  </div>
+                  <div class="table-card-days">
+                    <?php echo "S/  " . $rMatriculas['precio_me'] . " soles" ?>
+                  </div>
+                </div>
+                <hr>
+              <?php
+              }
+              ?>
+              <div class="table-card">
+                <div class="table-card-days">
+                  <h5>Total S/ <?php echo $totalMatricula ?></h5>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="tab-pane fade show active" id="chart-barra-ingreso-dia-mes-container" role="tabpanel" aria-labelledby="ingreso-dia-mes">
+          <canvas id="chart-barra-ingreso-dia-mes"></canvas>
+        </div>
+        <div class="tab-pane fade" id="chart-barra-ingreso-mes-año-container" role="tabpanel" aria-labelledby="ingreso-mes-año">
+          <canvas id="chart-barra-ingreso-mes-año"></canvas>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-<script src="assets/js/chartjs/pie-ingresos.js"></script>
-<script src="assets/js/tabs-asistencia/tabs-barras.js"></script>
-<script>
-const ingresoDiaMes= document.getElementById('chart-barra-ingreso-dia-mes');
-new Chart(ingresoDiaMes, {
-    type: 'bar',
-    data: {
+  <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+  <script src="assets/js/chartjs/pie-ingresos.js"></script>
+  <script src="assets/js/tabs-asistencia/tabs-barras.js"></script>
+  <script>
+    const ingresoDiaMes = document.getElementById('chart-barra-ingreso-dia-mes');
+    new Chart(ingresoDiaMes, {
+      type: 'bar',
+      data: {
         labels: <?php echo json_encode($dias); ?>,
         datasets: [{
-            label: 'Ingreso diario',
-            data: <?php echo json_encode($precios); ?>,
-            borderWidth: 1,
-            backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)',
-                'rgba(153, 102, 255)',
-                'rgba(75, 192, 192)',
-                'rgba(201, 203, 207)',
-            ],
-            borderColor: '#36A2EB',
+          label: 'Ingreso diario',
+          data: <?php echo json_encode($precios); ?>,
+          borderWidth: 1,
+          backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)',
+            'rgba(153, 102, 255)',
+            'rgba(75, 192, 192)',
+            'rgba(201, 203, 207)',
+          ],
+          borderColor: '#36A2EB',
         }]
-    },
-    options: {
+      },
+      options: {
         scales: {
-            y: {
-                beginAtZero: true
-            }
+          y: {
+            beginAtZero: true
+          }
         },
         plugins: {
-            title: {
-                display: true,
-                text: 'Ingresos de los Días del Mes',
-                font: {
-                    size: 16
-                }
+          title: {
+            display: true,
+            text: 'Ingresos de los Días del Mes',
+            font: {
+              size: 16
             }
+          }
         }
-    }
-});
+      }
+    });
 
-const ingresoMesAño = document.getElementById('chart-barra-ingreso-mes-año');
-new Chart(ingresoMesAño, {
-    type: 'bar',
-    data: {
+    const ingresoMesAño = document.getElementById('chart-barra-ingreso-mes-año');
+    new Chart(ingresoMesAño, {
+      type: 'bar',
+      data: {
         labels: <?php echo json_encode($dias); ?>,
         datasets: [{
-            label: 'Ingreso Mensual',
-            data: <?php echo json_encode($precios); ?>,
-            borderWidth: 1,
-            backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)',
-                'rgba(153, 102, 255)',
-                'rgba(75, 192, 192)',
-                'rgba(201, 203, 207)',
-            ],
-            borderColor: '#36A2EB',
+          label: 'Ingreso Mensual',
+          data: <?php echo json_encode($precios); ?>,
+          borderWidth: 1,
+          backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)',
+            'rgba(153, 102, 255)',
+            'rgba(75, 192, 192)',
+            'rgba(201, 203, 207)',
+          ],
+          borderColor: '#36A2EB',
         }]
-    },
-    options: {
+      },
+      options: {
         scales: {
-            y: {
-                beginAtZero: true
-            }
+          y: {
+            beginAtZero: true
+          }
         },
         plugins: {
-            title: {
-                display: true,
-                text: 'Ingresos de los Meses del Año',
-                font: {
-                    size: 16
-                }
+          title: {
+            display: true,
+            text: 'Ingresos de los Meses del Año',
+            font: {
+              size: 16
             }
+          }
         }
-    }
-});
-
-</script>
-<script src="./scrollTable.js"></script>
-<?php
-include_once("inc/estructura/parte_inferior.php")
-?>
+      }
+    });
+  </script>
+  <script src="./scrollTable.js"></script>
+  <?php
+  include_once("inc/estructura/parte_inferior.php")
+  ?>
