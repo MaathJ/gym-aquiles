@@ -222,6 +222,33 @@
                             </ul>
                         </li>
 
+                        <!-- Reportes -->
+                        <li class="section-item-options" id="report">
+                            <div class="section-item-container">
+                                <div class="section-item-box">
+                                    <a class="item-options">
+                                         <i class="fa-solid fa-chart-column"></i>
+                                        <span>Reportes</span>
+                                    </a>
+                                </div>
+                                <span>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </div>
+                            <ul class="optionsxd5">
+                                <li>
+                                    <a href="report_general.php">
+                                        <span>Registro Ingresos</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="roles.php">
+                                        <span>Caja Usuario</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="section-item">
                             <a href="configuracion.php" style="display: flex;  align-items: center;">
                                 <i class="fa-solid fa-gear"></i>
@@ -267,6 +294,13 @@
                         icono.classList.toggle("rotated");
                     });
 
+                    report.addEventListener("click", function() {
+                        var sublista = report.querySelector(".optionsxd5");
+                        sublista.classList.toggle("show");
+                        var icono = report.querySelector("i.fa-solid.fa-chevron-down");
+                        icono.classList.toggle("rotated");
+                    });
+
                     users.addEventListener("click", function() {
                         var sublista = users.querySelector(".optionsxd");
                         sublista.classList.toggle("show");
@@ -285,7 +319,8 @@
                 .optionsxd3,
                 .optionsxd2,
                 .optionsxd,
-                .optionsxd4 {
+                .optionsxd4,
+                .optionsxd5 {
                     display: none;
                     animation: slideDown 0.5s ease;
                 }
@@ -293,7 +328,8 @@
                 .optionsxd3.show,
                 .optionsxd2.show,
                 .optionsxd.show,
-                .optionsxd4.show {
+                .optionsxd4.show ,
+                .optionsxd5.show{
                     display: block;
                 }
 
