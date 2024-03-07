@@ -437,11 +437,12 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
             <h3 style="color: #5E7FEF;">MATRICULAS DE HOY</h3>
             <div class="content-table-one">
               <?php
-              $HoyMatriculas = "SELECT  cli.* , men.*, ma.* ,us.* FROM matricula ma 
-                          INNER JOIN membresia men ON ma.id_me = men.id_me 
-                          INNER JOIN cliente cli ON ma.id_cli = cli.id_cli 
-                          INNER JOIN usuario us ON ma.id_us = us.id_us
-                          WHERE DATE(ma.fecharegistro_ma) = CURDATE() AND estado_ma = 'ACTIVO'";
+              $HoyMatriculas = "SELECT  cli.* , men.*, ma.* ,us.* 
+              FROM matricula ma 
+              INNER JOIN membresia men ON ma.id_me = men.id_me 
+              INNER JOIN cliente cli ON ma.id_cli = cli.id_cli 
+              INNER JOIN usuario us ON ma.id_us = us.id_us
+              WHERE DATE(ma.fecharegistro_ma) = CURDATE() AND (estado_ma = 'ACTIVO' OR estado_ma = 'EN ESPERA');";
 
               $HoyMatriculass = mysqli_query($cn, $HoyMatriculas);
               $totalMatricula = 0;
@@ -458,6 +459,7 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
                     <div style="font-weight: 800;"><?php echo $rMatriculas['nombre_me'] ?></div>
                     <div style="font-weight: 500;"><?php echo date('d-m-Y H:i:s', strtotime($rMatriculas['fecharegistro_ma'])) ?></div>
                     <div style="font-weight: 800;"><?php echo $rMatriculas['nombre_us'] ?></div>
+                    <div style="font-weight: 800;"><?php echo $rMatriculas['estado_ma'] ?></div>
                   </div>
                   <div class="table-card-days">
                     <?php echo "S/  " . $rMatriculas['precio_me'] . " soles" ?>
