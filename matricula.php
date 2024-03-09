@@ -84,169 +84,172 @@ setTimeout(() => {
                 Nueva Matricula
             </button>
         </div>
-        <div>
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" id="regis-asis-hoy" href="#">Matriculas activas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="regis-asis-mes" href="#">Matriculas culminadas</a>
-                </li>
-            </ul>
-        </div>
 
-        <!-- //MATRICULAS ACTIVAS  -->
-        <div id="collapseExample">
-            <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
-                <table class="table table-sm" id="table_matricula" style="font-size: .8rem;">
-                    <thead align="center" class="" style="color: #fff;">
-                        <tr>
-                            <th>ID</th>
-                            <th>Foto</th>
-                            <th>Nombres</th>
-                            <th>Apellidos</th>
-                            <th>DNI</th>
-                            <th>Membresia-Servicio</th>
-                            <th>Fecha Inicio</th>
-                            <th>Fecha Vencimiento</th>
-                            <th>Dias Restantes</th>
-                            <th>Estado</th>
-                            <th>Empleado</th>
-                            <th>Fecha Registro</th>
-                            <th>Medio de pago</th>
-                            <th>Opciones</th>
-                        </tr>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Matriculas activas</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Matriculas culminadas</button>
+            </li>
 
-                    </thead>
-                    <tbody>
-                        <?php
-                        include_once("config/dbconnect.php");
-                        $sqlm = "SELECT ma.*, me.*, se.*, cli.*, us.*, tp.*
-                                    FROM matricula as ma
-                                    INNER JOIN membresia me ON ma.id_me = me.id_me
-                                    INNER JOIN servicio se ON me.id_se = se.id_se
-                                    INNER JOIN cliente cli ON ma.id_cli = cli.id_cli
-                                    INNER JOIN usuario us ON ma.id_us = us.id_us
-                                    INNER JOIN tipo_pago tp ON ma.id_tp = tp.id_tp
-                                WHERE ma.estado_ma != 'CULMINADO'
-                                ORDER BY ma.estado_ma DESC, ma.id_ma DESC";
-                        $f = mysqli_query($cn, $sqlm);
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <!-- //MATRICULAS ACTIVAS  -->
+                <div id="collapseExample">
+                    <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
+                        <table class="table table-sm" id="table_matricula" style="font-size: .8rem;">
+                            <thead align="center" class="" style="color: #fff;">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Foto</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>DNI</th>
+                                    <th>Membresia-Servicio</th>
+                                    <th>Fecha Inicio</th>
+                                    <th>Fecha Vencimiento</th>
+                                    <th>Dias Restantes</th>
+                                    <th>Estado</th>
+                                    <th>Empleado</th>
+                                    <th>Fecha Registro</th>
+                                    <th>Medio de pago</th>
+                                    <th>Opciones</th>
+                                </tr>
 
-                        while ($r = mysqli_fetch_assoc($f)) {
-
-
-                        ?>
-                            <tr>
-                                <td> <?php echo $r['id_ma']; ?></td>
-                                <td>
-                                    <img style="border-radius: 50%; align-self: center; height: 40px; width: 40px;" class="img-cliente" src="assets/images/cliente/<?php echo $r['dni_cli']; ?>.jpg" alt="">
-                                <td style="text-transform: capitalize;"><?php echo  $r['nombre_cli'] ?></td>
-                                <td style="text-transform: capitalize;"><?php echo $r['apellido_cli'] ?></td>
-                                <td>
-                                    <?php echo $r['dni_cli']; ?>
-                                </td>
-                                <td><?php echo $r['nombre_me'] . $r['nombre_se'] ?></td>
-                                <td><?php echo date('d-m-Y', strtotime($r['fechainicio_ma'])) ?></td>
+                            </thead>
+                            <tbody>
                                 <?php
-                                $fechaFin = new DateTime($r['fechafin_ma']);
-                                $fechaFin->modify('-1 day');
+                                include_once("config/dbconnect.php");
+                                $sqlm = "SELECT ma.*, me.*, se.*, cli.*, us.*, tp.*
+                                            FROM matricula as ma
+                                            INNER JOIN membresia me ON ma.id_me = me.id_me
+                                            INNER JOIN servicio se ON me.id_se = se.id_se
+                                            INNER JOIN cliente cli ON ma.id_cli = cli.id_cli
+                                            INNER JOIN usuario us ON ma.id_us = us.id_us
+                                            INNER JOIN tipo_pago tp ON ma.id_tp = tp.id_tp
+                                        WHERE ma.estado_ma != 'CULMINADO'
+                                        ORDER BY ma.estado_ma DESC, ma.id_ma DESC";
+                                $f = mysqli_query($cn, $sqlm);
+
+                                while ($r = mysqli_fetch_assoc($f)) {
+
+
                                 ?>
+                                    <tr>
+                                        <td> <?php echo $r['id_ma']; ?></td>
+                                        <td>
+                                            <img style="border-radius: 50%; align-self: center; height: 40px; width: 40px;" class="img-cliente" src="assets/images/cliente/<?php echo $r['dni_cli']; ?>.jpg" alt="">
+                                        <td style="text-transform: capitalize;"><?php echo  $r['nombre_cli'] ?></td>
+                                        <td style="text-transform: capitalize;"><?php echo $r['apellido_cli'] ?></td>
+                                        <td>
+                                            <?php echo $r['dni_cli']; ?>
+                                        </td>
+                                        <td><?php echo $r['nombre_me'] . $r['nombre_se'] ?></td>
+                                        <td><?php echo date('d-m-Y', strtotime($r['fechainicio_ma'])) ?></td>
+                                        <?php
+                                        $fechaFin = new DateTime($r['fechafin_ma']);
+                                        $fechaFin->modify('-1 day');
+                                        ?>
 
-                                <td><?php echo $fechaFin->format('d-m-Y'); ?></td>
+                                        <td><?php echo $fechaFin->format('d-m-Y'); ?></td>
 
-                                <?php
-                                date_default_timezone_set('America/Lima');
-                                $fechaHoy = new DateTime();
-                                $fechaFin = new DateTime($r['fechafin_ma']);
-                                $diferencia = $fechaHoy->diff($fechaFin);
-                                $diasRestantes = $diferencia->days;
+                                        <?php
+                                        date_default_timezone_set('America/Lima');
+                                        $fechaHoy = new DateTime();
+                                        $fechaFin = new DateTime($r['fechafin_ma']);
+                                        $diferencia = $fechaHoy->diff($fechaFin);
+                                        $diasRestantes = $diferencia->days;
 
-                                $estado = $r['estado_ma'];
-                                $colorLetra = '';
-                                // Ajustar a cero si la diferencia es menor a 0 días
-                                $diasRestantes = max($diasRestantes, 0);
-                                // Ajustar a cero si la fecha actual ha superado la fecha de finalización
-                                ?>
-                                <td style="font-weight: 800;"><?php echo $diasRestantes . ' días' ?></td>
-                                <td align="center">
-                                    <button class="<?php echo ($r['estado_ma'] == 'ACTIVO') ? 'active-button' : 'waiting-button'; ?>">
-                                        <?php echo $r['estado_ma'] ?>
-                                    </button>
-                                </td>
+                                        $estado = $r['estado_ma'];
+                                        $colorLetra = '';
+                                        // Ajustar a cero si la diferencia es menor a 0 días
+                                        $diasRestantes = max($diasRestantes, 0);
+                                        // Ajustar a cero si la fecha actual ha superado la fecha de finalización
+                                        ?>
+                                        <td style="font-weight: 800;"><?php echo $diasRestantes . ' días' ?></td>
+                                        <td align="center">
+                                            <button class="<?php echo ($r['estado_ma'] == 'ACTIVO') ? 'active-button' : 'waiting-button'; ?>">
+                                                <?php echo $r['estado_ma'] ?>
+                                            </button>
+                                        </td>
 
-                                <td><?php echo $r['nombre_us'] ?></td>
-                                <td><?php echo date('d-m-Y H:i:s', strtotime($r['fecharegistro_ma'])) ?></td>
-                                <td><?php echo $r['desc_tp'] ?></td>
-                                 
-                                    <td style="display: flex; gap: 1rem; justify-content: center; align-items: center;">
-                                        <!-- BOTON PARA EDITAR--> 
-                                    <a class="btn btn-sm btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#ModalEditar" data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
-                                                    'id_ma':'<?php echo $r['id_ma']; ?>',
-                                                    'precio_ma':'<?php echo $r['precio_me']; ?>',
-                                                    'fechainicio_ma':'<?php echo date('Y-m-d', strtotime($r['fechainicio_ma'])) ?? ''; ?>',
-                                                    'fechafin_ma':'<?php echo date('Y-m-d', strtotime($r['fechafin_ma'])) ?? ''; ?>',
-                                                    'estado_ma':'<?php echo $r['estado_ma'] ?>', 
-                                                    'cliente_ma':'<?php echo $r['id_cli'] ?? ''; ?>', 
-                                                    'membresia_ma':'<?php echo $r['id_me'] ?? ''; ?>',
-                                                    'tp_ma':'<?php echo $r['id_tp'] ?? ''; ?>'
-                                                    });">
-                                        <i class="fas fa-edit"> </i></a>
-                                            <!-- BOTON PARA ADELANTOS--> 
-                                        <a class="btn btn-sm btn-warning btn-circle" data-bs-toggle="modal" data-bs-target="#ModalAdelantos" data-bs-whatever="@mdo" target="_parent" onclick="cargar_info_Adelanto({
-                                                    'id_ma':'<?php echo $r['id_ma']; ?>',
-                                                    'precio_ma':'<?php echo $r['precio_me']; ?>',
-                                                    'fechainicio_ma':'<?php echo date('Y-m-d', strtotime($r['fechainicio_ma'])) ?? ''; ?>',
-                                                    'fechafin_ma':'<?php echo date('Y-m-d', strtotime($r['fechafin_ma'])) ?? ''; ?>',
-                                                    'estado_ma':'<?php echo $r['estado_ma'] ?>', 
-                                                    'cliente_ma':'<?php echo $r['id_cli'] ?? ''; ?>', 
-                                                    'membresia_ma':'<?php echo $r['id_me'] ?? ''; ?>',
-                                                    'tp_ma':'<?php echo $r['id_tp'] ?? ''; ?>'
-                                                    });">
-                                        <i class="fa-solid fa-layer-group"></i></a>
-                                    <!-- BOTON PARA ELIMINAR-->   
-                                    <a href="matricula/D_matricula.php?cod=<?php echo $r['id_ma'] ?>" class="btn btn-sm btn-danger" target="_parent">
-                                        <i class="fas fa-trash"> </i>
-                                    </a>
+                                        <td><?php echo $r['nombre_us'] ?></td>
+                                        <td><?php echo date('d-m-Y H:i:s', strtotime($r['fecharegistro_ma'])) ?></td>
+                                        <td><?php echo $r['desc_tp'] ?></td>
 
-                                    <!-- BOTON PARA TICKET-->
-                                    <a class="btn btn-sm btn-success btn-circle" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(<?php echo $r['id_ma']; ?>, 'mat')">
-                                        <i class="fas fa-ticket"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                                        <td style="display: flex; gap: 1rem; justify-content: center; align-items: center;">
+                                            <!-- BOTON PARA EDITAR-->
+                                            <a class="btn btn-sm btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#ModalEditar" data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
+                                                            'id_ma':'<?php echo $r['id_ma']; ?>',
+                                                            'precio_ma':'<?php echo $r['precio_me']; ?>',
+                                                            'fechainicio_ma':'<?php echo date('Y-m-d', strtotime($r['fechainicio_ma'])) ?? ''; ?>',
+                                                            'fechafin_ma':'<?php echo date('Y-m-d', strtotime($r['fechafin_ma'])) ?? ''; ?>',
+                                                            'estado_ma':'<?php echo $r['estado_ma'] ?>', 
+                                                            'cliente_ma':'<?php echo $r['id_cli'] ?? ''; ?>', 
+                                                            'membresia_ma':'<?php echo $r['id_me'] ?? ''; ?>',
+                                                            'tp_ma':'<?php echo $r['id_tp'] ?? ''; ?>'
+                                                            });">
+                                                <i class="fas fa-edit"> </i></a>
+                                            <!-- BOTON PARA ADELANTOS-->
+                                            <a class="btn btn-sm btn-warning btn-circle" data-bs-toggle="modal" data-bs-target="#ModalAdelantos" data-bs-whatever="@mdo" target="_parent" onclick="cargar_info_Adelanto({
+                                                            'id_ma':'<?php echo $r['id_ma']; ?>',
+                                                            'precio_ma':'<?php echo $r['precio_me']; ?>',
+                                                            'fechainicio_ma':'<?php echo date('Y-m-d', strtotime($r['fechainicio_ma'])) ?? ''; ?>',
+                                                            'fechafin_ma':'<?php echo date('Y-m-d', strtotime($r['fechafin_ma'])) ?? ''; ?>',
+                                                            'estado_ma':'<?php echo $r['estado_ma'] ?>', 
+                                                            'cliente_ma':'<?php echo $r['id_cli'] ?? ''; ?>', 
+                                                            'membresia_ma':'<?php echo $r['id_me'] ?? ''; ?>',
+                                                            'tp_ma':'<?php echo $r['id_tp'] ?? ''; ?>'
+                                                            });">
+                                                <i class="fa-solid fa-layer-group"></i></a>
+                                            <!-- BOTON PARA ELIMINAR-->
+                                            <a href="matricula/D_matricula.php?cod=<?php echo $r['id_ma'] ?>" class="btn btn-sm btn-danger" target="_parent">
+                                                <i class="fas fa-trash"> </i>
+                                            </a>
+
+                                            <!-- BOTON PARA TICKET-->
+                                            <a class="btn btn-sm btn-success btn-circle" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(<?php echo $r['id_ma']; ?>, 'mat')">
+                                                <i class="fas fa-ticket"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
 
             </div>
-        </div>
-         <!-- MATRICULAS CULMINADAS  -->
-        <div id="collapseExample2">
-            <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
-                <table class="table table-sm" id="table_matricula_culm" style="font-size: .8rem;">
-                    <thead align="center" class="" style="color: #fff">
-                        <tr>
-                            <!-- <th>ID</th> -->
-                            <th>Foto</th>
-                            <th>Nombres</th>
-                            <th>Apellidos</th>
-                            <th>DNI</th>
-                            <th>Membresia-Servicio</th>
-                            <th>Fecha Inicio</th>
-                            <th>Fecha Vencimiento</th>
-                            <th>Dias Restantes</th>
-                            <th>Estado</th>
-                            <th>Empleado</th>
-                            <th>Fecha Registro</th>
-                            <th>Medio de pago</th>
-                            <th>Opciones</th>
-                        </tr>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <!-- MATRICULAS CULMINADAS  -->
+                <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
+                    <table class="table table-sm" id="table_matricula_culm" style="font-size: .8rem;">
+                        <thead align="center" class="" style="color: #fff">
+                            <tr>
+                                <!-- <th>ID</th> -->
+                                <th>Foto</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>DNI</th>
+                                <th>Membresia-Servicio</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Vencimiento</th>
+                                <th>Dias Restantes</th>
+                                <th>Estado</th>
+                                <th>Empleado</th>
+                                <th>Fecha Registro</th>
+                                <th>Medio de pago</th>
+                                <th>Opciones</th>
+                            </tr>
 
-                    </thead>
-                    <tbody>
-                        <?php
-                        include_once("config/dbconnect.php");
-                        $sqlm = "SELECT ma.*, me.*, se.*, cli.*, us.*, tp.*
+                        </thead>
+                        <tbody>
+                            <?php
+                            include_once("config/dbconnect.php");
+                            $sqlmc = "SELECT ma.*, me.*, se.*, cli.*, us.*, tp.*
                                     FROM matricula as ma
                                     INNER JOIN membresia me ON ma.id_me = me.id_me
                                     INNER JOIN servicio se ON me.id_se = se.id_se
@@ -255,55 +258,55 @@ setTimeout(() => {
                                     INNER JOIN tipo_pago tp ON ma.id_tp = tp.id_tp
                                 WHERE ma.estado_ma = 'CULMINADO'
                                 ORDER BY ma.estado_ma DESC, ma.id_ma DESC";
-                        $f = mysqli_query($cn, $sqlm);
+                            $fc = mysqli_query($cn, $sqlmc);
 
-                        while ($r = mysqli_fetch_assoc($f)) {
+                            while ($rc = mysqli_fetch_assoc($fc)) {
 
 
-                        ?>
-                            <tr>
-                                <td>
-                                    <img style="border-radius: 50%; align-self: center; height: 40px; width: 40px;" class="img-cliente" src="assets/images/cliente/<?php echo $r['dni_cli']; ?>.jpg" alt="">
-                                <td style="text-transform: capitalize;"><?php echo  $r['nombre_cli'] ?></td>
-                                <td style="text-transform: capitalize;"><?php echo $r['apellido_cli'] ?></td>
-                                <td>
-                                    <?php echo $r['dni_cli']; ?>
-                                </td>
-                                <td><?php echo $r['nombre_me'] . $r['nombre_se'] ?></td>
-                                <td><?php echo date('d-m-Y', strtotime($r['fechainicio_ma'])) ?></td>
-                                <?php
-                                $fechaFin = new DateTime($r['fechafin_ma']);
-                                $fechaFin->modify('-1 day');
-                                ?>
+                            ?>
+                                <tr>
+                                    <td>
+                                        <img style="border-radius: 50%; align-self: center; height: 40px; width: 40px;" class="img-cliente" src="assets/images/cliente/<?php echo $r['dni_cli']; ?>.jpg" alt="">
+                                    <td style="text-transform: capitalize;"><?php echo  $rc['nombre_cli'] ?></td>
+                                    <td style="text-transform: capitalize;"><?php echo $rc['apellido_cli'] ?></td>
+                                    <td>
+                                        <?php echo $rc['dni_cli']; ?>
+                                    </td>
+                                    <td><?php echo $rc['nombre_me'] . $rc['nombre_se'] ?></td>
+                                    <td><?php echo date('d-m-Y', strtotime($rc['fechainicio_ma'])) ?></td>
+                                    <?php
+                                    $fechaFin = new DateTime($rc['fechafin_ma']);
+                                    $fechaFin->modify('-1 day');
+                                    ?>
 
-                                <td><?php echo $fechaFin->format('d-m-Y'); ?></td>
+                                    <td><?php echo $fechaFin->format('d-m-Y'); ?></td>
 
-                                <?php
-                                date_default_timezone_set('America/Lima');
-                                $fechaHoy = new DateTime();
-                                $fechaFin = new DateTime($r['fechafin_ma']);
-                                $diferencia = $fechaHoy->diff($fechaFin);
-                                $diasRestantes = $diferencia->days;
+                                    <?php
+                                    date_default_timezone_set('America/Lima');
+                                    $fechaHoy = new DateTime();
+                                    $fechaFin = new DateTime($rc['fechafin_ma']);
+                                    $diferencia = $fechaHoy->diff($fechaFin);
+                                    $diasRestantes = $diferencia->days;
 
-                                $estado = $r['estado_ma'];
-                                $colorLetra = '';
-                                // Ajustar a cero si la diferencia es menor a 0 días
-                                $diasRestantes = max($diasRestantes, 0);
-                                // Ajustar a cero si la fecha actual ha superado la fecha de finalización
-                                ?>
-                                <td style="font-weight: 800;"><?php echo $diasRestantes . ' días' ?></td>
-                                <td align="center">
-                                    <button class="<?php echo ($r['estado_ma'] == 'ACTIVO') ? 'active-button' : 'inactive-button'; ?>">
-                                        <?php echo $r['estado_ma'] ?>
-                                    </button>
-                                </td>
+                                    $estado = $rc['estado_ma'];
+                                    $colorLetra = '';
+                                    // Ajustar a cero si la diferencia es menor a 0 días
+                                    $diasRestantes = max($diasRestantes, 0);
+                                    // Ajustar a cero si la fecha actual ha superado la fecha de finalización
+                                    ?>
+                                    <td style="font-weight: 800;"><?php echo $diasRestantes . ' días' ?></td>
+                                    <td align="center">
+                                        <button class="<?php echo ($rc['estado_ma'] == 'ACTIVO') ? 'active-button' : 'inactive-button'; ?>">
+                                            <?php echo $rc['estado_ma'] ?>
+                                        </button>
+                                    </td>
 
-                                <td><?php echo $r['nombre_us'] ?></td>
-                                <td><?php echo date('d-m-Y H:i:s', strtotime($r['fecharegistro_ma'])) ?></td>
-                                <td><?php echo $r['desc_tp'] ?></td>
+                                    <td><?php echo $rc['nombre_us'] ?></td>
+                                    <td><?php echo date('d-m-Y H:i:s', strtotime($rc['fecharegistro_ma'])) ?></td>
+                                    <td><?php echo $rc['desc_tp'] ?></td>
 
-                                <td style="display: flex; gap: 1rem; justify-content: center; align-items: center;">
-                                    <!-- <a class="btn btn-sm btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#ModalEditar" data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
+                                    <td style="display: flex; gap: 1rem; justify-content: center; align-items: center;">
+                                        <!-- <a class="btn btn-sm btn-primary btn-circle" data-bs-toggle="modal" data-bs-target="#ModalEditar" data-bs-whatever="@mdo" target="_parent" onclick="cargar_info({
                                                     'id_ma':'<?php echo $r['id_ma']; ?>',
                                                     'precio_ma':'<?php echo $r['precio_me']; ?>',
                                                     'fechainicio_ma':'<?php echo date('Y-m-d', strtotime($r['fechainicio_ma'])) ?? ''; ?>',
@@ -315,24 +318,33 @@ setTimeout(() => {
                                                     });">
                                         <i class="fas fa-edit"> </i></a> -->
 
-                                    <a href="matricula/D_matricula.php?cod=<?php echo $r['id_ma'] ?>" class="btn btn-sm btn-danger" target="_parent">
-                                        <i class="fas fa-trash"> </i>
-                                    </a>
+                                        <a href="matricula/D_matricula.php?cod=<?php echo $rc['id_ma'] ?>" class="btn btn-sm btn-danger" target="_parent">
+                                            <i class="fas fa-trash"> </i>
+                                        </a>
 
-                                    <!-- BOTON PARA TICKET-->
-                                    <a class="btn btn-sm btn-success btn-circle" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(<?php echo $r['id_ma']; ?>, 'mat')">
-                                        <i class="fas fa-ticket"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                                        <!-- BOTON PARA TICKET-->
+                                        <a class="btn btn-sm btn-success btn-circle" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(<?php echo $rc['id_ma']; ?>, 'mat')">
+                                            <i class="fas fa-ticket"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+
+                </div>
 
             </div>
+
+
         </div>
 
-        
+
+
+
+
+
+
     </div>
 </div>
 
@@ -379,7 +391,7 @@ setTimeout(() => {
                                 <label for="datedesde" class="col-form-label" style="color: black;">Desde:</label>
                                 <input type="date" name="fechadesde" class="form-control" id="fechaInput" oninput="agregar()" required>
                             </div>
-                          
+
 
                             <!-- Medio de pago -->
                             <div class="mb-3">
@@ -438,11 +450,11 @@ setTimeout(() => {
                                     // include('config/dbconnect.php');
                                     $sql = "SELECT *
                                     FROM cliente cli
-                                    WHERE cli.estado_cli = 'ACTIVO'
+                                    WHERE cli.estado_cli = 'ACTIVO' 
                                     AND NOT EXISTS (
                                         SELECT 1
                                         FROM matricula ma
-                                        WHERE cli.id_cli = ma.id_cli AND ma.estado_ma = 'ACTIVO'
+                                        WHERE cli.id_cli = ma.id_cli AND ma.estado_ma = 'ACTIVO' 
                                     )
                                     ORDER BY cli.apellido_cli DESC;";
                                     $f = mysqli_query($cn, $sql);
@@ -528,6 +540,7 @@ setTimeout(() => {
 
                                     <option value="ACTIVO">ACTIVO</option>
                                     <option value="CULMINADO">CULMINADO</option>
+                                    <option value="EN ESPERA">EN ESPERA</option>
 
                                 </select>
 
@@ -658,7 +671,7 @@ setTimeout(() => {
                                 <input type="date" name="a_fechadesde" class="form-control" id="fechaini_a" oninput="agregar_A()" required>
                             </div>
                             <div class="mb-3">
-                               
+
 
                             </div>
 
@@ -841,7 +854,7 @@ include_once("inc/estructura/parte_inferior.php")
         var opcionSeleccionada = document.getElementById("membresia_u").options[document.getElementById("membresia_u").selectedIndex];
         var tiempoMembresia = parseInt(opcionSeleccionada.getAttribute("data-time"));
 
-        
+
 
         // Agregar la duración de la membresía (meses) a la fecha de inicio
         fecha.setMonth(fecha.getMonth() + tiempoMembresia);
@@ -853,13 +866,13 @@ include_once("inc/estructura/parte_inferior.php")
         var resultado2 = fecha.toISOString().split('T')[0];
 
         // Mostrar la fecha resultante en el input correspondiente
-        
+
         document.getElementById('fechafin_u').value = resultado2;
         document.getElementById('fechafin_u2').value = resultado2;
     }
 
-     // FUNCIONES PARA ADELANTOS 
-       function actualizarPrecio_A() {
+    // FUNCIONES PARA ADELANTOS 
+    function actualizarPrecio_A() {
         // Obtén la opción seleccionada
         var opcionSeleccionada = document.getElementById("membresia_a");
         var precioSeleccionado = opcionSeleccionada.options[opcionSeleccionada.selectedIndex].text;
@@ -893,7 +906,7 @@ include_once("inc/estructura/parte_inferior.php")
         var opcionSeleccionada = document.getElementById("membresia_a").options[document.getElementById("membresia_a").selectedIndex];
         var tiempoMembresia = parseInt(opcionSeleccionada.getAttribute("data-time"));
 
-        
+
 
         // Agregar la duración de la membresía (meses) a la fecha de inicio
         fecha.setMonth(fecha.getMonth() + tiempoMembresia);
@@ -905,17 +918,13 @@ include_once("inc/estructura/parte_inferior.php")
         var resultado2 = fecha.toISOString().split('T')[0];
 
         // Mostrar la fecha resultante en el input correspondiente
-        
+
         document.getElementById('fechafin_a').value = resultado2;
         document.getElementById('fechafin_a2').value = resultado2;
     }
-
-
-
 </script>
 
 <script>
-    
     // FUNCION PARA CARGAR EDITAR
     function cargar_info(dato) {
         document.getElementById('id_u').value = dato.id_ma;
@@ -930,25 +939,24 @@ include_once("inc/estructura/parte_inferior.php")
     }
     // FUNCION PARA CARGAR EDITAR
     function cargar_info_Adelanto(dato) {
-    document.getElementById('id_a').value = dato.id_ma;
-    document.getElementById('precio_a').value = dato.precio_ma;
+        document.getElementById('id_a').value = dato.id_ma;
+        document.getElementById('precio_a').value = dato.precio_ma;
 
-    document.getElementById('fechaini_a').value = dato.fechafin_ma;
+        document.getElementById('fechaini_a').value = dato.fechafin_ma;
 
-    // Esperar a que se cargue correctamente fechaini_a antes de establecer la fecha mínima en fechaini_b
-    setTimeout(function() {
-        var fechaini_a = document.getElementById('fechaini_a').value;
+        // Esperar a que se cargue correctamente fechaini_a antes de establecer la fecha mínima en fechaini_b
+        setTimeout(function() {
+            var fechaini_a = document.getElementById('fechaini_a').value;
 
-        // Establecer la fecha mínima en fechaini_a
-        document.getElementById('fechaini_a').min = fechaini_a;
-    }, 100); // Esperar 100 milisegundos (ajusta el tiempo según sea necesario)
+            // Establecer la fecha mínima en fechaini_a
+            document.getElementById('fechaini_a').min = fechaini_a;
+        }, 100); // Esperar 100 milisegundos (ajusta el tiempo según sea necesario)
 
-    document.getElementById('cliente_a').value = dato.cliente_ma;
-    document.getElementById('cliente_a2').value = dato.cliente_ma;
-    // document.getElementById('membresia_a').value = dato.membresia_ma;
-    document.getElementById('tipo_pago_a').value = dato.tp_ma;
-}
-
+        document.getElementById('cliente_a').value = dato.cliente_ma;
+        document.getElementById('cliente_a2').value = dato.cliente_ma;
+        // document.getElementById('membresia_a').value = dato.membresia_ma;
+        document.getElementById('tipo_pago_a').value = dato.tp_ma;
+    }
 </script>
 
 
