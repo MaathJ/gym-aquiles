@@ -141,4 +141,43 @@
 }
 .main-content-bottom .ingresos-mes-dia canvas {
   padding: 1.5rem;
+}
+
+.img-card-tipos-pago {
+  height: 60px;
+  width: 60px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+
+.container-title-tpagos {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.container-title-tpagos .title-tpagos {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+.container-title-tpagos .total-tpagos {
+  background-color: #f05941;
+  padding: 0.6rem 2rem;
+  border-radius: 1rem;
+  color: white;
+  font-weight: bolder;
+}
+
+.content-asistencia-pagos {
+  flex: 2.09;
+}
+
+.container-matriculados-pagos {
+  flex: 1;
 }/*# sourceMappingURL=dashboard.css.map */

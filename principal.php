@@ -120,23 +120,24 @@ $f_cla = mysqli_query($cn, $sql_cla);
 $r_cla = mysqli_fetch_assoc($f_cla);
 
 //CONSULTA PARA DIFERENTES TIPO DE PAGO
-$sql_dtp = "SELECT tpago.tipopago, SUM(tpago.total) AS total
-  FROM (SELECT tp.desc_tp as tipopago, sum(tr.precio_tiru) as total
+$sql_dtp = "SELECT tp.desc_tp AS tipopago, COALESCE(SUM(tpago.total), 0) AS total
   FROM tipo_pago tp
-  INNER JOIN asistencia_pago ap on ap.id_tp = tp.id_tp
-  inner join tipo_rutina tr on ap.id_tiru = tr.id_tiru
-  WHERE DATE(ap.fech_asip) = CURDATE()
-  GROUP BY tp.desc_tp
+  LEFT JOIN (
+      SELECT ap.id_tp, SUM(tr.precio_tiru) AS total
+      FROM asistencia_pago ap
+      INNER JOIN tipo_rutina tr ON ap.id_tiru = tr.id_tiru
+      WHERE DATE(ap.fech_asip) = CURDATE()
+      GROUP BY ap.id_tp
 
-  UNION ALL
+      UNION ALL
 
-  SELECT tp.desc_tp as tipopago, sum(men.precio_me) as total 
-  FROM tipo_pago tp
-  inner join matricula ma on ma.id_tp = tp.id_tp
-  inner join membresia men on ma.id_me = men.id_me 
-  WHERE DATE(ma.fecharegistro_ma) = CURDATE()
-  GROUP BY tp.desc_tp) as tpago
-  GROUP BY tpago.tipopago";
+      SELECT ma.id_tp, SUM(men.precio_me) AS total
+      FROM matricula ma
+      INNER JOIN membresia men ON ma.id_me = men.id_me 
+      WHERE DATE(ma.fecharegistro_ma) = CURDATE()
+      GROUP BY ma.id_tp
+  ) AS tpago ON tp.id_tp = tpago.id_tp
+  GROUP BY tp.desc_tp";
 
 $f_dtp = mysqli_query($cn, $sql_dtp);
 
@@ -187,117 +188,76 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
     <div class="main-content-top">
       <div class="main-content-left">
         <div class="content-left-earnings">
-          <!-- INGRESO MENSUAL -->
-          <?php
-          $cod = $_SESSION["usuario"];
-          $sql = "SELECT * FROM usuario as us INNER JOIN rol as ro ON us.id_ro = ro.id_ro WHERE us.id_us = $cod AND ro.nombre_ro='ADMINISTRADOR'";
-          // Ejecutar la consulta y obtener el resultado...
-
-          $resultado = mysqli_query($cn, $sql);
-          // Verificar si el usuario tiene el rol de ADMINISTRADOR
-          if ($resultado && mysqli_num_rows($resultado) > 0) {
-          ?>
-            <div class="card-earnings-sol">
-              <div class="card-earnings-title">
-                <span><i class="fa-solid fa-money-bill"></i></span>
-                <p>Ingreso mes de:
-                  <?php
-                  $mes = date("n");
-                  switch ($mes) {
-                    case 1:
-                      echo "Enero";
-                      break;
-                    case 2:
-                      echo "Febrero";
-                      break;
-                    case 3:
-                      echo "Marzo";
-                      break;
-                    case 4:
-                      echo "Abril";
-                      break;
-                    case 5:
-                      echo "Mayo";
-                      break;
-                    case 6:
-                      echo "Junio";
-                      break;
-                    case 7:
-                      echo "Julio";
-                      break;
-                    case 8:
-                      echo "Agosto";
-                      break;
-                    case 9:
-                      echo "Setiembre";
-                      break;
-                    case 10:
-                      echo "Octubre";
-                      break;
-                    case 11:
-                      echo "Noviembre";
-                      break;
-                    case 12:
-                      echo "Diciembre";
-                      break;
-                  }
-                  ?>
-                </p>
-              </div>
-              <h2 class="card-earnings-text mb-1">
-                <?php echo "S/. " . $r_g['total']; ?>
-              </h2>
+          <div class="container-title-tpagos">
+            <div class="title-tpagos">
+              <h1>Caja</h1>
+              <p>05-03-2024</p>
             </div>
-          <?php } ?>
-
-          <div class="card-earnings-sol">
-            <div class="card-earnings-title">
-              <span><i class="fa-solid fa-money-bill"></i></span>
-              <p>Caja Soles Matriculados Hoy</p>
+            <div>
+              <span class="total-tpagos">S/. 720</span>
             </div>
-            <h2 class="card-earnings-text">
-              <?php echo " S/" . $rMatricula['total'] ?>
-            </h2>
-          </div>
-          <div class="card-earnings-sol">
-            <div class="card-earnings-title">
-              <span><i class="fa-solid fa-money-bill"></i></span>
-              <p>Caja Soles Por Clase Hoy</p>
-            </div>
-            <h2 class="card-earnings-text">
-              <?php echo " S/" . $rAPago['total'] ?>
-            </h2>
-          </div>
-          <div class="card-earnings-sol">
-            <div class="card-earnings-title">
-              <span><i class="fa-solid fa-money-bill"></i></span>
-              <p>Caja Soles Total Hoy</p>
-            </div>
-            <h2 class="card-earnings-text">
-              <?php echo  " S/" . $rMatricula['total'] + $rAPago['total'] ?>
-            </h2>
           </div>
         </div>
         <div class="content-left-earnings">
-          <!-- INGRESO POR TIPO DE PAGO -->
           <?php
+          $tipos_pago_predeterminados = array(
+            'Yape' => '1.jpg',
+            'Plin' => 'plin.png',
+            'Efectivo' => 'efective.png'
+          );
           while ($r_dtp = mysqli_fetch_assoc($f_dtp)) {
           ?>
             <div class="card-earnings-sol">
               <div class="card-earnings-title">
-                <span><i class="fas fa-money-bills"></i></span>
-                <p>
-                  <?php echo $r_dtp['tipopago']; ?>
-                </p>
+                <img class="img-card-tipos-pago" src="assets/images/tipoPago/<?php echo $tipos_pago_predeterminados[$r_dtp['tipopago']]; ?>" alt="">
+                <p><?php echo $r_dtp['tipopago']; ?></p>
               </div>
-              <h2 class="card-earnings-text">
-                S/ <?php echo $r_dtp['total']; ?>
-              </h2>
+              <h2 class="card-earnings-text">S/ <?php echo $r_dtp['total']; ?></h2>
             </div>
-          <?php } ?>
+          <?php
+          }
+          ?>
         </div>
         <div class="content-left-earnings">
-          <!-- INGRESO MENSUAL -->
+          <div class="content-asistencia-pagos">
+            <div class="container-title-tpagos">
+              <div class="title-tpagos width-pago">
+                <h1>Asistencias</h1>
+              </div>
+              <div>
+                <span class="total-tpagos"><?php echo ($r_mat['asistencia'] + $r_cla['asistencia']); ?> Personas</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="container-matriculados-pagos">
+            <div class="container-title-tpagos">
+              <div class="title-tpagos">
+                <h1>Matriculados</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content-left-earnings">
+
+          <div class="card-earnings-ma">
+            <div class="card-earnings-title">
+              <span><i class="fa-solid  fa-door-open"></i></span>
+              <p>Asistencia Hoy Por Clase</p>
+            </div>
+            <h2 class="card-earnings-text">
+              <?php echo $r_cla['asistencia']; ?>
+            </h2>
+          </div>
+          <div class="card-earnings-ma">
+            <div class="card-earnings-title">
+              <span><i class="fa-solid  fa-door-open"></i></span>
+              <p>Asistencia Hoy Matriculados</p>
+            </div>
+            <h2 class="card-earnings-text">
+              <?php echo $r_mat['asistencia']; ?>
+            </h2>
+          </div>
           <div class="card-earnings-ma">
             <div class="card-earnings-title">
               <span><i class="fa-solid fa-newspaper"></i></span>
@@ -310,35 +270,6 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
             </h2>
           </div>
 
-          <div class="card-earnings-ma">
-            <div class="card-earnings-title">
-              <span><i class="fa-solid  fa-door-open"></i></span>
-              <p>Asistencia Hoy Matriculados</p>
-            </div>
-            <h2 class="card-earnings-text">
-              <?php echo $r_mat['asistencia']; ?>
-            </h2>
-          </div>
-
-          <div class="card-earnings-ma">
-            <div class="card-earnings-title">
-              <span><i class="fa-solid  fa-door-open"></i></span>
-              <p>Asistencia Hoy Por Clase</p>
-            </div>
-            <h2 class="card-earnings-text">
-              <?php echo $r_cla['asistencia']; ?>
-            </h2>
-          </div>
-
-          <div class="card-earnings-ma">
-            <div class="card-earnings-title">
-              <span><i class="fa-solid  fa-door-open"></i></span>
-              <p>Asistencia Total Hoy</p>
-            </div>
-            <h2 class="card-earnings-text">
-              <?php echo ($r_mat['asistencia'] + $r_cla['asistencia']); ?>
-            </h2>
-          </div>
         </div>
 
         <div class="content-left-tables">
@@ -422,16 +353,22 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
     <div class="main-content-bottom">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="ingreso-matricula-hoy" data-bs-toggle="tab" data-bs-target="#ingreso-mat-hoy" type="button" role="tab" aria-controls="ingreso-mat-hoy" aria-selected="true">Matriculas Hoy</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link " id="ingreso-dia-mes" data-bs-toggle="tab" data-bs-target="#chart-barra-ingreso-dia-mes-container" type="button" role="tab" aria-controls="chart-barra-ingreso-dia-mes-container" aria-selected="false">Ingreso de los Días del Mes</button>
+          <button class="nav-link active" id="ingreso-dia-mes" data-bs-toggle="tab" data-bs-target="#chart-barra-ingreso-dia-mes-container" type="button" role="tab" aria-controls="chart-barra-ingreso-dia-mes-container" aria-selected="true">Ingreso de los Días del Mes</button>
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="ingreso-mes-año" data-bs-toggle="tab" data-bs-target="#chart-barra-ingreso-mes-año-container" type="button" role="tab" aria-controls="chart-barra-ingreso-mes-año-container" aria-selected="false">Ingreso Meses del año</button>
         </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="ingreso-matricula-hoy" data-bs-toggle="tab" data-bs-target="#ingreso-mat-hoy" type="button" role="tab" aria-controls="ingreso-mat-hoy" aria-selected="false">Matriculas Hoy</button>
+        </li>
       </ul>
       <div class="ingresos-mes-dia">
+        <div class="tab-pane fade show active" id="chart-barra-ingreso-dia-mes-container" role="tabpanel" aria-labelledby="ingreso-dia-mes">
+          <canvas id="chart-barra-ingreso-dia-mes"></canvas>
+        </div>
+        <div class="tab-pane fade" id="chart-barra-ingreso-mes-año-container" role="tabpanel" aria-labelledby="ingreso-mes-año">
+          <canvas id="chart-barra-ingreso-mes-año"></canvas>
+        </div>
         <div class="tab-pane fade" id="ingreso-mat-hoy" role="tabpanel" aria-labelledby="ingreso-matricula-hoy">
           <div class="table">
             <h3 style="color: #5E7FEF;">MATRICULAS DE HOY</h3>
@@ -477,12 +414,6 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
             </div>
 
           </div>
-        </div>
-        <div class="tab-pane fade show active" id="chart-barra-ingreso-dia-mes-container" role="tabpanel" aria-labelledby="ingreso-dia-mes">
-          <canvas id="chart-barra-ingreso-dia-mes"></canvas>
-        </div>
-        <div class="tab-pane fade" id="chart-barra-ingreso-mes-año-container" role="tabpanel" aria-labelledby="ingreso-mes-año">
-          <canvas id="chart-barra-ingreso-mes-año"></canvas>
         </div>
       </div>
     </div>
