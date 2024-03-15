@@ -9,7 +9,7 @@ $r = mysqli_fetch_assoc($f);
 
 if (!$r) {
     $r = array(
-        'txt_negocio' => 'Name', 
+        'txt_negocio' => '', 
         'ruc_negocio' => '',
         'direccion_negocio' => '',
         'telefono_negocio' => '',
@@ -29,7 +29,7 @@ if (!$r) {
             <form action="config_historial/R_configHist.php" method="post" enctype="multipart/form-data">
                 <div class="form-configuracion">
                     <div class="fr-conf-inputs" style="flex: 1.2;">
-                        <h1 style="margin-bottom: 10px;">INGRESE LOS DATOS A CAMBIAR:</h1>
+                        <h1 style="margin-bottom: 10px;">DATOS DE LA EMPRESA:</h1>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fa-solid fa-building"></i></span>
@@ -40,7 +40,7 @@ if (!$r) {
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fa-solid fa-truck"></i></i></span>
                             </div>
-                            <input type="text" name="txt_ruc" class="form-control" placeholder="Ingrese el numero de Ruc..." maxlength="8" value="<?php echo isset($r['ruc_negocio']) ? $r['ruc_negocio'] : '' ?>">
+                            <input type="text" name="txt_ruc" class="form-control" placeholder="Ingrese el numero de Ruc..." maxlength="10" value="<?php echo isset($r['ruc_negocio']) ? $r['ruc_negocio'] : '' ?>">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -61,17 +61,31 @@ if (!$r) {
                             <input type="color" name="txt_color" class="form-control form-control-color" id="color-picker" value="<?php echo isset($r['color_negocio']) ? $r['color_negocio'] : '' ?>">
                         </div>
                         <div class="input-group mb-3">
-                            <input type="file"  value="<?php echo isset($r['foto_conf']) ? $r['foto_conf'] : '' ?>" name="foto" id="foto" accept="image/*">
-                            <label class="btn_img btn-danger" for="foto">CAMBIAR FOTO</label>
+                         
                         </div>
                     </div>
                     <div class="fr-conf-image" style="flex: 1;">
-                        <img src="<?php echo !empty($r['foto_conf']) ? $r['foto_conf'] : 'path/to/default_image.jpg'; ?>" alt="avatar" id="img" width="400" height="400">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                <img src="<?php echo !empty($r['foto_conf']) ? $r['foto_conf'] : './assets/images/config/Company.jpg'; ?>" alt="avatar" id="img" width="400" height="400">
+
+                                </div>
+                                <div class="col-md-12">
+                                        <input type="file"  value="<?php echo isset($r['foto_conf']) ? $r['foto_conf'] : '' ?>" name="foto" id="foto" accept="image/*">
+                                         <label class="btn_img btn-danger" for="foto">CAMBIAR FOTO</label>
+                                </div>
+                            </div>
+                        </div>
+                      
+                       
                     </div>
+
+            
                 </div>
                 <div class="form-footer-configuracion">
                     <input type="hidden" name="color_value" id="color_value" value="<?php echo $r['color_negocio'] ?>">
-                    <button type="submit" id="button-config">Guardar</button>
+                    <button type="submit" class="btn btn-primary" style="width: 200px;" id="button-config">Guardar</button>
                 </div>
             </form>
         </div>

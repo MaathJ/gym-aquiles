@@ -1,3 +1,15 @@
+
+<?php 
+
+include_once('./config/dbconnect.php');
+
+
+$sqlconf = "SELECT * FROM configurador_historial WHERE estado_conf = 'ACTIVO'";
+$fconf = mysqli_query($cn, $sqlconf);
+
+$rconf = mysqli_fetch_assoc($fconf)
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +30,9 @@
             <div class="app-header-logo">
                 <div class="logo">
                     <span class="logo-icon">
-                        <img src="assets/images/logo/logo-gym-aquiles.png" alt="">
+                    <img src="<?php echo !empty($rconf['foto_conf']) ? $rconf['foto_conf'] : './assets/images/config/Company.jpg'; ?>" alt="">
+
+
                     </span>
                     <h1 class="logo-title">
                         <span><?php
@@ -29,7 +43,7 @@
                                 $rsqlgym = mysqli_fetch_assoc($fsqlgym);
                                 if (!$rsqlgym) {
                                     $rsqlgym = array(
-                                        'txt_negocio' => 'Name',
+                                        'txt_negocio' => 'EMPRESA',
                                     );
                                 }
                                 echo $rsqlgym["txt_negocio"];
