@@ -137,7 +137,7 @@ $pdf->addPage();
 $pdf->SetMargins(5, 5, 5);
 
 //-----Cabecera
-    $pdf->Image($ruta, 10, 10, 24);
+    $pdf->Image($ruta, 10, 6, 24);
 
     $pdf->SetFont('Arial', 'B', 8);
     $pdf->Cell(25, 6, '',0, 0, 'L');
