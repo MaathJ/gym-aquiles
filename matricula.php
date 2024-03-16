@@ -596,22 +596,20 @@ setTimeout(() => {
 
                             <div class="mb-3">
                                 <label for="cliente" class="col-form-label" style="color: black;">Cliente:</label>
-                                <select class="form-select form-select-sm mb-3" name="u_lstcliente" id="cliente_u" required>
-
-                                    <option value="" disabled selected>Selecciona un cliente</option>
-
-                                    <?php
-                                    $sql = "SELECT * FROM cliente where estado_cli = 'ACTIVO' ORDER BY apellido_cli DESC";
-                                    $f = mysqli_query($cn, $sql);
-
-                                    while ($r = mysqli_fetch_assoc($f)) {
-                                    ?>
-                                        <option value="<?php echo $r['id_cli'] ?>"><?php echo $r['apellido_cli'] . ',' . $r['nombre_cli'] ?></option>
-                                    <?php } ?>
-                                </select>
-
+                                <div class="custom-select-wrapper">
+                                    <select class="form-select form-select-sm mb-3" name="u_lstcliente" id="cliente_u" required>
+                                        <option value="" disabled selected>Selecciona un cliente</option>
+                                        <?php
+                                        $sql = "SELECT * FROM cliente where estado_cli = 'ACTIVO' ORDER BY apellido_cli DESC";
+                                        $f = mysqli_query($cn, $sql);
+                                        while ($r = mysqli_fetch_assoc($f)) {
+                                        ?>
+                                            <option value="<?php echo $r['id_cli'] ?>"><?php echo $r['apellido_cli'] . ',' . $r['nombre_cli'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <div class="select-overlay"></div>
+                                </div>
                             </div>
-
 
 
                         </div>
@@ -1044,3 +1042,24 @@ include_once("inc/estructura/parte_inferior.php")
 
     });
 </script>
+
+<style>
+
+.custom-select-wrapper {
+    position: relative;
+}
+
+.custom-select-wrapper select {
+    cursor: not-allowed;
+    background-color: #f0f0f0; /* Puedes cambiar el color de fondo según tu diseño */
+}
+
+.select-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: not-allowed;
+}
+</style>

@@ -194,7 +194,7 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
               <p>05-03-2024</p>
             </div>
             <div>
-              <span class="total-tpagos">S/. 720</span>
+              <span class="total-tpagos">S/. <?php echo $suma?></span>
             </div>
           </div>
         </div>
