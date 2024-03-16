@@ -45,7 +45,7 @@
 
                     ?>
                      <td align="center"><?php echo $r['id_op'] ?></td>
-                     <td align="center"><img src="assets/images/operario/<?php echo $r['dni_op'] ?>.jpg" width="65px" style="border-radius: 20px;" height="65px"></td>
+                     <td align="center"><img src="assets/images/operario/<?php echo $r['dni_op'] ?>.jpg" width="60px" style="border-radius: 100%; object-fit: cover;" height="60px"></td>
                      <td align="center"><?php echo $r['nombre_op'] . ' ' . $r['apellido_op']  ?></td>
 
                      <td align="center"><?php echo $r['dni_op'] ?></td>

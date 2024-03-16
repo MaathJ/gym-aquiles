@@ -140,7 +140,7 @@ setTimeout(() => {
                                     <tr>
                                         <td> <?php echo $r['id_ma']; ?></td>
                                         <td>
-                                            <img style="border-radius: 50%; align-self: center; height: 40px; width: 40px;" class="img-cliente" src="assets/images/cliente/<?php echo $r['dni_cli']; ?>.jpg" alt="">
+                                            <img style="border-radius: 50%; object-fit: cover; height: 40px; width: 40px;" class="img-cliente" src="assets/images/cliente/<?php echo $r['dni_cli']; ?>.jpg" alt="">
                                         <td style="text-transform: capitalize;"><?php echo  $r['nombre_cli'] ?></td>
                                         <td style="text-transform: capitalize;"><?php echo $r['apellido_cli'] ?></td>
                                         <td>
