@@ -9,7 +9,7 @@ $r = mysqli_fetch_assoc($f);
 
 if (!$r) {
     $r = array(
-        'txt_negocio' => '', 
+        'txt_negocio' => '',
         'ruc_negocio' => '',
         'direccion_negocio' => '',
         'telefono_negocio' => '',
@@ -61,7 +61,7 @@ if (!$r) {
                             <input type="color" name="txt_color" class="form-control form-control-color" id="color-picker" value="<?php echo isset($r['color_negocio']) ? $r['color_negocio'] : '' ?>">
                         </div>
                         <div class="input-group mb-3">
-                         
+
                         </div>
                     </div>
                     <div class="fr-conf-image" style="flex: 1;">
@@ -69,13 +69,13 @@ if (!$r) {
                             <div class="row" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                                 <img src="<?php echo !empty($r['foto_conf']) ? $r['foto_conf'] : './assets/images/config/Company.jpg'; ?>" alt="avatar" id="img" width="400" height="400" style="object-fit: cover; border-radius: 100%;">
 
-                                        <input type="file"  value="<?php echo isset($r['foto_conf']) ? $r['foto_conf'] : '' ?>" name="foto" id="foto" accept="image/*">
-                                         <label class="btn_img btn-danger" for="foto">CAMBIAR FOTO</label>
+                                <input type="file" value="<?php echo isset($r['foto_conf']) ? $r['foto_conf'] : '' ?>" name="foto" id="foto" accept="image/*">
+                                <label class="btn_img btn-danger" for="foto">CAMBIAR FOTO</label>
                             </div>
                         </div>
                     </div>
 
-            
+
                 </div>
                 <div class="form-footer-configuracion">
                     <input type="hidden" name="color_value" id="color_value" value="<?php echo $r['color_negocio'] ?>">
@@ -88,45 +88,46 @@ if (!$r) {
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             function crearFileDesdeRuta(ruta) {
-            const nombreArchivo = ruta.split("/").pop();
-            const tipoArchivo = "image/jpeg"; // Reemplaza "image/jpeg" con el tipo de imagen real
+                const nombreArchivo = ruta.split("/").pop();
+                const tipoArchivo = "image/jpeg"; // Reemplaza "image/jpeg" con el tipo de imagen real
 
-            const file = new File([""], nombreArchivo, {
-                type: tipoArchivo,
-            });
+                const file = new File([""], nombreArchivo, {
+                    type: tipoArchivo,
+                });
 
-            return file;
+                return file;
             }
-            function crearArrayArchivos(file) {
-            const files = [file];
 
-            return files;
+            function crearArrayArchivos(file) {
+                const files = [file];
+
+                return files;
             }
 
             function cargarImagen(ruta) {
-            const file = crearFileDesdeRuta(ruta);
-            const files = crearArrayArchivos(file);
-            console.log(files);
-            document.getElementById("foto").files = files;
+                const file = crearFileDesdeRuta(ruta);
+                const files = crearArrayArchivos(file);
+                console.log(files);
+                document.getElementById("foto").files = files;
             }
 
 
             function obtenerRutaImagen() {
-            $.ajax({
-                url: "config_historial/imagencargada.php", // Reemplaza "ruta/al/archivo_php.php" con la ruta real al archivo PHP
-                method: "GET",
-                dataType: "json",
-                success: function(rutaImagen) {
-                cargarImagen(rutaImagen);
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                // Mostrar mensaje al usuario
-                alert("Error al obtener la ruta de la imagen: " + textStatus);
+                $.ajax({
+                    url: "config_historial/imagencargada.php", // Reemplaza "ruta/al/archivo_php.php" con la ruta real al archivo PHP
+                    method: "GET",
+                    dataType: "json",
+                    success: function(rutaImagen) {
+                        cargarImagen(rutaImagen);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        // Mostrar mensaje al usuario
+                        alert("Error al obtener la ruta de la imagen: " + textStatus);
 
-                // Registrar error en la consola
-                console.error("Error AJAX:", jqXHR, textStatus, errorThrown);
-                },
-            });
+                        // Registrar error en la consola
+                        console.error("Error AJAX:", jqXHR, textStatus, errorThrown);
+                    },
+                });
             }
 
 
