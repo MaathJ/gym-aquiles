@@ -121,22 +121,15 @@ include_once('config/dbconnect.php');
                             </a>
 
 
-
-
-
-
-
                             <div class="modal fade" id="ModalCardInfomatri" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-sm">
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <div class="card-user-modal ">
                                                 <div class="card-logo">
-
-
+                                                    <img src="" alt="">
                                                 </div>
                                                 <div class="card-important-info">
-
                                                     <input type="number" name="u_idcli" id="id_cliU" hidden>
                                                     <div class="user-name" id="nom_cli" style="color: #010133; font-weight: bold; font-size: 1rem;">
                                                     </div>

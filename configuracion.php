@@ -66,19 +66,13 @@ if (!$r) {
                     </div>
                     <div class="fr-conf-image" style="flex: 1;">
                         <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-12">
-                                <img src="<?php echo !empty($r['foto_conf']) ? $r['foto_conf'] : './assets/images/config/Company.jpg'; ?>" alt="avatar" id="img" width="400" height="400">
+                            <div class="row" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                <img src="<?php echo !empty($r['foto_conf']) ? $r['foto_conf'] : './assets/images/config/Company.jpg'; ?>" alt="avatar" id="img" width="400" height="400" style="object-fit: cover; border-radius: 100%;">
 
-                                </div>
-                                <div class="col-md-12">
                                         <input type="file"  value="<?php echo isset($r['foto_conf']) ? $r['foto_conf'] : '' ?>" name="foto" id="foto" accept="image/*">
                                          <label class="btn_img btn-danger" for="foto">CAMBIAR FOTO</label>
-                                </div>
                             </div>
                         </div>
-                      
-                       
                     </div>
 
             

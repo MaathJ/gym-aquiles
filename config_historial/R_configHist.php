@@ -22,67 +22,35 @@ $sql="INSERT INTO configurador_historial
 mysqli_query($cn, $sql);
 $id = mysqli_insert_id($cn);
 
-$ruta="assets/images/config/".$id.".jpg";
-
 try {
-    $archivo = $_FILES['foto']["tmp_name"]; 
-    $nombres=$_FILES["foto"]["name"];
-    echo $nombres;
+    if(isset($_FILES['foto']) && $_FILES['foto']['error'] == UPLOAD_ERR_OK) {
+        $foto_nombre = $_FILES['foto']['name'];
+        $foto_temp = $_FILES['foto']['tmp_name'];
 
-    if($archivo !=null){
-        $lastDotPosition = strrpos($nombres, ".");
-        if ($lastDotPosition !== false) {
-            $n = substr($nombres, 0, $lastDotPosition);
-            $e = substr($nombres, $lastDotPosition + 1);
-        } else {
-            // Si no hay punto en el nombre del archivo, manejar según tus necesidades
-            // Puedes asignar un valor predeterminado a $n y $e, o mostrar un mensaje de error, etc.
-            $n = $nombres;
-            $e = '';
-        }
-
-        $allowedExtensions = ['png', 'jpg', 'jpeg', 'JPG', 'JPEG'];
-        $imageInfo = getimagesize($archivo);
-
-        if ($imageInfo && in_array($e, $allowedExtensions) && ($imageInfo[2] == IMAGETYPE_JPEG || $imageInfo[2] == IMAGETYPE_PNG)) {
-            move_uploaded_file($archivo,"../".$ruta);
-            //ACTUALIZAR RUTA
-            $sql_ruta = "UPDATE configurador_historial SET foto_conf = '$ruta' WHERE id_conf = $id";
-            mysqli_query($cn, $sql_ruta);
-        }
-    }else{
-        echo "AS";
-        $directorio = '../assets/images/config';
-
-        // Obtener la lista de archivos de imagen en la carpeta
-        $archivos = glob($directorio . '/*.jpg'); // Cambia el patrón según el tipo de imágenes que tengas
-
-        // Verificar si se encontraron archivos
-        if ($archivos) {
-            // Extraer los números de los nombres de archivo y encontrar el máximo
-            $maximo_numero = 0;
-            foreach ($archivos as $archivo) {
-                $numero = intval(basename($archivo, '.jpg'));
-                $maximo_numero = max($maximo_numero, $numero);
+        $ruta = "../assets/images/config/" . $id . ".jpg";
+        
+        // Verificar si el directorio de destino existe
+        if (!file_exists("../assets/images/config/")) {
+            // Si no existe, intenta crearlo
+            if (!mkdir("../assets/images/config/", 0755, true)) {
+                throw new Exception("No se pudo crear el directorio de destino.");
             }
-
-            // Construir el nombre del archivo de la última imagen
-            $ultima_imagen = $directorio . '/' . $maximo_numero . '.jpg';
-            
-            // Imprimir la ruta de la última imagen
-            echo 'La última imagen es: ' . $ultima_imagen;
-
-            if(rename($ultima_imagen, $directorio . '/' . $id . '.jpg')){
-                $sql_ruta = "UPDATE configurador_historial SET foto_conf = '$ruta' WHERE id_conf = $id";
-                mysqli_query($cn, $sql_ruta);
-            }
-        } else {
-            echo 'No se encontraron imágenes en la carpeta especificada.';
+        }
+        
+        // Mover la imagen a la ubicación deseada
+        if (!move_uploaded_file($foto_temp, $ruta)) {
+            throw new Exception("Error al mover la imagen al directorio de destino.");
+        }
+        
+        //ACTUALIZAR RUTA
+        $sql_ruta = "UPDATE configurador_historial SET foto_conf = '$ruta' WHERE id_conf = $id";
+        if (!mysqli_query($cn, $sql_ruta)) {
+            throw new Exception("Error al actualizar la ruta de la imagen en la base de datos.");
         }
     }
-} catch (\Throwable $th) {
-    
+} catch (Exception $e) {
+    echo "Error al procesar la imagen: " . $e->getMessage();
 }
 
-header('location: ../configuracion.php')
+header('location: ../configuracion.php');
 ?>
