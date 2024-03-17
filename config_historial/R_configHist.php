@@ -13,40 +13,56 @@ $ruta="";
 $sql_in = "UPDATE configurador_historial SET estado_conf = 'INACTIVO'";
 mysqli_query($cn, $sql_in);
 
-//CREAR EL NUEVO REGISTRO
-$sql="INSERT INTO configurador_historial
-    (txt_negocio, ruc_negocio, direccion_negocio, telefono_negocio, color_negocio, estado_conf) 
-    VALUES
-    ('$name', '$ruc', '$dire', '$tele', '$colorValue', 'ACTIVO')";
-
-mysqli_query($cn, $sql);
-$id = mysqli_insert_id($cn);
-
 try {
-    if(isset($_FILES['foto']) && $_FILES['foto']['error'] == UPLOAD_ERR_OK) {
-        $foto_nombre = $_FILES['foto']['name'];
-        $foto_temp = $_FILES['foto']['tmp_name'];
-
-        $ruta = "../assets/images/config/" . $id . ".jpg";
+    if(isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+        $archivo = $_FILES['foto']['tmp_name'];
+        $nombres = $_FILES['foto']['name'];
         
-        // Verificar si el directorio de destino existe
-        if (!file_exists("../assets/images/config/")) {
-            // Si no existe, intenta crearlo
-            if (!mkdir("../assets/images/config/", 0755, true)) {
-                throw new Exception("No se pudo crear el directorio de destino.");
-            }
+        $lastDotPosition = strrpos($nombres, ".");
+        if ($lastDotPosition !== false) {
+            $n = substr($nombres, 0, $lastDotPosition);
+            $e = substr($nombres, $lastDotPosition + 1);
+        } else {
+            // Manejo del nombre del archivo si no hay punto en el nombre
+            $n = $nombres;
+            $e = '';
         }
+    
+        $allowedExtensions = ['png', 'jpg', 'jpeg'];
+        $imageInfo = getimagesize($archivo);
+    
+        if ($imageInfo && in_array($e, $allowedExtensions) && ($imageInfo[2] == IMAGETYPE_JPEG || $imageInfo[2] == IMAGETYPE_PNG)) {
+            // Insertar nuevo registro
+            $sql="INSERT INTO configurador_historial
+                (txt_negocio, ruc_negocio, direccion_negocio, telefono_negocio, color_negocio, estado_conf) 
+                VALUES
+                ('$name', '$ruc', '$dire', '$tele', '$colorValue', 'ACTIVO')";
+    
+            mysqli_query($cn, $sql);
+            $id = mysqli_insert_id($cn);
+    
+            $ruta="assets/images/config/".$id.".jpg";
+            move_uploaded_file($archivo,"../".$ruta);
+    
+            // Actualizar ruta
+            $sql_ruta = "UPDATE configurador_historial SET foto_conf = '$ruta' WHERE id_conf = $id";
+            mysqli_query($cn, $sql_ruta);
+        } else {
+            // Redirigir a la página de configuración si la imagen no es válida
+            header('location:../configuracion.php'); 
+            exit();
+        }
+    } else {
+        // No se proporcionó ningún archivo, establecer una imagen por defecto
+        $rutaDefecto = "assets/images/config/Company.jpg";
         
-        // Mover la imagen a la ubicación deseada
-        if (!move_uploaded_file($foto_temp, $ruta)) {
-            throw new Exception("Error al mover la imagen al directorio de destino.");
-        }
-        
-        //ACTUALIZAR RUTA
-        $sql_ruta = "UPDATE configurador_historial SET foto_conf = '$ruta' WHERE id_conf = $id";
-        if (!mysqli_query($cn, $sql_ruta)) {
-            throw new Exception("Error al actualizar la ruta de la imagen en la base de datos.");
-        }
+        // Insertar nuevo registro con ruta por defecto
+        $sql="INSERT INTO configurador_historial
+            (txt_negocio, ruc_negocio, direccion_negocio, telefono_negocio, color_negocio, estado_conf, foto_conf) 
+            VALUES
+            ('$name', '$ruc', '$dire', '$tele', '$colorValue', 'ACTIVO', '$rutaDefecto')";
+    
+        mysqli_query($cn, $sql);
     }
 } catch (Exception $e) {
     echo "Error al procesar la imagen: " . $e->getMessage();
