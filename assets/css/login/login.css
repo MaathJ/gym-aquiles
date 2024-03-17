@@ -1,70 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 * {
+    min-width: 0;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    
+    font-family:'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
 }
 
-.container {
-    background-image: url("../../images/background/image-1.png"); 
-  
-    
-    height: 100vh;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body {
+    background-color: #8d2404;
+  }
 
-}
-
-.login-container{
-    padding: 5rem;
-    background: rgba(255, 255, 255, 0.60);
-    width: 40.625rem;
-    border-radius: 4.75rem;
-    display: flex;
-}
-.form-container{
-    padding: 2.8rem;
-    width: 100%;
-}
-.title-container{
-    display: flex;
-    flex-direction: column;
-    place-items: center;
-}
-.title-container h1{
-    margin: 1rem;
-}
-.form-container img{
-    width: 5.8125rem;
-
-    
-}
-
-form{
-    display: flex;
-    flex-direction: column;
-}
-form input{
-    padding: .8rem;
-    width: 100%;
-    margin: 1rem 0;
-    color: rgb(0, 0, 0);
-    outline: none;
-    background-color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-weight: 500;
-    font-size: 15px;
-    
-    
-}
-form input:nth-child(3){
-    background-color: #FF7802;
-    color: white;
-    font-weight: bold;
+  button,
+select,
+input[type='submit'],
+input[type='reset'],
+input[type='button'],
+input[type='checkbox'],
+input[type='range'],
+input[type='radio'] {
     cursor: pointer;
+}
+  
+  .body__login {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at 50% -20%, rgba(120, 119, 198, 0.3), rgba(255, 255, 255, 0));
+  }
+  
+  .form__container {
+    color: white;
+    border: 1px solid rgba(255, 94, 0, 0.349);
+    padding: 4rem;
+    border-radius: 10%;
+    box-shadow: rgba(241, 119, 5, 0.603) 0px 30px 60px -12px, rgba(0, 0, 0, 0.274) 0px 18px 36px -18px;
+  }
+  .form__container .logo__form {
+    display: flex;
+    place-content: center;
+  }
+  
+  .login__form {
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form__logo__zeus {
+    height: 150px;
+    width: 150px;
+  }
+  
+  .footer {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    text-align: left;
+    background: rgba(41, 41, 41, 0.11);
+    padding: 8px 24px;
+    border-radius: 32px;
+    opacity: 0.85;
+    color: white;
+    -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+  }
+  
+  .footer h4, .footer h5 {
+    margin: 0;
+    display: flex;
+  }
+  
+  @media (max-width: 500px) {
+    footer {
+      display: none;
+    }
+    .form__container {
+      width: 92%;
+    }
+  }/*# sourceMappingURL=login.css.map */
 
+
+  input {
+    color: #1d1d1d;
+    color: var(--form-text);
+    background-color: #efefef;
+    background-color: var(--background);
+    font-family: inherit;
+    font-size: inherit;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    input {
+        background-color: #161f27;
+        background-color: var(--background);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+
+    input {
+        color: #fff;
+        color: var(--form-text);
+    }
+}
+
+
+
+
+.sesion{
+  background-color: #741e04;
 }
