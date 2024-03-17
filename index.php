@@ -1,3 +1,34 @@
+<?php
+include_once('config/dbconnect.php');
+?>
+
+<style>
+.inputuser:hover{
+  background-color: aliceblue !important;
+  color: #000000 !important;
+  transition: 1s !important;    
+  
+}
+
+.inputuser:focus{
+  background-color: aliceblue !important;
+  color: #000000 !important;
+  transition: 1s !important;
+
+}
+/* Estilo para el color del placeholder en estado :focus */
+.inputuser:focus::placeholder {
+  color: #000000 !important;
+}
+
+/* Estilo para el color del placeholder en estado :hover */
+.inputuser:hover::placeholder {
+  color: #000000 !important;
+}
+
+</style>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,23 +39,31 @@
 
 
     <link rel="stylesheet" src="style.css" href="assets/css/login/login.css">
+    <link rel="icon" href="assets/images/logo-gym-aquiles.png">
 
 </head>
 <body>
-    <section class="container">
-        <div class="login-container">
-            <div class="form-container" >
-                <div class="title-container">
-                    <h1>GYM AQUILES</h1>
-                    <img src="assets/images/background/image-3.png" alt="">
-                </div>
-                <form action="security.php"  method="post">
-                    <input type="text" name="usuario" placeholder="Username" required/>
-                    <input type="password" name="password" placeholder="Password" required />
-                    <input type="submit" Value="Iniciar Sesion"/>
+    <div class="body__login">
+        <div class="form__container">
+            <div class="logo__form">
+                <img class="form__logo__zeus" src="assets/images/logo/logo-gym-aquiles.png" alt="Logo">
+            </div>
+                <form class="login__form" action="security.php" method="POST">
+                    <label for="user">
+                        Usuario
+                    </label>
+                        <input class="inputuser" type="text" name="usuario" placeholder="Username" required/>
+                        <label for="password">
+                        Contraseña
+                        </label>
+                        <input class="inputuser" type="password" name="password" placeholder="Password" required />
+                        <input type="submit" class="sesion" Value="Iniciar Sesión"/>
                 </form>
             </div>
         </div>
-    </section>
+    </div>
 </body>
 </html>
+
+
+
