@@ -23,16 +23,16 @@ include_once('config/dbconnect.php');
                     <tr align="center">
                         <th class="text-center"> ID </th>
                         <th class="text-center"> FOTO </th>
-                        <th class="text-center"> Nombre </th>
-                        <th class="text-center"> Apellido </th>
+                        <th class="text-center"> NOMBRE </th>
+                        <th class="text-center"> APELLIDO </th>
                         <th class="text-center"> DNI </th>
-                        <th class="text-center"> Telefono </th>
-                        <th class="text-center"> Edad </th>
-                        <th class="text-center"> Genero </th>
-                        <th class="text-center"> Direc. </th>
-                        <th class="text-center"> Estado</th>
-                        <th class="text-center"> F.Registro</th>
-                        <th class="text-center"> Opciones</th>
+                        <th class="text-center"> TELEFONO </th>
+                        <th class="text-center"> EDAD </th>
+                        <th class="text-center"> GENERO </th>
+                        <th class="text-center"> DIREC. </th>
+                        <th class="text-center"> ESTADO</th>
+                        <th class="text-center"> F.REGISTRO</th>
+                        <th class="text-center"> OPCIONES</th>
                     </tr>
                 </thead>
                 <?php
@@ -45,7 +45,14 @@ include_once('config/dbconnect.php');
                 ?>
 
                     <td align="center"><?php echo $r['id_cli'] ?></td>
-                    <td align="center"><img style="border-radius: 50%; object-fit: cover;" src="assets/images/cliente/<?php echo $r['dni_cli'] ?>.jpg" width="30px" height="30px"></td>
+                    <td align="center">
+    <img id="cliente_img_<?php echo $r['dni_cli'] ?>" 
+         style="border-radius: 50%; object-fit: cover;" 
+         src="assets/images/cliente/<?php echo $r['dni_cli'] ?>.jpg" 
+         width="30px" height="30px" 
+         onmouseover="zoomIn(this)" 
+         onmouseout="zoomOut(this)">
+                    </td>
                     <td align="center"><?php echo $r['nombre_cli'] ?></td>
                     <td align="center"><?php echo $r['apellido_cli'] ?></td>
                     <td align="center"><?php echo $r['dni_cli'] ?></td>

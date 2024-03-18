@@ -17,15 +17,16 @@ date_default_timezone_set('America/Lima');
         <div>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" id="regis-asis-hoy">Registro De Asistencias Hoy</a>
+                    <a class="nav-link text-dark active" id="regisprox-tab" data-toggle="tab" href="#regisprox">Registro De Asistencias Hoy</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="regis-asis-mes" href="#">Registro de Asistencias del Mes</a>
+                    <a class="nav-link text dark" id="detprox-tab" data-toggle="tab" href="#detpro">Registro de Asistencias del Mes</a>
                 </li>
             </ul>
         </div>
-        <div id="collapseExample">
 
+        <div class="tab-content">
+            <div class="tab-pane fade in active show" id="regisprox">
             <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
                 <div style="color: #f05941; font-weight: bolder; font-size: 2rem; text-align:center;">Asistencias Hoy</div>
                 <table class="table table-striped" id="table_asistencia">
@@ -97,8 +98,10 @@ date_default_timezone_set('America/Lima');
 
                 </table>
             </div>
-        </div>
-        <div id="collapseExample2">
+
+            </div>
+
+            <div class="tab-pane fade" id="detprox">
             <div class="col-md-12" style="background-color: white; padding: 1rem; border-radius: 1rem;">
                 <div style="color: #f05941; font-weight: bolder; font-size: 2rem; text-align:center;">Asistencias Mensuales
                 </div>
@@ -169,7 +172,12 @@ date_default_timezone_set('America/Lima');
 
                 </table>
             </div>
+            </div>
+
+
         </div>
+      
+        
     </div>
 
     <div class="modal fade  " id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: -20px;">

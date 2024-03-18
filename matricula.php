@@ -103,19 +103,19 @@ setTimeout(() => {
                             <thead align="center" class="" style="color: #fff;">
                                 <tr>
                                     <th>ID</th>
-                                    <th>Foto</th>
-                                    <th>Nombres</th>
-                                    <th>Apellidos</th>
+                                    <th>FOTO</th>
+                                    <th>NOMBRES</th>
+                                    <th>APELLIDOS</th>
                                     <th>DNI</th>
-                                    <th>Membresia-Servicio</th>
-                                    <th>Fecha Inicio</th>
-                                    <th>Fecha Vencimiento</th>
-                                    <th>Dias Restantes</th>
-                                    <th>Estado</th>
-                                    <th>Empleado</th>
-                                    <th>Fecha Registro</th>
-                                    <th>Medio de pago</th>
-                                    <th>Opciones</th>
+                                    <th>MEMBRESIA-SERVICIO</th>
+                                    <th>FECHA INICIO</th>
+                                    <th>FECHA VENCIMIENTO</th>
+                                    <th>DIAS RESTANTES</th>
+                                    <th>ESTADO</th>
+                                    <th>EMPLEADO</th>
+                                    <th>FECHA REGISTRO</th>
+                                    <th>MEDIO DE PAGO</th>
+                                    <th>OPCIONES</th>
                                 </tr>
 
                             </thead>

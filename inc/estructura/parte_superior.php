@@ -97,7 +97,7 @@ $rconf = mysqli_fetch_assoc($fconf)
                             <div class="section-item-container">
                                 <div class="section-item-box">
                                     <a class="item-options">
-                                        <i class="fas fa-money-check-dollar"></i>
+                                    <i class="fa-solid fa-calendar-days"></i>
                                         <span>Registro Asistencia</span>
                                     </a>
                                 </div>
@@ -128,7 +128,7 @@ $rconf = mysqli_fetch_assoc($fconf)
                             <div class="section-item-container">
                                 <div class="section-item-box">
                                     <a class="item-options">
-                                        <i class="fas fa-money-check-dollar"></i>
+                                    <i class="fa-solid fa-handshake"></i>
                                         <span>Suscripciones</span>
                                     </a>
                                 </div>
@@ -169,7 +169,7 @@ $rconf = mysqli_fetch_assoc($fconf)
                             <div class="section-item-container">
                                 <div class="section-item-box">
                                     <a class="item-options">
-                                        <i class="fas fa-money-check-dollar"></i>
+                                    <i class="fa-solid fa-user-tie"></i>
                                         <span>Operario</span>
                                     </a>
                                 </div>
@@ -214,7 +214,7 @@ $rconf = mysqli_fetch_assoc($fconf)
                             <div class="section-item-container">
                                 <div class="section-item-box">
                                     <a class="item-options">
-                                        <i class="fas fa-money-check-dollar"></i>
+                                    <i class="fa-solid fa-user"></i>
                                         <span>Users</span>
                                     </a>
                                 </div>
@@ -241,7 +241,7 @@ $rconf = mysqli_fetch_assoc($fconf)
                             <div class="section-item-container">
                                 <div class="section-item-box">
                                     <a class="item-options">
-                                         <i class="fa-solid fa-chart-column"></i>
+                                    <i class="fa-solid fa-chart-column"></i>
                                         <span>Reportes</span>
                                     </a>
                                 </div>
