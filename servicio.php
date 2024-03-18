@@ -21,8 +21,8 @@ include_once('config/dbconnect.php');
                                 <thead class=""  style="color: #fff; background-color:#f05941;">
                                     <tr>
                                         <th class="text-center">Id</th>
-                                        <th class="text-center">Servicio</th>
-                                        <th class="text-center">Opciones</th>
+                                        <th class="text-center">SERVICIO</th>
+                                        <th class="text-center">OPCIONES</th>
                                     </tr>
                                 </thead>
                                 <tbody>

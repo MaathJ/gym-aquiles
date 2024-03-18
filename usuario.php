@@ -31,13 +31,13 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
                 <table class="table table-striped" id="tabla_usuario">
                     <thead style="color: #fff; background-color:#f05941;">
                         <tr>
-                            <th>Usuario</th>
-                            <th>Contraseña</th>
-                            <th>Nombre</th>
-                            <th>Telefono</th>
-                            <th>Estado</th>
-                            <th>Rol</th>
-                            <th>Opciones</th>
+                            <th>USUARIO</th>
+                            <th>CONTRASEÑA</th>
+                            <th>NOMBRE</th>
+                            <th>TELEFONO</th>
+                            <th>ESTADO</th>
+                            <th>ROL</th>
+                            <th>OPCIONES</th>
                         </tr>
                     </thead>
                     <tbody>

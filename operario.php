@@ -28,13 +28,13 @@
                          <th class="text-center"> FOTO </th>
                          <th class="text-center"> OPERARIO</th>
                          <th class="text-center"> DNI </th>
-                         <th class="text-center"> Telefono </th>
-                         <th class="text-center"> Edad </th>
-                         <th class="text-center"> Estado</th>
-                         <th class="text-center"> F.Registro</th>
-                         <th class="text-center"> Turno</th>
-                         <th class="text-center"> Cargo</th>
-                         <th class="text-center"> Opciones</th>
+                         <th class="text-center"> TELEFONO </th>
+                         <th class="text-center"> EDAD </th>
+                         <th class="text-center"> ESTADO</th>
+                         <th class="text-center"> F.REGISTRO</th>
+                         <th class="text-center"> TURNO</th>
+                         <th class="text-center"> CARGO</th>
+                         <th class="text-center"> OPCIONES</th>
                      </tr>
                  </thead>
                  <?php
@@ -51,7 +51,11 @@
                      <td align="center"><?php echo $r['dni_op'] ?></td>
                      <td align="center"><?php echo $r['telefono_op'] ?></td>
                      <td align="center"><?php echo $r['edad_op'] ?></td>
-                     <td align="center"><?php echo $r['estado_op'] ?></td>
+                     <td align="center">
+                                            <button class="<?php echo ($r['estado_op'] == 'ACTIVO') ? 'active-button' : 'waiting-button'; ?>">
+                                                <?php echo $r['estado_op'] ?>
+                                            </button>
+                                        </td>
                      <td align="center"><?php echo $r['fecharegistro_op'] ?></td>
                      <td align="center"><?php echo $r['nombre_tu'] ?></td>
                      <td align="center"><?php echo $r['nombre_ca'] ?></td>
