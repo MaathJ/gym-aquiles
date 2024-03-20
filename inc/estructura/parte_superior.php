@@ -256,7 +256,7 @@ $rconf = mysqli_fetch_assoc($fconf)
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="roles.php">
+                                    <a href="cajas.php">
                                         <span>Caja Usuario</span>
                                     </a>
                                 </li>

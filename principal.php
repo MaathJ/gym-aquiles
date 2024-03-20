@@ -6,7 +6,7 @@ include('config/dbconnect.php');
 
 $fechaHoy = new DateTime();
 $mesactual = $fechaHoy->format('m');
-$añoactual = $fechaHoy->format('Y');
+$añoactual = $fechaHoy->format('Y'); 
 
 // INGRESO S/. DE HOY (MATRICULA REALIZADAS)
 $Ingreso_Matricul = "SELECT sum(men.precio_me) as total FROM matricula ma inner join membresia men on 
@@ -180,6 +180,96 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
 <link rel="stylesheet" src="style.css" href="assets/css/dashboard/dashboard.css">
 <link rel="stylesheet" src="style.css" href="assets/css/bootstrap/bootstrap.css">
 <div class="app-body-main-content">
+
+<?php 
+
+$codigo = $_SESSION['codigo'];
+
+$sql = "SELECT count(id_caj) as total FROM caja WHERE id_us = $codigo AND cier_caj IS NULL";
+$resultado = mysqli_query($cn, $sql);
+$fila = mysqli_fetch_assoc($resultado);
+
+if ($fila['total'] <=0) { 
+
+    $mostrar_modal = true;
+} else {
+
+    $mostrar_modal = false;
+}
+
+?>
+
+<button id="openModalButton" style="display: none;" data-bs-toggle="modal" data-bs-target="#myModal"></button>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Apertura de Caja</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="caja/r_caja.php" method="post">
+            <div class="modal-body">
+                
+                  <input type="" name="codigo" value="<?php echo $codigo ?> " hidden>
+                  <input type="" name="saldo"  placeholder="Ingrese el saldo Inicial">
+                  
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <input class="btn btn-primary"  type="submit" value="ABRIR CAJA">
+            </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<?php if ($mostrar_modal): ?>
+    <script>
+        window.onload = function() {
+            document.getElementById('openModalButton').click();
+        };
+    </script>
+<?php endif; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <div>
     <p>Pages<span> / Dashboard</span></p>
     <h3>Dashboard</h3>
@@ -194,7 +284,7 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
               <p>05-03-2024</p>
             </div>
             <div>
-              <span class="total-tpagos">S/. <?php echo $suma?></span>
+              <span class="total-tpagos">S/. <?php echo $suma ?></span>
             </div>
           </div>
         </div>
