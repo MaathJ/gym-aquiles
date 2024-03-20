@@ -10,11 +10,12 @@ $f = mysqli_query($cn, $sql);
 $r = mysqli_fetch_assoc($f);
 
 $valor=$r["id_us"];
-
+$codigo = $r["id_us"];
 
 if($r){
    $_SESSION["usuario"]=$valor;
    $_SESSION["auth"]=1;
+   $_SESSION["codigo"] = $codigo;
    $_SESSION["name_user"] =$usuario;
 
     $mensajeIngre="USUARIO correcto";
@@ -23,7 +24,7 @@ if($r){
     
 	  echo '<script>window.location.href = "principal.php"</script>';
  exit();
- }else if($valor==null){
+ }else if($valor==null){ 
 
     $_SESSION["auth"]=0;
     $mensaje="USUARIO INCORRECTO";
