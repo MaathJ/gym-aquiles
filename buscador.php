@@ -22,10 +22,10 @@ if (isset($_POST['searchTerm'])) {
        
     
         // Verificar si ya existe un registro de asistencia para hoy
-        $fechaHoy = date('Y-m-d');
-        $sqlCheckAsistencia = "SELECT COUNT(*) as count FROM asistencia 
+        $sqlCheckAsistencia = "SELECT COUNT(*) as count 
+        FROM asistencia 
         WHERE id_ma = $matricula 
-        AND DATE(fecha_as) = '$fechaHoy'";
+        AND DATE(fecha_as) = DATE(NOW())";
         $resultCheckAsistencia = $cn->query($sqlCheckAsistencia);
         $countAsistencia = $resultCheckAsistencia->fetch_assoc()['count'];
 
@@ -50,7 +50,7 @@ if (isset($_POST['searchTerm'])) {
                     <div class="info-datos">
                         <h1>¡Bienvenido a Gym <span>Aquiles</span>!</h1>
                         <h2>' . $row['apellido_cli'] . ' ' . $row['nombre_cli'] . '</h2>
-                        <h3>Te quedan '. $diasRestantes . ' días Restantes</h3>
+                        <h3>Te quedan '. $diasRestantes + 1 . ' días Restantes</h3>
     
                         <a class="btn btn-sm btn-success btn-circle text-white" data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-whatever="@mdo" onclick="pdf_cod(' . $id . ', '. $dest .')">
                             <i class="fas fa-ticket"></i> IMPRIMIR
