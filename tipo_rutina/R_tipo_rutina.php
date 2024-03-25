@@ -25,6 +25,7 @@ if(mysqli_query($cn, $sql)) {
 
 // Devolver la respuesta como JSON
 echo json_encode($response);
+header('location: ../rutina.php');
 
 // Redirigir de vuelta a la página de tipo_rutina.php
 // No se ejecutará si la respuesta es enviada como JSON, ya que la página se redirigirá antes de imprimir cualquier cosa.

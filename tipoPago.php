@@ -42,7 +42,7 @@ include('config/dbconnect.php');
         '<script>
             setTimeout(() => {
                 Swal.fire({
-                    title: "¡Ups!",
+                    title: "¡No se puede eliminar!",
                     text: "' . $_SESSION['error_message'] . '",
                     icon: "error"
                 });

@@ -4,6 +4,7 @@ include('../config/dbconnect.php');
 
 
 $id = $_POST['txt_id'];
+
 try {
   $sql_select = "SELECT nombre_me FROM membresia WHERE id_me = $id";
   $result = mysqli_query($cn, $sql_select);
