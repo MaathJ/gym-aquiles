@@ -1,17 +1,25 @@
 <?php  
+session_start();
 include('../config/dbconnect.php');
 
 $codigo = $_POST['txt_id'];
+$nombre_pago = "";
 
-$sql = "delete from tipo_pago where id_tp = $codigo";
+try {
+    $sql_select = "SELECT desc_tp FROM tipo_pago WHERE id_tp = $codigo";
+    $result = mysqli_query($cn, $sql_select);
 
-// ELIMINAR RUTA DE LA IMAGEN
-$ruta_fp="../assets/images/tipoPago/".$codigo.".jpg";
-if (file_exists($ruta_fp)) {
-    unlink($ruta_fp);
+    if ($result && $row = mysqli_fetch_assoc($result)) {
+        $nombre_pago = $row['desc_tp'];
+        $sql = "DELETE FROM tipo_pago WHERE id_tp = $codigo";
+        mysqli_query($cn, $sql);
+        $_SESSION['deleted_message'] = "Tipo de pago eliminado: $nombre_pago";
+    } else {
+        $_SESSION['deleted_message'] = "No se pudo obtener la información del tipo de pago: $id";
+    }
+} catch (Exception $e) {
+    $_SESSION['error_message'] = "Error al eliminar el tipo de pago: $nombre_pago";
 }
 
-mysqli_query($cn, $sql);
-	
 header('location: ../tipoPago.php');
 ?>

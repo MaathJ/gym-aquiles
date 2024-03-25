@@ -11,14 +11,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'success' => true,
             'message' => 'Servicio Registrado exitosamente'
         );
+        header('location:../rutina.php');
     } else {
         $response = array(
             'success' => false,
             'message' => 'Hubo un problema al agregar el servicio.'
         );
+        header('location:../rutina.php');
     }
 
     echo json_encode($response);
     exit(); // Detener la ejecución del script después de enviar la respuesta
 }
+
+
 ?>

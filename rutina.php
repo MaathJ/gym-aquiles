@@ -8,11 +8,11 @@ include_once('config/dbconnect.php');
 <div class="app-body-main-content">
     <div>
         <p>Pages<span> / Rutina</span></p>
-        <h3>Rutina</h3>
+        <h3>RUTINA</h3>
     </div>
     <div class="main-content">
         <div>
-            <button class="rutina" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+            <button class="rutina" data-bs-toggle="modal" data-bs-target="#R_servicio" data-bs-whatever="@mdo">
             Nuevo Rutina
             </button>
         </div>
@@ -51,7 +51,7 @@ include_once('config/dbconnect.php');
                                                 <i class="fas fa-edit"> </i></a>
 
 
-                                            <a href="tipo_rutina/D_tipo_rutina.php?d=<?php echo $r['id_tiru'] ?>" class="btn btn-danger btn-circle " target="_parent">
+                                            <a href="tipo_rutina/D_tipo_rutina.php?codigo=<?php echo $r['id_tiru'] ?>" class="btn btn-danger btn-circle " target="_parent">
                                                 <i class="fas fa-trash"> </i></a>
                                         </center>
 
@@ -74,18 +74,26 @@ include_once('config/dbconnect.php');
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header " style="background-color: #F39C12; color: #ffffff;">
-                                    <h4 class="modal-title" id="exampleModalLabel">REGISTRAR NUEVO SERVICIO</h4>
+                                    <h4 class="modal-title" id="exampleModalLabel">REGISTRAR NUEVA RUTINA</h4>
                                     <button type="button" class="btn-close" style="background-color: #ffffff;" data-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
 
-                                    <form action="membresia/R_servicio.php" method="post">
+                                    <form action="tipo_rutina/R_tipo_rutina.php" method="post">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="recipient-name" class="col-form-label" style="color: black;">Nombre:</label>
-                                                    <input type="text" name="txt_nomb" class="form-control" id="recipient-name" required>
+                                                    <input type="text" name="txtnombre" class="form-control" id="recipient-name" required>
                                                 </div>
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <div class="mb-3">
+                                                    <label for="recipient-name" class="col-form-label" style="color: black;">Precio:</label>
+                                                    <input type="number" name="txtprecio" class="form-control" id="recipient-name" required>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="modal-footer">
