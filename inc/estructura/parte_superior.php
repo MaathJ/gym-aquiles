@@ -153,7 +153,7 @@ $rconf = mysqli_fetch_assoc($fconf)
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="rutina.php">
+                                    <a href="tipo_rutina.php">
                                         <span>Rutina</span>
                                     </a>
                                 </li>

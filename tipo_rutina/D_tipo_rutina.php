@@ -1,8 +1,8 @@
 <?php  
 include('../config/dbconnect.php');
 
-if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['codigo'])) {
-    $codigo = $_GET['codigo'];
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['txt_id'])) {
+    $codigo = $_POST['txt_id'];
 
     $sql = "DELETE FROM tipo_rutina WHERE id_tiru = '$codigo'";
 
@@ -27,5 +27,5 @@ if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['codigo'])) {
 }
 
 echo json_encode($response);
-header('location: ../rutina.php');
+header('location: ../tipo_rutina.php');
 ?>

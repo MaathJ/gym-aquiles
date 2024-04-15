@@ -151,9 +151,7 @@ include_once('config/dbconnect.php');
 
 
 
-<?php
-include_once("inc/estructura/parte_inferior.php")
-?>
+
 
 <script type="text/javascript">
             function cargar_info(dato) {
@@ -312,7 +310,9 @@ let table = new DataTable('#table_servicio', {
     });
 </script>
 
-
+<?php
+include_once("inc/estructura/parte_inferior.php")
+?>
 
 
 
