@@ -281,7 +281,7 @@ if ($fila['total'] <=0) {
           <div class="container-title-tpagos">
             <div class="title-tpagos">
               <h1>Caja</h1>
-              <p>05-03-2024</p>
+              <p>26-03-2024</p>
             </div>
             <div>
               <span class="total-tpagos">S/. <?php echo $suma ?></span>
